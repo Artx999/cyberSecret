@@ -1,4 +1,9 @@
 {
+  "incorrectUsernameOrPassword": "Incorrect username or password",
+  "somethingWrong": "Something went wrong",
   "noUsername": "You have not entered a username",
-  "noPassword": "You have not entered a password"
+  "noPassword": "You have not entered a password",
+  "noEmail": "You have not entered an email",
+  "noConfirmPassword": "You have not entered a confirmation password",
+  "noConfirmPasswordMatch": "The password and confirmation password does not match"
 }

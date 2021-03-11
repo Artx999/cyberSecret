@@ -1,15 +1,10 @@
 <?php
-// Global variables
-$server = "localhost";
-$db = "cyberSecret";
-$user = "root";
-$pwd = "";
 // ----------------
 function trueOrFalse($i) {
     if ($i) return "true";
     else return "false";
 }
-function dbQuery($sql, $database = "prototype", $server = "209.97.135.228", $username="root", $password="QpcH\$tm68f") {
+function dbQuery($sql, $database = "cyberSecret", $server = "localhost", $username="root", $password="") {
     $connection = new mysqli($server, $username, $password, $database);
     if ($connection -> connect_error) return false;
     else return $connection -> query($sql);
