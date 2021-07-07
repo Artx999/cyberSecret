@@ -1,0 +1,22 @@
+:root {
+    /* Main */
+    --primary: 237, 94%, 81%;
+    --secondary: 315, 92%, 81%;
+    --tertiary: 350, 92%, 81%;
+    --background: 240, 4%, 3%;
+    --text-primary: 0, 0%, 100%;
+    /* Colors */
+    --black: 0, 0%, 0%;
+    --white: 0, 0%, 100%;
+    /* Gradients */
+    --gradient: linear-gradient(90deg, hsla(var(--primary), 1) 0%, hsla(var(--secondary), 1) 50%, hsla(var(--tertiary), 1) 100%);
+    /* Sizes */
+    --heading-large: 5.6rem;
+    --heading-medium: 3.6rem;
+    --heading-small: 2.4rem;
+    --paragraph: 1.2rem;
+    /* Transitions */
+    --transition-main: .175, .685, .32;
+    /* Fonts */
+    --font-main: "Poppins";
+}
