@@ -33,7 +33,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `user_username_uindex` (`username`),
   UNIQUE KEY `user_user_id_uindex` (`user_id`),
   UNIQUE KEY `user_email_uindex` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Artx999','mrjj@live.no','test','2002-11-27','2021-01-17 00:23:58'),(7,'iohj','uiohl','$2y$10$uiigoQ6fV3/xOEGYqnCfbuisdDdHpHGqjoo8WuQ2gD7QI9XtIZkjW','1200-12-12','2021-01-18 21:10:18'),(8,'a','a','$2y$10$VvOS4ZClLlq01SxHK6LUpu8x3vId9wRKKwDEEqPF4A7d6XW5TWWYG',NULL,'2021-01-26 12:18:52');
+INSERT INTO `user` VALUES (1,'Artx999','mrjj@live.no','$2y$10$9pVEbwFmFzCjYt91kRghdOyNX1pkPabf2GyhLBUcffFPC2mexsuAG','2002-11-27','2021-01-17 00:23:58'),(7,'iohj','uiohl','$2y$10$uiigoQ6fV3/xOEGYqnCfbuisdDdHpHGqjoo8WuQ2gD7QI9XtIZkjW','1200-12-12','2021-01-18 21:10:18'),(8,'a','a','$2y$10$VvOS4ZClLlq01SxHK6LUpu8x3vId9wRKKwDEEqPF4A7d6XW5TWWYG',NULL,'2021-01-26 12:18:52'),(10,'xfvgynj cghbvujm ','dfhrtgfdxrthgb','$2y$10$PamA4QkEidoYvTa3vLHMcevVn7UEgJGEDHE6yLZP89dxy3377QEjm','0000-00-00','2021-07-08 01:24:42'),(11,'gzdb rtxe','hbaedrtg','$2y$10$DbZHaRq93waW02ov4AaO1.H53yNoOO6f49BSj88YHKSZayibIe2T2','0000-00-00','2021-07-08 01:25:48'),(12,'yutrhea','kjtrhewr','$2y$10$NynlWmJ8nMzKn0IVJFPQmufni1tyKd9bUiizK2crWTOo5A4adDF0m','0000-00-00','2021-07-08 01:27:05'),(13,'hdaet','grw','$2y$10$jIVwBuSVYn35ejAJPH/gOOAkfoUSMf6OStFwhFsnvoOpLxP3oqhJO','0000-00-00','2021-07-08 01:31:23'),(16,'awdrfafqawf','qeqwrwqrf','$2y$10$UPvugv4/Uro52HWFLK2LJ.J6W6/wfHnHBhHDeMVneCDeh3GWGefWO','0000-00-00','2021-07-08 01:38:23'),(20,'liukgycfjghxyhdtxzgdrz','fxgnhnfghcghmmghcjmghjc','$2y$10$IIOOhzE/CrAuCzt/cWwkYON1sDzoipK39.Y77Sfl8fSTA69529cSu','0000-00-00','2021-07-08 01:58:56'),(21,'lol','lol','$2y$10$Z0rmkYzmGFQLY3WuVdcGsOo9MYFxhESb7TOs8DhanGLD7HLEp/rDa','0000-00-00','2021-07-08 02:06:35'),(22,'lkjhgfd','fdsghjfgk','$2y$10$wXRhQA0nMW/sck4FuBa.de67l6C48epOezv26R1t5cyOquOPDw7cC','0000-00-00','2021-07-08 03:28:30');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-07  2:39:54
+-- Dump completed on 2021-07-08  3:57:41
