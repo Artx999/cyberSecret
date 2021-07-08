@@ -1,24 +1,25 @@
 <?php
+session_start();
 require "../func.php";
 
-$error = [];
+$errors = new ErrorMsg();
 // Username
 if (isset($_POST["username"]) && $_POST["username"]) {
     $user = stripslashes(htmlspecialchars($_POST["username"]));
-} else array_push($error, "noUsername");
+} else $errors->add("noUsername");
 // Password
 if (isset($_POST["password"]) && $_POST["password"]) {
     $pwd = stripslashes(htmlspecialchars($_POST["password"]));
-} else array_push($error, "noPassword");
+    $pwd = stripslashes(htmlspecialchars($_POST["password"]));
+} else $errors->add("noPassword");
 
 // Handles the errors
-if ($error) {
-    $error = base64_encode(json_encode($error));
-    header("Location: ../login.php?error=" . $error);
-} elseif (auth($user, $pwd)) {
+if ($errors->content) {
+    header("Location: ../login.php?error=" . $errors->encode());
+} elseif (User::auth($user, $pwd)) {
     $_SESSION["user"] = $user;
     header("Location: ../index.php");
 } else {
-    array_push($error, "incorrectUsernameOrPassword");
-    header("Location: ../login.php?error=" . base64_encode(json_encode($error)));
+    $errors->add("incorrectUsernameOrPassword");
+    header("Location: ../login.php?error=" . $errors->encode());
 }

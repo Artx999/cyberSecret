@@ -5,5 +5,8 @@
   "noPassword": "You have not entered a password",
   "noEmail": "You have not entered an email",
   "noConfirmPassword": "You have not entered a confirmation password",
-  "noConfirmPasswordMatch": "The password and confirmation password does not match"
+  "noConfirmPasswordMatch": "The password and confirmation password does not match",
+  "duplicateKey": "Duplicate key",
+  "usernameExists": "Username already exists",
+  "emailExists": "Email already exists"
 }

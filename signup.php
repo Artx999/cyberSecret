@@ -1,7 +1,7 @@
 <?php
 require "func.php";
 if (isset($_GET["error"])) {
-    print errorDecode($_GET["error"]); // Prints error messages.
+    print ErrorMsg::decode($_GET["error"]); // Prints error messages.
 }
 ?>
 <form action="backend/signupSys.php" method="post">

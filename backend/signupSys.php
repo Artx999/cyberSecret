@@ -1,37 +1,45 @@
 <?php
 require "../func.php";
 
-$error = [];
+$errors = new ErrorMsg();
 // Username
 if (isset($_POST["username"]) && $_POST["username"]) {
     $user = stripslashes(htmlspecialchars($_POST["username"]));
-} else array_push($error, "noUsername");
+} else $errors->add("noUsername");
 // Email
 if (isset($_POST["email"]) && $_POST["email"]) {
     $email = stripslashes(htmlspecialchars($_POST["email"]));
-} else array_push($error, "noEmail");
+} else $errors->add("noEmail");
 // Password
 if (isset($_POST["password"]) && $_POST["password"]) {
     $pwd = stripslashes(htmlspecialchars($_POST["password"]));
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-} else array_push($error, "noPassword");
+} else $errors->add("noPassword");
 // Confirm password
 if (isset($_POST["confirmPassword"]) && $_POST["confirmPassword"]) {
     $cPwd = stripslashes(htmlspecialchars($_POST["confirmPassword"]));
-    if (isset($pwd) && $cPwd !== $pwd) array_push($error, "noConfirmPasswordMatch");
-} else array_push($error, "noConfirmPassword");
+    if (isset($pwd) && $cPwd !== $pwd) $errors->add("noConfirmPasswordMatch");
+} else $errors->add("noConfirmPassword");
 // Birthday
 if (isset($_POST["birthday"]) && $_POST["birthday"]) {
     $birthday = stripslashes(htmlspecialchars($_POST["birthday"]));
 }
 
 // Handles the errors
-if ($error) {
-    $error = base64_encode(json_encode($error));
-    header("Location: ../signup.php?error=" . $error);
-} elseif (dbQuery("INSERT INTO `cybersecret`.`user` (`username`, `email`, `password`, `birthday`) VALUES ('$user', '$email', '$hashedPwd', '$birthday');")) {
-    header("Location: ../login.php");
+$usernameExists = mysqli_num_rows(dbQuery("SELECT * FROM `cyber_secret`.`user` WHERE username='$user'"));
+$emailExists = mysqli_num_rows(dbQuery("SELECT * FROM `cyber_secret`.`user` WHERE email='$email'"));
+if ($usernameExists) $errors->add("usernameExists");
+if ($emailExists) $errors->add("emailExists");
+
+if ($errors->content) {
+    header("Location: ../signup.php?error=" . $errors->encode());
+} elseif ($sql = dbQuery("INSERT INTO `cyber_secret`.`user` (`username`, `email`, `password`, `birthday`) VALUES ('$user', '$email', '$hashedPwd', '$birthday');")) {
+    if ($sql === "duplicateKey") {
+        $errors->add("duplicateKey");
+        header("Location: ../signup.php?error=" . $errors->encode());
+    }
+    else header("Location: ../login.php");
 } else {
-    array_push($error, "somethingWrong");
-    header("Location: ../signup.php?error=" . base64_encode(json_encode($error)));
+    $errors->add("somethingWrong");
+    header("Location: ../signup.php?error=" . $errors->encode());
 }
