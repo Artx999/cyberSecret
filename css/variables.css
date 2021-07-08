@@ -1,6 +1,6 @@
 :root {
     /* Main */
-    --primary: 237, 94%, 81%;
+    --primary: 273, 100%, 57%;
     --secondary: 315, 92%, 81%;
     --tertiary: 350, 92%, 81%;
     --background: 240, 4%, 3%;
@@ -8,6 +8,7 @@
     /* Colors */
     --black: 0, 0%, 0%;
     --white: 0, 0%, 100%;
+    --grooble: 233, 3%, 48%;
     /* Gradients */
     --gradient: linear-gradient(90deg, hsla(var(--primary), 1) 0%, hsla(var(--secondary), 1) 50%, hsla(var(--tertiary), 1) 100%);
     /* Sizes */

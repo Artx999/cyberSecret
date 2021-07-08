@@ -181,6 +181,11 @@ select {
     3. Classes
    ============ */
 
+.material-icons-sharp {
+    user-select: none;
+    cursor: default;
+}
+
 /* ====================
     3.1 Global classes
    ==================== */
@@ -255,10 +260,121 @@ select {
 .view-width {
     width: 70%;
 }
+.page {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 6em 1fr;
+}
 
 /* ==============
     3.2.1 Navbar
    ============== */
+
+#navbar {
+    width: 6em;
+    height: 100vh;
+    position: relative;
+}
+.navbar-inner {
+    padding: 2em 0;
+    width: 6em;
+    height: 100%;
+    position: fixed;
+    transition: all .35s cubic-bezier(var(--transition-main), 1);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.navbar-inner:hover {
+    width: 20em;
+}
+.navbar-inner::-webkit-scrollbar-track {
+    background-color: hsl(var(--background));
+}
+.navbar-inner::-webkit-scrollbar {
+    width: 8px;
+    background-color: hsl(var(--background));
+}
+.navbar-inner::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--background));
+    border-radius: 5em;
+}
+.navbar-inner:hover.navbar-inner::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--grooble));
+}
+/* Navbar Profile Picture */
+.navbar-profile-picture-wrapper {
+    width: 3em;
+    height: 3em;
+    position: relative;
+}
+.npp-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+.npp {
+    min-width: 100%;
+    max-width: 105%;
+    min-height: 100%;
+    position: absolute;
+    object-fit: cover;
+}
+.npp-blur {
+    top: .5em;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform: scale(.8, .8);
+    filter: blur(.5rem);
+}
+/* Navbar Items */
+.navbar-items {
+    margin: 2em 0;
+    padding: 0;
+    width: 100%;
+    border-top: 2px solid hsla(var(--grooble), .15);
+    border-bottom: 2px solid hsla(var(--grooble), .15);
+    list-style-type: none;
+}
+.navbar-item {
+    width: 100%;
+}
+.navbar-item-inner {
+    padding: 1em 0;
+    width: 100%;
+    height: 100%;
+}
+.navbar-item-inner, .navbar-item-inner .material-icons-sharp {
+    color: hsla(var(--grooble), .8);
+    text-decoration: none;
+    cursor: pointer;
+}
+/* Navbar Stats */
+.navbar-stats {
+    width: 100%;
+}
+.nst-items {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    list-style-type: none;
+}
+.nst-item {
+    width: 100%;
+}
+.nst-item-inner {
+    width: 2.5em;
+    height: 2.5em;
+    background-color: hsl(var(--primary));
+    border-radius: .75rem;
+}
+.nst-item-inner, .nst-item-inner .material-icons-sharp {
+    color: hsl(var(--white));
+    text-decoration: none;
+    cursor: pointer;
+}
 
 /* ==============
     3.2.2 Header
@@ -269,7 +385,7 @@ select {
    ============ */
 
 #main {
-    margin: 10em 0;
+    min-height: 110vh;
 }
 
 /* ======================
@@ -291,7 +407,7 @@ select {
     width: 100%;
     height: 100%;
     position: absolute;
-    background: linear-gradient(hsla(var(--black), .33) 0%, hsla(var(--black), .77) 100%);
+    background: linear-gradient(hsla(var(--background), .33) 0%, hsla(var(--background), .77) 50%, hsla(var(--background), 1) 100%);
     z-index: 3;
 }
 .profile-header-image {
@@ -301,15 +417,6 @@ select {
     position: absolute;
     filter: hue-rotate(-5deg) saturate(1.25);
     object-fit: cover;
-}
-.profile-header-image-blur {
-    top: .8em;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    transform: scale(.975, .975);
-    filter: blur(1rem) hue-rotate(-5deg);
-    opacity: .22;
 }
 /* Profile Info */
 .phi-info-wrapper {
@@ -352,8 +459,16 @@ select {
 .phi-profile-username-wrapper {
 
 }
-.phi-profile-username {
+.phi-profile-username span {
+    margin: 0 0 0 .3em;
+}
+.phi-profile-tagline {
+    color: hsl(var(--grooble));
+}
 
+/* Profile Page */
+.profile-page {
+    margin: 5em 0;
 }
 
 /* ==============
@@ -580,6 +695,18 @@ select {
     /* ============
         3.2.3 Main
        ============ */
+
+    /* Profile Info */
+    .phi-info-wrapper {
+        grid-template-columns: auto;
+        place-items: center;
+        gap: 2em;
+    }
+    /* Profile Username */
+    .phi-profile-username-wrapper {
+        justify-content: center;
+        align-items: center;
+    }
 
     /* ======================
         3.2.3.1 Profile Page
