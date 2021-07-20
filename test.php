@@ -2,7 +2,7 @@
 require "func.php";
 session_start();
 
-$user = User::auth("lol", "lol");
-$user->sessionSet();
-
-var_dump(User::sessionGet());
+$user = User::sessionGet();
+var_dump($user);
+$stats = $user->getStats();
+var_dump($stats);

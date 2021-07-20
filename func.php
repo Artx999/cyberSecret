@@ -46,8 +46,7 @@ class ErrorMsg {
 
 
 class User {
-    public $userId;
-    public $username;
+    public $userId, $username;
     function __construct($userId, $username) {
         $this->username = $username;
         $this->userId = $userId;
@@ -73,5 +72,20 @@ class User {
         $result = dbQuery("SELECT username, password FROM cyber_secret.user WHERE username = '$uname' LIMIT 1;");
         if ($result = $result->fetch_assoc()) return $result["password"];
         else return false;
+    }
+
+    public function getStats() {
+        $i = dbQuery("SELECT * FROM cyber_secret.stats WHERE user_id='$this->userId'")->fetch_assoc();
+        return $stats = new Stats($i["strength"], $i["dexterity"], $i["charisma"], $i["intelligence"]);
+    }
+}
+
+class Stats {
+    public $strength, $dexterity, $charisma, $intelligence;
+    public function __construct($strength, $dexterity, $charisma, $intelligence) {
+        $this->strength = $strength;
+        $this->dexterity = $dexterity;
+        $this->charisma = $charisma;
+        $this->intelligence = $intelligence;
     }
 }

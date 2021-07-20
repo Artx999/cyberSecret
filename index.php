@@ -3,6 +3,7 @@ require "func.php";
 session_start();
 if (!isset($_SESSION["user"])) header("Location: login.php");
 $user = User::sessionGet();
+$stats = $user->getStats();
 $rootPath = "";
 ?>
 <!DOCTYPE html>
@@ -60,7 +61,11 @@ $rootPath = "";
             <!-- Profile Page -->
             <section class="profile-page">
                 <div class="profile-page-inner">
-                    <h3>Statistikk</h3>
+                    <h3>Statistics</h3>
+                    <p>Strength: <?php print $stats->strength?></p>
+                    <p>Dexterity: <?php print $stats->dexterity?></p>
+                    <p>Charisma: <?php print $stats->charisma?></p>
+                    <p>Intelligence: <?php print $stats->intelligence?></p>
                 </div>
             </section>
 
