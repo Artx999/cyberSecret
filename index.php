@@ -1,6 +1,8 @@
 <?php
+require "func.php";
 session_start();
 if (!isset($_SESSION["user"])) header("Location: login.php");
+$user = User::sessionGet();
 $rootPath = "";
 ?>
 <!DOCTYPE html>
@@ -45,7 +47,7 @@ $rootPath = "";
                         </div>
                         <!-- Profile Username -->
                         <div class="phi-profile-username-wrapper flexbox-col-left">
-                            <h3 class="phi-profile-username flexbox"><?php print $_SESSION["user"]; ?> <span class="material-icons-sharp">verified_user</span></h3>
+                            <h3 class="phi-profile-username flexbox"><?php print $user->username; ?> <span class="material-icons-sharp">verified_user</span></h3>
                             <p class="phi-profile-tagline">Something neat and funny!</p>
                         </div>
                     </div>

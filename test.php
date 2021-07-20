@@ -1,5 +1,8 @@
 <?php
-session_start();
 require "func.php";
+session_start();
 
-session_unset();
+$user = User::auth("lol", "lol");
+$user->sessionSet();
+
+var_dump(User::sessionGet());

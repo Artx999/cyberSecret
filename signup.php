@@ -21,3 +21,4 @@ if (isset($_GET["error"])) {
     -->
     <button type="submit">Sign up</button>
 </form>
+<a href="login.php"><button>Or login</button></a>

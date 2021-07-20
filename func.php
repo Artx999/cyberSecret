@@ -4,6 +4,7 @@ function trueOrFalse($i) {
     if ($i) return "true";
     else return "false";
 }
+// Possibly make this a class that has functionality described in: https://stackoverflow.com/questions/533459/how-to-do-a-php-nested-class-or-nested-methods
 function dbQuery($sql, $database = "cyber_secret", $server = "localhost", $username="root", $password="") {
     $connection = new mysqli($server, $username, $password, $database);
     if ($connection -> connect_error) return false;
@@ -45,10 +46,27 @@ class ErrorMsg {
 
 
 class User {
+    public $userId;
+    public $username;
+    function __construct($userId, $username) {
+        $this->username = $username;
+        $this->userId = $userId;
+    }
+
+    public function sessionSet() {
+        $_SESSION["user"] = serialize($this);
+    }
+
+    public static function sessionGet() {
+        return unserialize($_SESSION["user"]);
+    }
+
     public static function auth($uname, $password) {
         $hashedPass = User::getHashedPass($uname);
-        if (password_verify($password, $hashedPass)) return true;
-        else return false;
+        if (password_verify($password, $hashedPass)) {
+            $userInfo = dbQuery("SELECT user_id, username FROM cyber_secret.user WHERE username = '$uname' LIMIT 1")->fetch_assoc();
+            return new User($userInfo["user_id"], $userInfo["username"]);
+        } else return false;
     }
 
     private static function getHashedPass($uname) {
