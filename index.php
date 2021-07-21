@@ -62,10 +62,12 @@ $rootPath = "";
             <section class="profile-page">
                 <div class="profile-page-inner">
                     <h3>Statistics</h3>
-                    <p>Strength: <?php print $stats->strength?></p>
-                    <p>Dexterity: <?php print $stats->dexterity?></p>
-                    <p>Charisma: <?php print $stats->charisma?></p>
-                    <p>Intelligence: <?php print $stats->intelligence?></p>
+                    <?php
+                    foreach ($stats as $key => $val) {
+                        $name = ucfirst($key);
+                        print "<p>{$name}: {$val}<p/>";
+                    };
+                    ?>
                 </div>
             </section>
 

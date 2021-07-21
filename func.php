@@ -76,7 +76,8 @@ class User {
 
     public function getStats() {
         $i = dbQuery("SELECT * FROM cyber_secret.stats WHERE user_id='$this->userId'")->fetch_assoc();
-        return $stats = new Stats($i["strength"], $i["dexterity"], $i["charisma"], $i["intelligence"]);
+        if ($i)return $stats = new Stats($i["strength"], $i["dexterity"], $i["charisma"], $i["intelligence"]);
+        else return $stats = new Stats(0, 0, 0, 0);
     }
 }
 
