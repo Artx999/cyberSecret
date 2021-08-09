@@ -1,11 +1,13 @@
 {
-  "incorrectUsernameOrPassword": "Incorrect username or password",
   "somethingWrong": "Something went wrong",
+  "incorrectUsernameOrPassword": "Incorrect username or password",
   "noUsername": "You have not entered a username",
   "noPassword": "You have not entered a password",
   "noEmail": "You have not entered an email",
   "noConfirmPassword": "You have not entered a confirmation password",
   "noConfirmPasswordMatch": "The password and confirmation password does not match",
+  "noSeatNumber": "You have not entered a seat number",
+  "invalidSeatNumber": "You have entered an invalid seat number",
   "duplicateKey": "Duplicate key",
   "usernameExists": "Username already exists",
   "emailExists": "Email already exists"

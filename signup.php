@@ -15,10 +15,8 @@ if (isset($_GET["error"])) {
     <input id="password" name="password" type="password">
     <label for="confirmPassword">Confirm password</label>
     <input id="confirmPassword" name="confirmPassword" type="password">
-    <!--
-    <label for="birthday">Birthday (optional)</label>
-    <input id="birthday" name="birthday" type="date">
-    -->
+    <label for="seatNumber">Seat number</label>
+    <input id="seatNumber" name="seatNumber" type="number" min="1" max="<?php print Info::maxSeats()?>">
     <button type="submit">Sign up</button>
 </form>
 <a href="login.php"><button>Or login</button></a>

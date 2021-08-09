@@ -4,7 +4,7 @@ require "../func.php";
 $errors = new ErrorMsg();
 // Username
 if (isset($_POST["username"]) && $_POST["username"]) {
-    $user = stripslashes(htmlspecialchars($_POST["username"]));
+    $username = stripslashes(htmlspecialchars($_POST["username"]));
 } else $errors->add("noUsername");
 /*
 // Email
@@ -22,23 +22,22 @@ if (isset($_POST["confirmPassword"]) && $_POST["confirmPassword"]) {
     $cPwd = stripslashes(htmlspecialchars($_POST["confirmPassword"]));
     if (isset($pwd) && $cPwd !== $pwd) $errors->add("noConfirmPasswordMatch");
 } else $errors->add("noConfirmPassword");
-/*
-// Birthday
-if (isset($_POST["birthday"]) && $_POST["birthday"]) {
-    $birthday = stripslashes(htmlspecialchars($_POST["birthday"]));
-}
-*/
+// Seat number
+if (isset($_POST["seatNumber"]) && $_POST["seatNumber"]) {
+    $seatNumber = stripslashes(htmlspecialchars($_POST["seatNumber"]));
+    if (!is_int($seatNumber) || $seatNumber < 1 || $seatNumber > Info::maxSeats()) $errors->add("invalidSeatNumber");
+} else $errors->add("noSeatNumber");
 
 // Handles the errors
 // Maybe only use a single query that gets all info about both username and email
-$usernameExists = mysqli_num_rows(dbQuery("SELECT * FROM `cyber_secret`.`user` WHERE username='$user'"));
+$usernameExists = mysqli_num_rows(dbQuery("SELECT * FROM `cyber_secret`.`user` WHERE username='$username'"));
 //$emailExists = mysqli_num_rows(dbQuery("SELECT * FROM `cyber_secret`.`user` WHERE email='$email'"));
 if ($usernameExists) $errors->add("usernameExists");
 //if ($emailExists) $errors->add("emailExists");
 
 if ($errors->content) {
     header("Location: ../signup.php?error=" . $errors->encode());
-} elseif ($sql = dbQuery("INSERT INTO `cyber_secret`.`user` (`username`, `password`) VALUES ('$user', '$hashedPwd');")) {
+} elseif ($sql = dbQuery("INSERT INTO `cyber_secret`.`user` (`username`, `password`, `seat_number`) VALUES ('$username', '$hashedPwd', '$seatNumber');")) {
     if ($sql === "duplicateKey") {
         $errors->add("duplicateKey");
         header("Location: ../signup.php?error=" . $errors->encode());

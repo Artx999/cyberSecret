@@ -37,6 +37,7 @@ class ErrorMsg {
         $errorMessage = "";
         foreach ($error as $value) {
             if (isset($errorList->$value)) $errorMessage .= $errorList->$value . "<br/>";
+            else $errorMessage .= "Unknown error: {$value} !</br>";
         }
         return $errorMessage;
     }
@@ -88,5 +89,11 @@ class Stats {
         $this->dexterity = $dexterity;
         $this->charisma = $charisma;
         $this->intelligence = $intelligence;
+    }
+}
+
+class Info {
+    public static function maxSeats() {
+        return 120; // ! Must ask someone important !
     }
 }
