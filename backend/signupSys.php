@@ -25,15 +25,16 @@ if (isset($_POST["confirmPassword"]) && $_POST["confirmPassword"]) {
 // Seat number
 if (isset($_POST["seatNumber"]) && $_POST["seatNumber"]) {
     $seatNumber = stripslashes(htmlspecialchars($_POST["seatNumber"]));
-    if (!is_int($seatNumber) || $seatNumber < 1 || $seatNumber > Info::maxSeats()) $errors->add("invalidSeatNumber");
+    if ($seatNumber < 1 || $seatNumber > Info::maxSeats()) $errors->add("invalidSeatNumber");
 } else $errors->add("noSeatNumber");
 
 // Handles the errors
-// Maybe only use a single query that gets all info about both username and email
-$usernameExists = mysqli_num_rows(dbQuery("SELECT * FROM `cyber_secret`.`user` WHERE username='$username'"));
-//$emailExists = mysqli_num_rows(dbQuery("SELECT * FROM `cyber_secret`.`user` WHERE email='$email'"));
-if ($usernameExists) $errors->add("usernameExists");
-//if ($emailExists) $errors->add("emailExists");
+// Maybe only use a single query that gets all info about both username and seat number
+$keyExists = dbQuery("SELECT * FROM `cyber_secret`.`user` WHERE username='$username' OR seat_number='$seatNumber'");
+foreach ($keyExists as $row) {
+    if ($row["username"] === $username) $errors->add("usernameExists");
+    if ($row["seat_number"] === $seatNumber) $errors->add("seatNumberExists");
+}
 
 if ($errors->content) {
     header("Location: ../signup.php?error=" . $errors->encode());

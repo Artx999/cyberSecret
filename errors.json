@@ -10,5 +10,6 @@
   "invalidSeatNumber": "You have entered an invalid seat number",
   "duplicateKey": "Duplicate key",
   "usernameExists": "Username already exists",
+  "seatNumberExists": "Seat number already exists",
   "emailExists": "Email already exists"
 }
