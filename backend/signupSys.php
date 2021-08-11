@@ -29,8 +29,7 @@ if (isset($_POST["seatNumber"]) && $_POST["seatNumber"]) {
 } else $errors->add("noSeatNumber");
 
 // Handles the errors
-// Maybe only use a single query that gets all info about both username and seat number
-$keyExists = dbQuery("SELECT * FROM `cyber_secret`.`user` WHERE username='$username' OR seat_number='$seatNumber'");
+$keyExists = dbQuery("SELECT username, seat_number FROM `cyber_secret`.`user` WHERE username='$username' OR seat_number='$seatNumber'");
 foreach ($keyExists as $row) {
     if ($row["username"] === $username) $errors->add("usernameExists");
     if ($row["seat_number"] === $seatNumber) $errors->add("seatNumberExists");
