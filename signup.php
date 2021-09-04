@@ -1,7 +1,7 @@
 <head>
     <title>Register</title>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="javascript/script.js"></script>
+    <script src="javascript/script.js" defer></script>
     <style>
         .wait {
             background-color: blue;
@@ -38,6 +38,6 @@ if (isset($_GET["error"])) {
     <label for="seatNumber">Seat number</label>
     <input id="seatNumber" name="seatNumber" type="number" min="1" max="<?php print Info::maxSeats()?>">
 
-    <button type="submit">Sign up</button>
+    <button id="submit" type="submit">Sign up</button>
 </form>
 <a href="login.php"><button>Or login</button></a>
