@@ -1,8 +1,21 @@
-/*
+/* -
+-*-~*~-*-*-~*~-*-*-~*~*-*-~*~-*-*-~*~-*-*-~*~*-*-~*~-* |
 
-   ===================
-    Table of contents
-   ===================
+　. 　　　　　　　　　　　　　　　　　　o 　　　　　+
+　　()　　　　　　+　 Made with ❤ by ~
+　　　　　o 　　　      Areal Alien　　　　.
+　　.　　　　　　　　　　　.
+　　　　　　　　　　 ●▬▬▬๑ 💙 ๑▬▬▬●　　　　　　()
+　　+　　　　　　. 　　　　　　　　　　　　　　o
+　o　　　　　　　　　　　 ▄▀▄　　　▄▀▄　　　　　　　+
+　　　　　　+　　　　　 ▄█░░▀▀▀▀▀░░█▄　　.
+　　　.　　　　　 ▄▄ 　█░░░░░░░░░░░█　▄▄
+　　　　　　.　 █▄▄█　█░░▀░░┬░░▀░░█　█▄▄█　　　o
+
+-*-~*~-*-*-~*~-*-*-~*~*-*-~*~-*-*-~*~-*-*-~*~*-*-~*~-* |
+- */
+
+/* Table of contents
 
     1. Imports
     2. Global styles
@@ -11,14 +24,18 @@
         2.3 Lists
         2.4 Forms
     3. Classes
-        3.1 Global Classes
-            3.1.1 Flexbox
-        3.2 Classes
-            3.2.1 Navbar
-            3.2.2 Header
-            3.2.3 Main
-                3.2.3.1 Profile Page
-            3.2.4 Footer
+        3.1 Loading
+        3.2 Global Classes
+            3.2.1 Flexbox
+        3.3 Classes
+            3.3.1 Navbar
+            3.3.2 Header
+            3.3.3 Main
+                3.3.3.1 Index.php
+                3.3.3.2 Profile.php
+                3.3.3.3 Buttons.php
+                3.3.3.4 Login-/Signup.php
+            3.3.4 Footer
     4. ::Selectors
     5. @Keyframes
     6. @Media Rules
@@ -50,7 +67,9 @@ html, body {
     width: 100%;
     color: hsl(var(--text-primary));
     font-family: var(--font-main);
-    background-color: hsl(var(--background));
+    background: radial-gradient(hsla(var(--primary), .15) 6%, transparent 6%), hsl(var(--background));
+    background-position: 0 0, 5px 5px;
+    background-size: 5px 5px;
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
     box-sizing: border-box;
@@ -63,7 +82,6 @@ html, body {
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
-    color: hsl(var(--text-primary));
 }
 /* Font Size */
 h1 {
@@ -94,14 +112,13 @@ h3, h4, h5, h6 {
 /* Paragraphs */
 p {
     margin: 0;
-    color: hsl(var(--text-primary));
     font-size: var(--paragraph);
 }
 /* Links */
 a {
     color: hsla(var(--primary), 1);
     font-size: var(--paragraph);
-    text-decoration: underline;
+    text-decoration: none;
 }
 a:visited {
     color: hsla(var(--primary), .5);
@@ -113,16 +130,14 @@ a:visited {
 
 button {
     padding: .8em 1.2em;
-    color: hsl(var(--text-primary));
-    background-color: hsl(var(--background));
-    border: 1px solid hsl(var(--white));
     font-size: var(--paragraph);
+    background-color: hsl(var(--background));
+    border: 1px solid hsl(var(--black));
     cursor: pointer;
     outline: none;
 }
 button:focus {
-    box-shadow:
-            0 0 0 2px hsl(var(--white));
+    box-shadow: 0 0 0 2px hsl(var(--black)), 0 0 0 3px hsl(var(--white));
     border: 1px solid transparent;
 }
 
@@ -148,30 +163,28 @@ fieldset {
 }
 input {
     padding: .8em 1.2em;
-    color: hsl(var(--text-primary));
     font-size: var(--paragraph);
-    border: 2px solid hsl(var(--white));
+    background-color: hsl(var(--grooble));
+    border: 2px solid hsl(var(--grooble));
     outline: none;
 }
 textarea {
     padding: .8em 1.2em;
-    color: hsl(var(--text-primary));
     font-size: var(--paragraph);
     font-family: var(--font-main);
-    border: 2px solid hsl(var(--white));
+    background-color: hsl(var(--grooble));
+    border: 2px solid hsl(var(--grooble));
     outline: none;
 }
 input, textarea {
     transition: all .2s ease-in-out;
 }
 input:hover, input:focus, textarea:hover, textarea:focus {
-    box-shadow:
-            0 0 0 2px hsl(var(--white));
+    box-shadow: 0 0 0 2px hsl(var(--black)), 0 0 0 3px hsl(var(--white));
     border: 2px solid transparent;
 }
 select {
     padding: .8em 1.2em;
-    color: hsl(var(--text-primary));
     font-size: var(--paragraph);
     border: 1px solid hsl(var(--black));
     outline: none;
@@ -181,17 +194,40 @@ select {
     3. Classes
    ============ */
 
-.material-icons-sharp {
+.material-icons {
     user-select: none;
-    cursor: default;
+}
+
+/* =============
+    3.1 Loading
+   ============= */
+
+.pace {
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+.pace-inactive {
+    display: block !important;
+    opacity: 0;
+    transition: opacity.25s ease-in-out;
+}
+.pace .pace-progress {
+    top: 0; right: 100%;
+    width: 100%; height: 3px !important;
+    background: var(--gradient) !important;
+    background-size: 105% !important;
+    position: fixed;
+    z-index: 2000;
 }
 
 /* ====================
-    3.1 Global classes
+    3.2 Global classes
    ==================== */
 
 /* ===============
-    3.1.1 Flexbox
+    3.2.1 Flexbox
    =============== */
 
 .flexbox {
@@ -234,12 +270,6 @@ select {
     flex-direction: column;
     align-items: flex-end;
 }
-.flexbox-col-right-ns {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: flex-end;
-}
 .flexbox-col-start-center {
     display: flex;
     justify-content: flex-start;
@@ -254,125 +284,408 @@ select {
 }
 
 /* ===============
-    3.2 Classes
+    3.3 Classes
    =============== */
 
 .view-width {
     width: 70%;
 }
-.page {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 6em 1fr;
-}
 
 /* ==============
-    3.2.1 Navbar
+    3.3.1 Navbar
    ============== */
 
-#navbar {
-    width: 6em;
-    height: 100vh;
-    position: relative;
-}
-
 /* ==============
-    3.2.2 Header
+    3.3.2 Header
    ============== */
 
 /* ============
-    3.2.3 Main
+    3.3.3 Main
    ============ */
 
 #main {
-    min-height: 110vh;
+    min-height: 100vh;
 }
 
-/* ======================
-    3.2.3.1 Profile Page
-   ====================== */
+/* ===================
+    3.3.3.1 Index.php
+   =================== */
 
-/* Profile Header */
-.profile-header {
+/* =====================
+    3.3.3.2 Profile.php
+   ===================== */
+
+#profile-section {
+    margin: 5em 0;
+}
+.profile-inner {
     width: 100%;
+    gap: 4em;
+}
+.profile-header, .profile-stats {
+    padding: 5em;
+    width: 100%;
+    background: linear-gradient(0deg, hsla(var(--primary), .1) 0%, hsla(var(--primary), 0) 100%);
+    border: 1px hsl(var(--primary)) solid;
+}
+/* Profile Header */
+.profile-header {}
+.profile-header-content {
+    width: 100%;
+    gap: 2em;
+}
+/* Profile Picture */
+.profile-picture-wrapper {
+    width: 8em; height: 8em;
     position: relative;
 }
-.profile-header-inner {
-    width: 100%;
+.profile-picture-inner {
+    width: 100%; height: 100%;
     position: relative;
     overflow: hidden;
-    z-index: 2;
-}
-.profile-header-overlay {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background: linear-gradient(hsla(var(--background), .33) 0%, hsla(var(--background), .77) 50%, hsla(var(--background), 1) 100%);
     z-index: 3;
 }
-.profile-header-image {
-    min-width: 100%;
-    max-width: 110%;
-    min-height: 100%;
+.profile-picture {
+    min-width: 100%; min-height: 100%;
+    max-width: 105%;
     position: absolute;
-    filter: hue-rotate(-5deg) saturate(1.25);
     object-fit: cover;
 }
-/* Profile Info */
-.phi-info-wrapper {
-    padding: 4em 4em 8em 4em;
+.profile-picture-glow {
+    top: 1.15em;
+    width: 100%; height: 100%;
+    position: absolute;
+    transform: scale(.8, .8);
+    filter: blur(.75rem);
+    opacity: .75;
+}
+/* Username */
+.profile-username-wrapper {
+    gap: .25em;
+}
+.profile-username {
+    line-height: 1;
+    color: hsl(var(--white));
+}
+.profile-at-username {
+    line-height: 1;
+    color: hsl(var(--primary));
+}
+/* Profile Stats */
+.profile-stats {}
+.profile-stats-wrapper {
     width: 100%;
     display: grid;
     grid-template-columns: auto 1fr;
+    place-items: center;
     gap: 2em;
-    z-index: 5;
 }
-/* Profile Picture */
-.phi-profile-picture-wrapper {
-    width: 10em;
-    height: 10em;
-    position: relative;
-}
-.phi-profile-picture-inner {
+/* Title */
+.pro-sw-titles {
     width: 100%;
-    height: 100%;
+}
+.pro-swt-column {
+    width: 100%;
+}
+.pro-swt-title {
+    color: hsl(var(--white));
+}
+/* Content */
+.pro-sw-content {
+    width: 100%;
+}
+.pro-swc-column {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    place-items: center;
+    gap: 2em;
+}
+.pro-swc-content {
+    width: 2em;
+}
+.pro-swc-number {
+    color: hsl(var(--white));
+}
+/* Bar */
+.pro-swc-bar-wrapper {
+    width: 100%;
+}
+.pro-swc-bar {
+    width: 100%; height: 2em;
     position: relative;
+    background-color: hsl(var(--background));
+}
+.pro-swc-bar-perc {
+    right: 0;
+    padding: 0 1em;
+    position: absolute;
+    color: hsl(var(--quite-gray));
+    font-size: calc(var(--paragraph) - .3rem);
+    z-index: 3;
+}
+.pro-swc-bar-inner {
+    width: 50%; height: 100%;
+    position: relative;
+}
+#styrke .pro-swc-bar-inner {
+    width: 95%;
+    background-color: hsl(var(--clr-styrke));
+}
+#intelligens .pro-swc-bar-inner {
+    width: 30%;
+    background-color: hsl(var(--clr-intelligens));
+}
+#karisma .pro-swc-bar-inner {
+    width: 10%;
+    background-color: hsl(var(--clr-karisma));
+}
+#smidighet .pro-swc-bar-inner {
+    width: 66%;
+    background-color: hsl(var(--clr-smidighet));
+}
+#visdom .pro-swc-bar-inner {
+    width: 34%;
+    background-color: hsl(var(--clr-visdom));
+}
+#flaks .pro-swc-bar-inner {
+    width: 75%;
+    background-color: hsl(var(--clr-flaks));
+}
+.pro-swc-bar-glow {
+    top: .35em;
+    width: 100%; height: 100%;
+    position: absolute;
+    background-color: inherit;
+    transform: scale(.85, .85);
+    filter: blur(1.5rem);
+    opacity: .4;
+}
+
+/* =====================
+    3.3.3.3 Buttons.php
+   ===================== */
+
+.buttons-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-radius: .5em;
     overflow: hidden;
-    z-index: 6;
 }
-.phi-profile-picture {
-    min-width: 100%;
-    max-width: 105%;
-    min-height: 100%;
+.buttons-box {
+    height: 10em;
+    background-color: hsla(var(--background-secondary), .5);
+}
+.btn:focus {
+    box-shadow: 0 0 0 2px transparent, 0 0 0 3px transparent;
+    border: 2px solid hsl(var(--black));
+}
+.bb-yellow {
+    background-color: hsl(var(--yellow));
+}
+.bb-yellow .btn-top::before, .bb-yellow .btn-left::before, .bb-yellow .btn-right::after {
+    background-color: hsl(var(--yellow));
+}
+.bb-red {
+    background-color: hsl(var(--red));
+}
+.bb-red .btn-top::before, .bb-red .btn-left::before, .bb-red .btn-right::after {
+    background-color: hsl(var(--red));
+}
+.bb-blue {
+    background-color: hsl(var(--blue));
+}
+.bb-blue .btn-top::before, .bb-blue .btn-left::before, .bb-blue .btn-right::after {
+    background-color: hsl(var(--blue));
+}
+.btn {
+    position: relative;
+    background-color: transparent;
+    border: 2px solid hsl(var(--black));
+}
+.btn-top::before {
+    left: -.5em; top: -.5em;
+    width: 1em; height: 1em;
+    content: "";
     position: absolute;
-    object-fit: cover;
+    border-top: 2px solid hsl(var(--black));
+    transform: rotate(135deg);
 }
-.phi-profile-picture-blur {
-    top: 1em;
+.btn-left::before {
+    top: -.5em; right: -.5em;
+    width: 1em; height: 1em;
+    content: "";
+    position: absolute;
+    border-top: 2px solid hsl(var(--black));
+    transform: rotate(225deg);
+}
+.btn-right::after {
+    left: -.5em; bottom: -.5em;
+    width: 1em; height: 1em;
+    content: "";
+    position: absolute;
+    border-top: 2px solid hsl(var(--black));
+    transform: rotate(45deg);
+}
+.btn-text {
+    right: .75em;
+    bottom: -.5em;
+    padding: 0 .5em;
+    position: absolute;
+    font-size: calc(var(--paragraph) - .5em);
+}
+
+/* Modals */
+.modals-container {
+    margin: 2em 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2em;
+}
+.modals-box {
     width: 100%;
-    height: 100%;
+    background-color: hsla(var(--background-secondary), 1);
+    border-radius: .25em;
+    overflow: hidden;
+}
+.modal {
+    width: 100%;
+    padding: 1em;
+}
+.modal > p {
+    color: hsl(var(--white));
+}
+.modal-red {
+    background-color: hsla(var(--red), 1);
+}
+.modal-yellow {
+    background-color: hsla(var(--yellow), 1);
+}
+.modal-blue {
+    background-color: hsla(var(--blue), 1);
+}
+.modal-bottom {
+    width: 100%;
+    padding: 1em;
+}
+.modal-bottom .btn::after, .modal-bottom .btn::before {
+    background-color: hsl(var(--background-secondary));
+}
+
+/* ===========================
+    3.3.3.4 Login-/Signup.php
+   =========================== */
+
+.user-form {
+    margin: 4em 0; padding: 5em;
+    background: linear-gradient(0deg, hsla(var(--primary), .1) 0%, hsla(var(--primary), 0) 100%);
+    border: 1px hsl(var(--primary)) solid;
+    gap: 3em;
+}
+.user-form-top {
+    width: 100%;
+    color: hsl(var(--white));
+}
+.user-form-top h2 {
+    font-family: var(--font-title);
+}
+.user-form-center {
+    width: 100%;
+    display: grid;
+    gap: 2.5em;
+}
+/* Inputs */
+.input-grid {
+    padding: 0;
+    display: grid;
+    gap: 2.5em;
+}
+.inpt-grd-1 {
+    grid-template-columns: 1fr;
+}
+.inpt-grd-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+.inpt-grd-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+.input-wrapper {
+    width: 100%;
+}
+.input-wrapper > label {
+    margin: 0 0 .5em 0;
+    display: block;
+    color: hsl(var(--quite-gray));
+    font-weight: 200;
+}
+.ufi-input-inner {
+    padding: .175em;
+    width: 100%;
+    position: relative;
+    background: linear-gradient(90deg, hsl(var(--primary)) 0, hsl(var(--background)) 100%);
+}
+.ufi-input-inner > span {
+    left: 1.1em;
     position: absolute;
-    transform: scale(.8, .8);
-    filter: blur(1rem) hue-rotate(-5deg) saturate(1.25);
+    color: hsl(var(--white));
+    font-size: calc(var(--paragraph) + .35rem);
 }
-/* Profile Username */
-.phi-profile-username-wrapper {
-
+.ufi-input {
+    padding: 1.2em 3.25em;
+    width: 100%;
+    color: hsl(var(--white));
+    background-color: hsl(var(--background));
+    border: 2px solid transparent;
+    border-radius: 0;
 }
-.phi-profile-username span {
-    margin: 0 0 0 .3em;
+.ufi-input:hover, .ufi-input:focus {
+    box-shadow: none;
+    border: 2px solid transparent;
 }
-.phi-profile-tagline {
-    color: hsl(var(--grooble));
+.ufi-input-inner div {
+    right: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: hsl(var(--white));
 }
-
-/* Profile Page */
-.profile-page {
-    margin: 5em 0;
+.wait, .ok, .bad {
+    padding: .8em 1em;
+    font-size: var(--paragraph);
+}
+.ufi-input-inner .ok {
+    color: hsl(var(--green));
+}
+.ufi-input-inner .bad {
+    color: hsl(var(--red));
+}
+/* Ufi button */
+.ufi-button {
+    padding: 1.25em 1.6em;
+    position: relative;
+    color: hsl(var(--white));
+    font-weight: 800;
+    background-color: hsl(var(--background));
+    box-shadow: -6px -4px 24px hsla(var(--background), .1);
+    border: 1px solid transparent;
+    overflow: hidden;
+    user-select: none;
+}
+.ufi-button ion-icon {
+    margin: 0 .75em 0 0;
+}
+span.ripple {
+    position: absolute;
+    background-color: hsla(var(--white), .8);
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple .75s cubic-bezier(var(--transition-main), 1);
+    z-index: 10;
 }
 
 /* ==============
-    3.2.4 Footer
+    3.3.4 Footer
    ============== */
 
 /* ================
@@ -400,6 +713,10 @@ select {
     5. @keyframes
    =============== */
 
+@keyframes ripple {
+    to { transform: scale(1); opacity: 0; }
+}
+
 /* =================
     6. @media rules
    ================= */
@@ -413,31 +730,43 @@ select {
         /* Sizes */
         --heading-large: 5.4rem;
         --heading-medium: 3.4rem;
-        --heading-small: 2.2rem;
+        --heading-small: 2.3rem;
     }
 
     /* ===============
-        3.2 Classes
+        3.3 Classes
        =============== */
 
     /* ==============
-        3.2.1 Navbar
+        3.3.1 Navbar
        ============== */
 
     /* ==============
-        3.2.2 Header
+        3.3.2 Header
        ============== */
 
     /* ============
-        3.2.3 Main
+        3.3.3 Main
        ============ */
 
-    /* ======================
-        3.2.3.1 Profile Page
-       ====================== */
+    /* ===================
+        3.3.3.1 Index.php
+       =================== */
+
+    /* =====================
+        3.3.3.2 Profile.php
+       ===================== */
+
+    /* =====================
+        3.3.3.3 Buttons.php
+       ===================== */
+
+    /* ===========================
+        3.3.3.4 Login-/Signup.php
+       =========================== */
 
     /* ==============
-        3.2.4 Footer
+        3.3.4 Footer
        ============== */
 
 }
@@ -451,35 +780,51 @@ select {
         /* Sizes */
         --heading-large: 5.2rem;
         --heading-medium: 3.2rem;
-        --heading-small: 2rem;
+        --heading-small: 2.2rem;
     }
 
     /* ===============
-        3.2 Classes
+        3.3 Classes
        =============== */
 
     .view-width {
         width: 80%;
     }
 
+    /* ===============
+        3.3 Classes
+       =============== */
+
     /* ==============
-        3.2.1 Navbar
+        3.3.1 Navbar
        ============== */
 
     /* ==============
-        3.2.2 Header
+        3.3.2 Header
        ============== */
 
     /* ============
-        3.2.3 Main
+        3.3.3 Main
        ============ */
 
-    /* ======================
-        3.2.3.1 Profile Page
-       ====================== */
+    /* ===================
+        3.3.3.1 Index.php
+       =================== */
+
+    /* =====================
+        3.3.3.2 Profile.php
+       ===================== */
+
+    /* =====================
+        3.3.3.3 Buttons.php
+       ===================== */
+
+    /* ===========================
+        3.3.3.4 Login-/Signup.php
+       =========================== */
 
     /* ==============
-        3.2.4 Footer
+        3.3.4 Footer
        ============== */
 
 }
@@ -491,7 +836,7 @@ select {
 @media only screen and (max-width: 1220px) {
 
     /* ===============
-        3.2 Classes
+        3.3 Classes
        =============== */
 
     .view-width {
@@ -499,23 +844,35 @@ select {
     }
 
     /* ==============
-        3.2.1 Navbar
+        3.3.1 Navbar
        ============== */
 
     /* ==============
-        3.2.2 Header
+        3.3.2 Header
        ============== */
 
     /* ============
-        3.2.3 Main
+        3.3.3 Main
        ============ */
 
-    /* ======================
-        3.2.3.1 Profile Page
-       ====================== */
+    /* ===================
+        3.3.3.1 Index.php
+       =================== */
+
+    /* =====================
+        3.3.3.2 Profile.php
+       ===================== */
+
+    /* =====================
+        3.3.3.3 Buttons.php
+       ===================== */
+
+    /* ===========================
+        3.3.3.4 Login-/Signup.php
+       =========================== */
 
     /* ==============
-        3.2.4 Footer
+        3.3.4 Footer
        ============== */
 
 }
@@ -529,11 +886,11 @@ select {
         /* Sizes */
         --heading-large: 5rem;
         --heading-medium: 3rem;
-        --heading-small: 1.8rem;
+        --heading-small: 2.1rem;
     }
 
     /* ===============
-        3.2 Classes
+        3.3 Classes
        =============== */
 
     .view-width {
@@ -541,23 +898,39 @@ select {
     }
 
     /* ==============
-        3.2.1 Navbar
+        3.3.1 Navbar
        ============== */
 
     /* ==============
-        3.2.2 Header
+        3.3.2 Header
        ============== */
 
     /* ============
-        3.2.3 Main
+        3.3.3 Main
        ============ */
 
-    /* ======================
-        3.2.3.1 Profile Page
-       ====================== */
+    /* ===================
+        3.3.3.1 Index.php
+       =================== */
+
+    /* =====================
+        3.3.3.2 Profile.php
+       ===================== */
+
+    /* =====================
+        3.3.3.3 Buttons.php
+       ===================== */
+
+    /* ===========================
+        3.3.3.4 Login-/Signup.php
+       =========================== */
+
+    .inpt-grd-2 {
+        grid-template-columns: 100%;
+    }
 
     /* ==============
-        3.2.4 Footer
+        3.3.4 Footer
        ============== */
 
 }
@@ -571,13 +944,13 @@ select {
         /* Sizes */
         --heading-large: 4rem;
         --heading-medium: 2.6rem;
-        --heading-small: 1.6rem;
+        --heading-small: 2rem;
         --paragraph: 1rem;
-        --navbar-buttons: 2rem;
+        --navbar-buttons: 2.2rem;
     }
 
     /* ===============
-        3.2 Classes
+        3.3 Classes
        =============== */
 
     .view-width {
@@ -585,35 +958,35 @@ select {
     }
 
     /* ==============
-        3.2.1 Navbar
+        3.3.1 Navbar
        ============== */
 
     /* ==============
-        3.2.2 Header
+        3.3.2 Header
        ============== */
 
     /* ============
-        3.2.3 Main
+        3.3.3 Main
        ============ */
 
-    /* Profile Info */
-    .phi-info-wrapper {
-        grid-template-columns: auto;
-        place-items: center;
-        gap: 2em;
-    }
-    /* Profile Username */
-    .phi-profile-username-wrapper {
-        justify-content: center;
-        align-items: center;
-    }
+    /* ===================
+        3.3.3.1 Index.php
+       =================== */
 
-    /* ======================
-        3.2.3.1 Profile Page
-       ====================== */
+    /* =====================
+        3.3.3.2 Profile.php
+       ===================== */
+
+    /* =====================
+        3.3.3.3 Buttons.php
+       ===================== */
+
+    /* ===========================
+        3.3.3.4 Login-/Signup.php
+       =========================== */
 
     /* ==============
-        3.2.4 Footer
+        3.3.4 Footer
        ============== */
 
 }
@@ -625,7 +998,7 @@ select {
 @media only screen and (max-width: 576px) {
 
     /* ===============
-        3.2 Classes
+        3.3 Classes
        =============== */
 
     .view-width {
@@ -633,23 +1006,35 @@ select {
     }
 
     /* ==============
-        3.2.1 Navbar
+        3.3.1 Navbar
        ============== */
 
     /* ==============
-        3.2.2 Header
+        3.3.2 Header
        ============== */
 
     /* ============
-        3.2.3 Main
+        3.3.3 Main
        ============ */
 
-    /* ======================
-        3.2.3.1 Profile Page
-       ====================== */
+    /* ===================
+        3.3.3.1 Index.php
+       =================== */
+
+    /* =====================
+        3.3.3.2 Profile.php
+       ===================== */
+
+    /* =====================
+        3.3.3.3 Buttons.php
+       ===================== */
+
+    /* ===========================
+        3.3.3.4 Login-/Signup.php
+       =========================== */
 
     /* ==============
-        3.2.4 Footer
+        3.3.4 Footer
        ============== */
 
 }
@@ -661,27 +1046,39 @@ select {
 @media only screen and (max-width: 496px) {
 
     /* ===============
-        3.2 Classes
+        3.3 Classes
        =============== */
 
     /* ==============
-        3.2.1 Navbar
+        3.3.1 Navbar
        ============== */
 
     /* ==============
-        3.2.2 Header
+        3.3.2 Header
        ============== */
 
     /* ============
-        3.2.3 Main
+        3.3.3 Main
        ============ */
 
-    /* ======================
-        3.2.3.1 Profile Page
-       ====================== */
+    /* ===================
+        3.3.3.1 Index.php
+       =================== */
+
+    /* =====================
+        3.3.3.2 Profile.php
+       ===================== */
+
+    /* =====================
+        3.3.3.3 Buttons.php
+       ===================== */
+
+    /* ===========================
+        3.3.3.4 Login-/Signup.php
+       =========================== */
 
     /* ==============
-        3.2.4 Footer
+        3.3.4 Footer
        ============== */
 
 }

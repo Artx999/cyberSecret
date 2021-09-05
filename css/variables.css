@@ -1,23 +1,41 @@
 :root {
-    /* Main */
-    --primary: 273, 100%, 57%;
+    --primary: 192, 100%, 50%;
     --secondary: 315, 92%, 81%;
     --tertiary: 350, 92%, 81%;
-    --background: 240, 4%, 3%;
-    --text-primary: 0, 0%, 100%;
+    --background: 225, 12%, 7%;
+    --background-dark: 271, 11%, 4%;
+    --background-secondary: 225, 11%, 14%;
+    --text-primary: 0, 0%, 0%;
     /* Colors */
     --black: 0, 0%, 0%;
     --white: 0, 0%, 100%;
-    --grooble: 233, 3%, 48%;
+    --quite-gray: 0, 0%, 50%;
+    --grooble: 10, 28%, 93%;
+    --red: 352, 100%, 53%;
+    --orange: 22, 100%, 55%;
+    --yellow: 52, 100%, 50%;
+    --green: 128, 100%, 50%;
+    --teal: 156, 100%, 50%;
+    --blue: 192, 100%, 50%;
+    --purple: 276, 100%, 50%;
+    --pink: 322, 100%, 74%;
+    /* Stats */
+    --clr-styrke: 352, 100%, 53%;
+    --clr-intelligens: 22, 100%, 55%;
+    --clr-karisma: 52, 100%, 50%;
+    --clr-smidighet: 128, 100%, 50%;
+    --clr-visdom: 192, 100%, 50%;
+    --clr-flaks: 276, 100%, 50%;
     /* Gradients */
     --gradient: linear-gradient(90deg, hsla(var(--primary), 1) 0%, hsla(var(--secondary), 1) 50%, hsla(var(--tertiary), 1) 100%);
     /* Sizes */
     --heading-large: 5.6rem;
     --heading-medium: 3.6rem;
     --heading-small: 2.4rem;
-    --paragraph: 1.2rem;
-    /* Transitions */
+    --paragraph: 1.11rem;
+    /* misc */
     --transition-main: .175, .685, .32;
     /* Fonts */
     --font-main: "Poppins";
+    --font-title: 'Bebas Neue', cursive;
 }
