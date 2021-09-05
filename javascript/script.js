@@ -1,6 +1,6 @@
 class CheckIcon {
     constructor() {
-        this.content = $("<div>...</div>")
+        this.content = $("<div></div>")
     }
 }
 
@@ -31,7 +31,7 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
         // Check if username fits proper parameters
         if (!val) {
             $(icon.content).attr("class", "none")
-                .html("...")
+                .html('')
             checks[type] = false
             checkButton(checks)
             return
@@ -39,7 +39,7 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
         if (type === "username") {
             if (typeof val !== "string") {
                 $(icon.content).attr("class", "bad")
-                    .html("Input must be string")
+                    .html('<span class="material-icons">close</span>')
                 clearTimeout(timer)
                 checks[type] = false
                 checkButton(checks)
@@ -47,7 +47,7 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
             }
             else if (val.length > 25) {
                 $(icon.content).attr("class", "bad")
-                    .html("Username cannot be longer than 25 characters!")
+                    .html('<span class="material-icons">close</span>')
                 clearTimeout(timer)
                 checks[type] = false
                 checkButton(checks)
@@ -58,7 +58,7 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
             let confirmPassword = $("#confirmPassword")
             if (typeof val !== "string") {
                 $(icon.content).attr("class", "bad")
-                    .html("Input must be string")
+                    .html('<span class="material-icons">close</span>')
                 clearTimeout(timer)
                 checks[type] = false
                 checkButton(checks)
@@ -66,7 +66,7 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
             }
             else if (val.length > 255) {
                 $(icon.content).attr("class", "bad")
-                    .html("Password cannot be longer than 255 characters!")
+                    .html('<span class="material-icons">close</span>')
                 clearTimeout(timer)
                 checks[type] = false
                 checkButton(checks)
@@ -80,7 +80,7 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
             }
             else if ((type === "password" && val !== $(confirmPassword).val()) || (type === "confirmPassword" && val !== $("#password").val())) {
                 $(confirmPassword).next().attr("class", "bad")
-                    .html("Passwords must match!")
+                    .html('<span class="material-icons">close</span>')
                 clearTimeout(timer)
                 checks[type] = false
                 checkButton(checks)
@@ -88,7 +88,7 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
             }
             else {
                 $(confirmPassword).next().attr("class", "ok")
-                    .html("Good!")
+                    .html('<span class="material-icons">done</span>')
                 clearTimeout(timer)
                 checks["confirmPassword"] = true
                 checks["password"] = true
@@ -99,7 +99,7 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
         if (type === "seatNumber") {
             if (isNaN(+val)) {
                 $(icon.content).attr("class", "bad")
-                    .html("Input must be number")
+                    .html('<span class="material-icons">close</span>')
                 clearTimeout(timer)
                 checks[type] = false
                 checkButton(checks)
@@ -107,7 +107,7 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
             }
             else if (val < 1 || val > 172) {
                 $(icon.content).attr("class", "bad")
-                    .html("Input must be between 1 and 172")
+                    .html('<span class="material-icons">close</span>')
                 clearTimeout(timer)
                 checks[type] = false
                 checkButton(checks)
@@ -123,30 +123,30 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
             timer = setTimeout(function () {
                 if (!$(input).val()) {
                     $(icon.content).attr("class", "none")
-                        .html("...")
+                        .html("")
                     return
                 }
                 $.post("backend/checkIfExists.php", payload, function (data) {
                     if (data === "error") {
                         $(icon.content).attr("class", "bad")
-                            .html("Error!")
+                            .html('<span class="material-icons">error</span>')
                         checks[type] = false
                         checkButton(checks)
                     } else if (data) {
                         $(icon.content).attr("class", "bad")
-                            .html("Already exists!")
+                            .html('<span class="material-icons">close</span>')
                         checks[type] = false
                         checkButton(checks)
                     } else {
                         $(icon.content).attr("class", "ok")
-                            .html("Valid input")
+                            .html('<span class="material-icons">done</span>')
                         checks[type] = true
                         checkButton(checks)
                     }
                 })
                     .fail(function () {
                         $(icon.content).attr("class", "bad")
-                            .html("Error")
+                            .html('<span class="material-icons">error</span>')
                         checks[type] = false
                         checkButton(checks)
                     })
