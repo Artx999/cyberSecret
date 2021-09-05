@@ -93,7 +93,7 @@ class Stats {
 }
 
 class Info {
-    public static function maxSeats() {
-        return 120; // ! Must ask someone important !
+    public static function maxID() {
+        return 172; // ! Must ask someone important !
     }
 }
