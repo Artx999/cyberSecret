@@ -152,7 +152,6 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
                     })
             }, 1000)
         }
-        console.log(checks)
     })
 })
 
