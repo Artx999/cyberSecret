@@ -13,6 +13,7 @@ $rootPath = "";
     <!-- General -->
     <title>Registrer deg</title>
     <?php require "{$rootPath}structure/head/imports.php" ?>
+    <script src="javascript/signup.js" defer></script>
 </head>
 <body>
 

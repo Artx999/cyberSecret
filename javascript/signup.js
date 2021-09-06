@@ -183,4 +183,3 @@ $(["username", "password", "confirmPassword", "cardID", "firstName", "lastName"]
 })
 
 // Todo: Make better variable and class names
-// Todo: Make it work for every input, and with the correct checks
