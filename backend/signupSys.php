@@ -30,13 +30,14 @@ if (isset($_POST["lastName"]) && $_POST["lastName"]) {
     $lastName = stripslashes(htmlspecialchars($_POST["lastName"]));
 } else $errors->add("noLastName");
 
-// Handles the errors
+// Checks if username or card ID exists
 $keyExists = dbQuery("SELECT username, card_ID FROM `cyber_secret`.`user` WHERE username='$username' OR card_ID='$cardID'");
 foreach ($keyExists as $row) {
     if ($row["username"] === $username) $errors->add("usernameExists");
     if ($row["seat_number"] === $cardID) $errors->add("cardIDExists");
 }
 
+// Handles the errors
 if ($errors->content) {
     header("Location: ../signup.php?error=" . $errors->encode());
 } elseif ($sql = dbQuery("INSERT INTO `cyber_secret`.`user` (username, password, card_ID, first_name, last_name) VALUES ('$username', '$hashedPwd', '$cardID', '$firstName', '$lastName');")) {
