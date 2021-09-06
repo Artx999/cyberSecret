@@ -134,6 +134,14 @@ $(["username", "password", "confirmPassword", "cardID", "firstName", "lastName"]
                 checkButton(checks)
                 return
             }
+            else {
+                $(icon.content).attr("class", "ok")
+                    .html('<span class="material-icons">done</span>')
+                clearTimeout(timer)
+                checks[type] = true
+                checkButton(checks)
+                return
+            }
         }
         // Check if username or cardID already exists
         if (type === "username" || type === "cardID") {
