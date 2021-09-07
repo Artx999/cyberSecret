@@ -753,6 +753,12 @@ select {
 .ufi-input-inner .bad {
     color: hsl(var(--red));
 }
+/* Error Message */
+.error-msg {
+    padding: 1.2em 3.25em;
+    width: 100%;
+    color: hsl(var(--white));
+}
 /* Ufi button */
 .ufi-button {
     padding: 1.25em 1.6em;

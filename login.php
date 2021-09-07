@@ -35,7 +35,7 @@ $rootPath = "";
 
         require "func.php";
         if (isset($_GET["error"])) {
-            print ErrorMsg::decode($_GET["error"]); // Prints error messages
+            print '<p class="error-msg">' . ErrorMsg::decode($_GET["error"]) . '</p>'; // Prints error messages
         }
 
         ?>

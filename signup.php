@@ -32,14 +32,16 @@ $rootPath = "";
             <h2>Registrer deg</h2>
             <a href="login.php">Eller login</a>
         </div>
-        <?php
+        <p class="error-msg">
+            <?php
 
-        require "func.php";
-        if (isset($_GET["error"])) {
-            print ErrorMsg::decode($_GET["error"]); // Prints error messages
-        }
+            require "func.php";
+            if (isset($_GET["error"])) {
+                print '<p class="error-msg">' . ErrorMsg::decode($_GET["error"]) . '</p>'; // Prints error messages
+            }
 
-        ?>
+            ?>
+        </p>
         <div class="user-form-center">
             <fieldset class="input-grid inpt-grd-2">
                 <div class="input-wrapper ufi-input-wrapper">
