@@ -755,9 +755,16 @@ select {
 }
 /* Error Message */
 .error-msg {
-    padding: 1.2em 3.25em;
+    margin: 0; padding: 1.2em;
     width: 100%;
     color: hsl(var(--white));
+    background-color: hsla(var(--red), .5);
+    border-left: .5em solid hsl(var(--red));
+    line-height: 1;
+    gap: 1em;
+}
+.error-msg span {
+    font-size: var(--paragraph);
 }
 /* Ufi button */
 .ufi-button {
