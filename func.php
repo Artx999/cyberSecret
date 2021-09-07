@@ -47,10 +47,11 @@ class ErrorMsg {
 
 
 class User {
-    public $userId, $username;
-    function __construct($userId, $username) {
+    public $userId, $username, $cardID;
+    function __construct($userId, $username, $cardID) {
         $this->username = $username;
         $this->userId = $userId;
+        $this->cardID = $cardID;
     }
 
     public function sessionSet() {
@@ -64,8 +65,8 @@ class User {
     public static function auth($uname, $password) {
         $hashedPass = User::getHashedPass($uname);
         if (password_verify($password, $hashedPass)) {
-            $userInfo = dbQuery("SELECT user_id, username FROM cyber_secret.user WHERE username = '$uname' LIMIT 1")->fetch_assoc();
-            return new User($userInfo["user_id"], $userInfo["username"]);
+            $userInfo = dbQuery("SELECT user_id, username, card_ID FROM cyber_secret.user WHERE username = '$uname' LIMIT 1")->fetch_assoc();
+            return new User($userInfo["user_id"], $userInfo["username"], $userInfo["card_ID"]);
         } else return false;
     }
 
