@@ -51,107 +51,39 @@ $rootPath = "";
             <!-- Profile Stats -->
             <div class="profile-stats">
                 <div class="profile-stats-wrapper">
-
                     <div class="pro-sw-titles">
-                        <div class="pro-swt-column">
-                            <h3 class="pro-swt-title">Styrke:</h3>
-                        </div>
-                        <div class="pro-swt-column">
-                            <h3 class="pro-swt-title">Intelligens:</h3>
-                        </div>
-                        <div class="pro-swt-column">
-                            <h3 class="pro-swt-title">Karisma:</h3>
-                        </div>
-                        <div class="pro-swt-column">
-                            <h3 class="pro-swt-title">Smidighet:</h3>
-                        </div>
-                        <div class="pro-swt-column">
-                            <h3 class="pro-swt-title">Visdom:</h3>
-                        </div>
-                        <div class="pro-swt-column">
-                            <h3 class="pro-swt-title">Flaks:</h3>
-                        </div>
+                        <?php
+                        foreach ($stats as $key => $val) {
+                            print "
+                            <div class='pro-swt-column'>
+                                <h3 class='pro-swt-title'>{$val[0]}:</h3>
+                            </div>
+                            ";
+                        }
+                        ?>
                     </div>
 
                     <div class="pro-sw-content">
-                        <div class="pro-swc-column">
-                            <div class="pro-swc-content flexbox">
-                                <h3 class="pro-swc-number">5</h3>
+                        <?php
+                        foreach ($stats as $key => $val) {
+                            $percent = ($val[1] - 5) * 20;
+                            $cssVariable = strtolower("--clr-" . $val[0]);
+                            print "
+                            <div class='pro-swc-column'>
+                            <div class='pro-swc-content flexbox'>
+                                <h3 class='pro-swc-number'>{$val[1]}</h3>
                             </div>
-                            <div class="pro-swc-bar-wrapper">
-                                <div id="styrke" class="pro-swc-bar flexbox-left">
-                                    <p class="pro-swc-bar-perc">95%</p>
-                                    <div class="pro-swc-bar-inner">
-                                        <div class="pro-swc-bar-glow"></div>
+                            <div class='pro-swc-bar-wrapper'>
+                                <div class='pro-swc-bar flexbox-left'>
+                                    <div class='pro-swc-bar-inner' style='width: {$percent}%; background-color: hsl(var({$cssVariable}));'>
+                                        <div class='pro-swc-bar-glow'></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="pro-swc-column">
-                            <div class="pro-swc-content flexbox">
-                                <h3 class="pro-swc-number">6</h3>
-                            </div>
-                            <div class="pro-swc-bar-wrapper">
-                                <div id="intelligens" class="pro-swc-bar flexbox-left">
-                                    <p class="pro-swc-bar-perc">30%</p>
-                                    <div class="pro-swc-bar-inner">
-                                        <div class="pro-swc-bar-glow"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pro-swc-column">
-                            <div class="pro-swc-content flexbox">
-                                <h3 class="pro-swc-number">8</h3>
-                            </div>
-                            <div class="pro-swc-bar-wrapper">
-                                <div id="karisma" class="pro-swc-bar flexbox-left">
-                                    <p class="pro-swc-bar-perc">10%</p>
-                                    <div class="pro-swc-bar-inner">
-                                        <div class="pro-swc-bar-glow"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pro-swc-column">
-                            <div class="pro-swc-content flexbox">
-                                <h3 class="pro-swc-number">7</h3>
-                            </div>
-                            <div class="pro-swc-bar-wrapper">
-                                <div id="smidighet" class="pro-swc-bar flexbox-left">
-                                    <p class="pro-swc-bar-perc">66%</p>
-                                    <div class="pro-swc-bar-inner">
-                                        <div class="pro-swc-bar-glow"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pro-swc-column">
-                            <div class="pro-swc-content flexbox">
-                                <h3 class="pro-swc-number">6</h3>
-                            </div>
-                            <div class="pro-swc-bar-wrapper">
-                                <div id="visdom" class="pro-swc-bar flexbox-left">
-                                    <p class="pro-swc-bar-perc">34%</p>
-                                    <div class="pro-swc-bar-inner">
-                                        <div class="pro-swc-bar-glow"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pro-swc-column">
-                            <div class="pro-swc-content flexbox">
-                                <h3 class="pro-swc-number">8</h3>
-                            </div>
-                            <div class="pro-swc-bar-wrapper">
-                                <div id="flaks" class="pro-swc-bar flexbox-left">
-                                    <p class="pro-swc-bar-perc">75%</p>
-                                    <div class="pro-swc-bar-inner">
-                                        <div class="pro-swc-bar-glow"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            ";
+                        }
+                        ?>
                     </div>
 
                 </div>

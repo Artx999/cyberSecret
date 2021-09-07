@@ -4,10 +4,12 @@ session_start();
 
 
 $user = User::auth("Artx999", "test");
-print_r($user);
+$stats = $user->getStats();
+print_r($stats);
 
 
-//foreach ($stats as $key => $val) {
-//    $name = ucfirst($key);
-//    print "<p>{$name}: {$val}<p/>";
-//}
+foreach ($stats as $key => $val) {
+    $name = ucfirst($val[0]);
+    $percent = ($val[1] -5) * 20;
+    print "<p>{$name}: {$val[1]} - {$percent}%<p/>";
+}
