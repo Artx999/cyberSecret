@@ -96,21 +96,27 @@ $rootPath = "";
             <!-- Inventory -->
             <div id="inventory" class="flexbox-col-left">
                 <h3>Inventory</h3>
-                <div class="inventory-inner">
-                    <?php
-                    if ($inventory->fetch_assoc()) {
-                        foreach ($inventory as $row) {
-                            print "
-                            <div class='inventory-cell flexbox'>
-                                <p class='inventory-cell-title'>{$row["item"]}</p>
-                            </div>
-                            ";
-                        }
-                    } else {
-                        print "NO!";
+                <?php
+                if ($inventory->fetch_assoc()) {
+                    print "<div class='inventory-inner'>";
+                    foreach ($inventory as $row) {
+                        print "
+                        <div class='inventory-cell flexbox'>
+                            <p class='inventory-cell-title'>{$row["item"]}</p>
+                        </div>
+                        ";
                     }
-                    ?>
-                </div>
+                    print "</div>";
+                } else {
+                    print "
+                    <div class='inventory-inner-empty'>
+                        <div class='inv-empty'>
+                            <p>Inventaret ditt er tomt</p>
+                        </div>
+                    </div>
+                    ";
+                }
+                ?>
             </div>
         </div>
     </section>
