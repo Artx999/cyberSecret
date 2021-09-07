@@ -48,6 +48,10 @@ $rootPath = "";
                     </div>
                 </div>
 
+                <div class="profile-header-logout flexbox">
+                    <a href="backend/logout.php"><button class="logout-button">Logout</button></a>
+                </div>
+
             </div>
             <!-- Profile Stats -->
             <div class="profile-stats">
