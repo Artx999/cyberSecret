@@ -158,39 +158,19 @@ $rootPath = "";
 
             <!-- Inventory -->
             <div id="inventory" class="flexbox-col-left">
-                <h3>Inventory</h3>
+                <h3>Inventar</h3>
+                <div class="inventory-inner-empty">
+                    <div class="inv-empty">
+                        <p>Inventaret ditt er tomt</p>
+                    </div>
+                </div>
+                <!--
                 <div class="inventory-inner">
                     <div class="inventory-cell flexbox">
                         <p class="inventory-cell-title">Hey</p>
                     </div>
-                    <div class="inventory-cell flexbox">
-                        <p class="inventory-cell-title">Hey</p>
-                    </div>
-                    <div class="inventory-cell flexbox">
-                        <p class="inventory-cell-title">Hey</p>
-                    </div>
-                    <div class="inventory-cell flexbox">
-                        <p class="inventory-cell-title">Hey</p>
-                    </div>
-                    <div class="inventory-cell flexbox">
-                        <p class="inventory-cell-title">Hey</p>
-                    </div>
-                    <div class="inventory-cell flexbox">
-                        <p class="inventory-cell-title">Hey</p>
-                    </div>
-                    <div class="inventory-cell flexbox">
-                        <p class="inventory-cell-title">Hey</p>
-                    </div>
-                    <div class="inventory-cell flexbox">
-                        <p class="inventory-cell-title">Hey</p>
-                    </div>
-                    <div class="inventory-cell flexbox">
-                        <p class="inventory-cell-title">Hey</p>
-                    </div>
-                    <div class="inventory-cell flexbox">
-                        <p class="inventory-cell-title">Hey</p>
-                    </div>
                 </div>
+                -->
             </div>
 
         </div>
