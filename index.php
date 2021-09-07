@@ -16,69 +16,155 @@ $rootPath = "";
     <meta name="author" content="">
     <!-- ======= -->
     <!-- General -->
-    <title>Cyber Secret</title>
-    <!-- ======= -->
-    <!-- Imports -->
+    <title>Profile</title>
     <?php require "{$rootPath}structure/head/imports.php" ?>
 </head>
 <body>
 
-<!-- Page -->
-<div class="page">
+<!-- Loading - Pace -->
+<div class="pace">
+    <div class="pace-progress"></div>
+</div>
 
-    <!-- Navbar -->
-    <?php require "{$rootPath}structure/items/navbar.php" ?>
+<!-- Main -->
+<main id="main" class="flexbox-col-start-center">
 
-    <!-- Main -->
-    <main id="main" class="flexbox-col-start-center">
-
-        <!-- Profile Page -->
-        <div class="view-width">
-
+    <section id="profile-section" class="view-width">
+        <div class="profile-inner flexbox-col">
             <!-- Profile Header -->
-            <section class="profile-header">
-                <div class="profile-header-inner flexbox">
-                    <div class="phi-info-wrapper flexbox">
-                        <!-- Profile Picture -->
-                        <div class="phi-profile-picture-wrapper">
-                            <div class="phi-profile-picture-inner flexbox">
-                                <img class="phi-profile-picture" src="https://images.unsplash.com/photo-1532373213958-5156f1836b37?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1931&q=80" alt="">
-                            </div>
-                            <img class="phi-profile-picture-blur" src="https://images.unsplash.com/photo-1532373213958-5156f1836b37?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1931&q=80" alt="">
+            <div class="profile-header">
+
+                <div class="profile-header-content flexbox-left">
+                    <div class="profile-picture-wrapper flexbox">
+                        <div class="profile-picture-inner flexbox">
+                            <img class="profile-picture" src="https://images.unsplash.com/photo-1599476913208-072a43d63922?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="">
                         </div>
-                        <!-- Profile Username -->
-                        <div class="phi-profile-username-wrapper flexbox-col-left">
-                            <h3 class="phi-profile-username flexbox"><?php print $user->username; ?> <span class="material-icons-sharp">verified_user</span></h3>
-                            <p class="phi-profile-tagline">Something neat and funny!</p>
+                        <img class="profile-picture-glow" src="https://images.unsplash.com/photo-1599476913208-072a43d63922?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="">
+                    </div>
+                    <div class="profile-username-wrapper flexbox-col-left">
+                        <h3 class="profile-username"><?php print $user->username?></h3>
+                        <p class="profile-at-username">@<?php print strtolower($user->username) ?></p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Profile Stats -->
+            <div class="profile-stats">
+                <div class="profile-stats-wrapper">
+
+                    <div class="pro-sw-titles">
+                        <div class="pro-swt-column">
+                            <h3 class="pro-swt-title">Styrke:</h3>
+                        </div>
+                        <div class="pro-swt-column">
+                            <h3 class="pro-swt-title">Intelligens:</h3>
+                        </div>
+                        <div class="pro-swt-column">
+                            <h3 class="pro-swt-title">Karisma:</h3>
+                        </div>
+                        <div class="pro-swt-column">
+                            <h3 class="pro-swt-title">Smidighet:</h3>
+                        </div>
+                        <div class="pro-swt-column">
+                            <h3 class="pro-swt-title">Visdom:</h3>
+                        </div>
+                        <div class="pro-swt-column">
+                            <h3 class="pro-swt-title">Flaks:</h3>
                         </div>
                     </div>
-                    <!-- Profile Header Image -->
-                    <div class="profile-header-overlay"></div>
-                    <img class="profile-header-image" src="https://images.unsplash.com/photo-1564737956548-df7b58e61146?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80" alt="">
-                </div>
-            </section>
 
-            <!-- Profile Page -->
-            <section class="profile-page">
-                <div class="profile-page-inner">
-                    <h3>Statistics</h3>
-                    <?php
-                    foreach ($stats as $key => $val) {
-                        $name = ucfirst($key);
-                        print "<p>{$name}: {$val}<p/>";
-                    };
-                    ?>
-                </div>
-            </section>
+                    <div class="pro-sw-content">
+                        <div class="pro-swc-column">
+                            <div class="pro-swc-content flexbox">
+                                <h3 class="pro-swc-number">5</h3>
+                            </div>
+                            <div class="pro-swc-bar-wrapper">
+                                <div id="styrke" class="pro-swc-bar flexbox-left">
+                                    <p class="pro-swc-bar-perc">95%</p>
+                                    <div class="pro-swc-bar-inner">
+                                        <div class="pro-swc-bar-glow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pro-swc-column">
+                            <div class="pro-swc-content flexbox">
+                                <h3 class="pro-swc-number">6</h3>
+                            </div>
+                            <div class="pro-swc-bar-wrapper">
+                                <div id="intelligens" class="pro-swc-bar flexbox-left">
+                                    <p class="pro-swc-bar-perc">30%</p>
+                                    <div class="pro-swc-bar-inner">
+                                        <div class="pro-swc-bar-glow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pro-swc-column">
+                            <div class="pro-swc-content flexbox">
+                                <h3 class="pro-swc-number">8</h3>
+                            </div>
+                            <div class="pro-swc-bar-wrapper">
+                                <div id="karisma" class="pro-swc-bar flexbox-left">
+                                    <p class="pro-swc-bar-perc">10%</p>
+                                    <div class="pro-swc-bar-inner">
+                                        <div class="pro-swc-bar-glow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pro-swc-column">
+                            <div class="pro-swc-content flexbox">
+                                <h3 class="pro-swc-number">7</h3>
+                            </div>
+                            <div class="pro-swc-bar-wrapper">
+                                <div id="smidighet" class="pro-swc-bar flexbox-left">
+                                    <p class="pro-swc-bar-perc">66%</p>
+                                    <div class="pro-swc-bar-inner">
+                                        <div class="pro-swc-bar-glow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pro-swc-column">
+                            <div class="pro-swc-content flexbox">
+                                <h3 class="pro-swc-number">6</h3>
+                            </div>
+                            <div class="pro-swc-bar-wrapper">
+                                <div id="visdom" class="pro-swc-bar flexbox-left">
+                                    <p class="pro-swc-bar-perc">34%</p>
+                                    <div class="pro-swc-bar-inner">
+                                        <div class="pro-swc-bar-glow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pro-swc-column">
+                            <div class="pro-swc-content flexbox">
+                                <h3 class="pro-swc-number">8</h3>
+                            </div>
+                            <div class="pro-swc-bar-wrapper">
+                                <div id="flaks" class="pro-swc-bar flexbox-left">
+                                    <p class="pro-swc-bar-perc">75%</p>
+                                    <div class="pro-swc-bar-inner">
+                                        <div class="pro-swc-bar-glow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+            </div>
         </div>
+    </section>
 
-    </main>
-
-</div>
+</main>
 
 </body>
 <script>
-
+    paceOptions = {
+        elements: true
+    };
 </script>
 </html>
