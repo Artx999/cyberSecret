@@ -630,6 +630,54 @@ select {
     color: hsl(var(--white));
     font-size: calc(var(--paragraph) + .35rem);
 }
+.ufi-input-inner-check {
+    width: 100%;
+    position: relative;
+    gap: 1em;
+}
+.ufi-input-inner-check p {
+    color: hsl(var(--white));
+}
+.ufi-input-check {
+    padding: 0;
+    width: 3em; height: 1.8em;
+    position: relative;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid hsl(var(--white));
+    outline: none;
+    transition: all .3s cubic-bezier(var(--transition-main), 1);
+    cursor: pointer;
+}
+.ufi-input-check:hover {
+    box-shadow: none;
+    border: 2px solid hsl(var(--white));
+}
+.ufi-input-check:focus {
+    box-shadow: none;
+    border: 2px solid hsl(var(--white));
+    outline: none;
+}
+.ufi-input-check:active {
+    box-shadow: none;
+    border: 2px solid hsl(var(--white));
+    outline: none;
+}
+.ufi-input-check::before {
+    content: "";
+    top: .4em; left: .4em;
+    width: .8em; height: .8em;
+    position: absolute;
+    background-color: hsl(var(--white));
+    transition: all .3s cubic-bezier(var(--transition-main), 1);
+}
+.ufi-input-check:checked::before {
+    left: calc(100% - .4em - .8em);
+    background: hsl(var(--primary));
+}
+.ufi-input-check:checked {
+    border-color: hsl(var(--primary));
+}
 .ufi-input {
     padding: 1.2em 3.25em;
     width: 100%;
