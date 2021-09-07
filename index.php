@@ -38,9 +38,9 @@ $rootPath = "";
                 <div class="profile-header-content flexbox-left">
                     <div class="profile-picture-wrapper flexbox">
                         <div class="profile-picture-inner flexbox">
-                            <img class="profile-picture" src="https://images.unsplash.com/photo-1599476913208-072a43d63922?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="">
+                            <img class="profile-picture" src="images/profile-pic.jpg" alt="">
                         </div>
-                        <img class="profile-picture-glow" src="https://images.unsplash.com/photo-1599476913208-072a43d63922?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="">
+                        <img class="profile-picture-glow" src="images/profile-pic.jpg" alt="">
                     </div>
                     <div class="profile-username-wrapper flexbox-col-left">
                         <h3 class="profile-username"><?php print $user->username?></h3>
@@ -96,21 +96,27 @@ $rootPath = "";
             <!-- Inventory -->
             <div id="inventory" class="flexbox-col-left">
                 <h3>Inventory</h3>
-                <div class="inventory-inner">
-                    <?php
-                    if ($inventory->fetch_assoc()) {
-                        foreach ($inventory as $row) {
-                            print "
-                            <div class='inventory-cell flexbox'>
-                                <p class='inventory-cell-title'>{$row["item"]}</p>
-                            </div>
-                            ";
-                        }
-                    } else {
-                        print "NO!";
+                <?php
+                if ($inventory->fetch_assoc()) {
+                    print "<div class='inventory-inner'>";
+                    foreach ($inventory as $row) {
+                        print "
+                        <div class='inventory-cell flexbox'>
+                            <p class='inventory-cell-title'>{$row["item"]}</p>
+                        </div>
+                        ";
                     }
-                    ?>
-                </div>
+                    print "</div>";
+                } else {
+                    print "
+                    <div class='inventory-inner-empty'>
+                        <div class='inv-empty'>
+                            <p>Inventaret ditt er tomt</p>
+                        </div>
+                    </div>
+                    ";
+                }
+                ?>
             </div>
         </div>
     </section>
