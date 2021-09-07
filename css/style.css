@@ -329,7 +329,10 @@ select {
     border: 1px hsl(var(--primary)) solid;
 }
 /* Profile Header */
-.profile-header {}
+.profile-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
 .profile-header-content {
     width: 100%;
     gap: 2em;
@@ -406,6 +409,17 @@ select {
 }
 .pro-swc-number {
     color: hsl(var(--white));
+}
+/* Logout */
+.logout-button {
+    padding: 1.25em 1.6em;
+    position: relative;
+    color: hsl(var(--white));
+    font-weight: 800;
+    background-color: hsl(var(--background));
+    border: 1px solid transparent;
+    overflow: hidden;
+    user-select: none;
 }
 /* Bar */
 .pro-swc-bar-wrapper {

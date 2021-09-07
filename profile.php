@@ -42,6 +42,10 @@ $rootPath = "";
                     </div>
                 </div>
 
+                <div class="profile-header-logout flexbox">
+                    <button class="logout-button">Logout</button>
+                </div>
+
             </div>
             <!-- Profile Stats -->
             <div class="profile-stats">
