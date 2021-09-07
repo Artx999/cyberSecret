@@ -81,6 +81,12 @@ class User {
         if ($i)return new Stats($i["strength"], $i["dexterity"], $i["intelligence"], $i["wisdom"], $i["charisma"], $i["luck"]);
         else return new Stats(0, 0, 0, 0, 0, 0);
     }
+
+    public function getInventory() {
+        $i = dbQuery("SELECT * FROM cyber_secret.inventory WHERE user_id='$this->userId'");
+        if ($i) return $i;
+        else return false;
+    }
 }
 
 class Stats {

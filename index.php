@@ -4,6 +4,7 @@ session_start();
 if (!isset($_SESSION["user"])) header("Location: login.php");
 $user = User::sessionGet();
 $stats = $user->getStats();
+$inventory = $user->getInventory();
 $rootPath = "";
 ?>
 <!DOCTYPE html>
@@ -86,6 +87,25 @@ $rootPath = "";
                         ?>
                     </div>
 
+                </div>
+            </div>
+            <!-- Inventory -->
+            <div id="inventory" class="flexbox-col-left">
+                <h3>Inventory</h3>
+                <div class="inventory-inner">
+                    <?php
+                    if ($inventory->fetch_assoc()) {
+                        foreach ($inventory as $row) {
+                            print "
+                            <div class='inventory-cell flexbox'>
+                                <p class='inventory-cell-title'>{$row["item"]}</p>
+                            </div>
+                            ";
+                        }
+                    } else {
+                        print "NO!";
+                    }
+                    ?>
                 </div>
             </div>
         </div>
