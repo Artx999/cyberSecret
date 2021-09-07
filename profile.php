@@ -151,6 +151,44 @@ $rootPath = "";
 
                 </div>
             </div>
+
+            <!-- Inventory -->
+            <div id="inventory" class="flexbox-col-left">
+                <h3>Inventory</h3>
+                <div class="inventory-inner">
+                    <div class="inventory-cell flexbox">
+                        <p class="inventory-cell-title">Hey</p>
+                    </div>
+                    <div class="inventory-cell flexbox">
+                        <p class="inventory-cell-title">Hey</p>
+                    </div>
+                    <div class="inventory-cell flexbox">
+                        <p class="inventory-cell-title">Hey</p>
+                    </div>
+                    <div class="inventory-cell flexbox">
+                        <p class="inventory-cell-title">Hey</p>
+                    </div>
+                    <div class="inventory-cell flexbox">
+                        <p class="inventory-cell-title">Hey</p>
+                    </div>
+                    <div class="inventory-cell flexbox">
+                        <p class="inventory-cell-title">Hey</p>
+                    </div>
+                    <div class="inventory-cell flexbox">
+                        <p class="inventory-cell-title">Hey</p>
+                    </div>
+                    <div class="inventory-cell flexbox">
+                        <p class="inventory-cell-title">Hey</p>
+                    </div>
+                    <div class="inventory-cell flexbox">
+                        <p class="inventory-cell-title">Hey</p>
+                    </div>
+                    <div class="inventory-cell flexbox">
+                        <p class="inventory-cell-title">Hey</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
