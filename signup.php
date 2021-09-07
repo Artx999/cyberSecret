@@ -87,6 +87,15 @@ $rootPath = "";
                     </div>
                 </div>
             </fieldset>
+            <fieldset class="input-grid inpt-grd-1">
+                <div class="input-wrapper ufi-input-wrapper">
+                    <label for="password">Terms of service*</label>
+                    <div class="ufi-input-inner-check flexbox-left">
+                        <input id="" type="checkbox" class="ufi-input-check" name="" aria-label="" required>
+                        <p>For å registrere deg må du akseptere våre <a href="">terms of service</a></p>
+                    </div>
+                </div>
+            </fieldset>
             <fieldset class="input-grid inpt-grd-2">
                 <div class="ufi-button-wrapper">
                     <button id="submit" type="submit" class="ufi-button flexbox">

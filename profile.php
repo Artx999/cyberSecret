@@ -32,9 +32,9 @@ $rootPath = "";
                 <div class="profile-header-content flexbox-left">
                     <div class="profile-picture-wrapper flexbox">
                         <div class="profile-picture-inner flexbox">
-                            <img class="profile-picture" src="https://images.unsplash.com/photo-1599476913208-072a43d63922?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="">
+                            <img class="profile-picture" src="images/profile-pic.jpg" alt="">
                         </div>
-                        <img class="profile-picture-glow" src="https://images.unsplash.com/photo-1599476913208-072a43d63922?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="">
+                        <img class="profile-picture-glow" src="images/profile-pic.jpg" alt="">
                     </div>
                     <div class="profile-username-wrapper flexbox-col-left">
                         <h3 class="profile-username">Username</h3>
