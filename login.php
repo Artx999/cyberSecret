@@ -28,7 +28,7 @@ $rootPath = "";
 
     <form class="user-form view-width flexbox-col" method="post" action="backend/loginSys.php">
         <div class="user-form-top">
-            <h2>Login</h2>
+            <h2>Logg inn</h2>
             <a href="signup.php">Eller register deg</a>
         </div>
         <?php
@@ -59,7 +59,7 @@ $rootPath = "";
             <fieldset class="input-grid inpt-grd-2">
                 <div class="ufi-button-wrapper">
                     <button type="submit" class="ufi-button flexbox">
-                        Login
+                        Logg inn
                     </button>
                 </div>
             </fieldset>

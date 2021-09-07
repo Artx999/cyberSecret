@@ -30,7 +30,7 @@ $rootPath = "";
     <form class="user-form view-width flexbox-col" method="post" action="backend/signupSys.php">
         <div class="user-form-top">
             <h2>Registrer deg</h2>
-            <a href="login.php">Eller login</a>
+            <a href="login.php">Eller logg inn</a>
         </div>
 
         <?php
