@@ -1,4 +1,6 @@
 <?php
+session_start();
+if (isset($_SESSION["user"])) header("Location: index.php");
 $rootPath = "";
 ?>
 <!DOCTYPE html>
@@ -26,14 +28,14 @@ $rootPath = "";
 
     <form class="user-form view-width flexbox-col" method="post" action="backend/loginSys.php">
         <div class="user-form-top">
-            <h2>Login</h2>
+            <h2>Logg inn</h2>
             <a href="signup.php">Eller register deg</a>
         </div>
         <?php
 
         require "func.php";
         if (isset($_GET["error"])) {
-            print ErrorMsg::decode($_GET["error"]); // Prints error messages
+            print '<p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMsg::decode($_GET["error"]) . '</p>'; // Prints error messages
         }
 
         ?>
@@ -57,7 +59,7 @@ $rootPath = "";
             <fieldset class="input-grid inpt-grd-2">
                 <div class="ufi-button-wrapper">
                     <button type="submit" class="ufi-button flexbox">
-                        Login
+                        Logg inn
                     </button>
                 </div>
             </fieldset>

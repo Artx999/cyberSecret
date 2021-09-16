@@ -3,13 +3,13 @@
   "incorrectUsernameOrPassword": "Incorrect username or password",
   "noUsername": "You have not entered a username",
   "noPassword": "You have not entered a password",
-  "noEmail": "You have not entered an email",
   "noConfirmPassword": "You have not entered a confirmation password",
   "noConfirmPasswordMatch": "The password and confirmation password does not match",
-  "noSeatNumber": "You have not entered a seat number",
-  "invalidSeatNumber": "You have entered an invalid seat number",
+  "noCardID": "You have not entered a card ID",
+  "invalidCardID": "You have entered an invalid card ID",
   "duplicateKey": "Duplicate key",
   "usernameExists": "Username already exists",
-  "seatNumberExists": "Seat number already exists",
-  "emailExists": "Email already exists"
+  "cardIDExists": "Card ID already exists",
+  "noFirstName": "You have not entered a first name",
+  "noLastName": "You have not entered a last name"
 }

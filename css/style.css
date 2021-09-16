@@ -329,7 +329,10 @@ select {
     border: 1px hsl(var(--primary)) solid;
 }
 /* Profile Header */
-.profile-header {}
+.profile-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
 .profile-header-content {
     width: 100%;
     gap: 2em;
@@ -407,6 +410,17 @@ select {
 .pro-swc-number {
     color: hsl(var(--white));
 }
+/* Logout */
+.logout-button {
+    padding: 1.25em 1.6em;
+    position: relative;
+    color: hsl(var(--white));
+    font-weight: 800;
+    background-color: hsl(var(--background));
+    border: 1px solid transparent;
+    overflow: hidden;
+    user-select: none;
+}
 /* Bar */
 .pro-swc-bar-wrapper {
     width: 100%;
@@ -460,6 +474,50 @@ select {
     transform: scale(.85, .85);
     filter: blur(1.5rem);
     opacity: .4;
+}
+
+/* Inventory */
+#inventory {
+    padding: 5em;
+    width: 100%;
+    background: linear-gradient(0deg, hsla(var(--primary), .1) 0%, hsla(var(--primary), 0) 100%);
+    border: 1px hsl(var(--primary)) solid;
+    gap: 2em;
+}
+#inventory > h3 {
+    color: hsl(var(--white));
+}
+.inventory-inner {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    place-items: center;
+    gap: 1em;
+}
+.inventory-inner-empty {
+    width: 100%;
+    min-height: 10em;
+    display: grid;
+    background-color: hsla(var(--black), .2);
+    border: 1px dashed hsla(var(--primary), .2);
+    place-items: center;
+}
+.inv-empty {
+    color: hsl(var(--white));
+}
+.inventory-cell {
+    width: 100%; height: 1fr;
+    position: relative;
+    background-color: hsla(var(--black), .2);
+    border: 1px solid hsl(var(--primary));
+}
+.inventory-cell::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+.inventory-cell-title {
+    color: hsl(var(--white));
 }
 
 /* =====================
@@ -630,6 +688,54 @@ select {
     color: hsl(var(--white));
     font-size: calc(var(--paragraph) + .35rem);
 }
+.ufi-input-inner-check {
+    width: 100%;
+    position: relative;
+    gap: 1em;
+}
+.ufi-input-inner-check p {
+    color: hsl(var(--white));
+}
+.ufi-input-check {
+    padding: 0;
+    width: 3em; height: 1.8em;
+    position: relative;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid hsl(var(--white));
+    outline: none;
+    transition: all .3s cubic-bezier(var(--transition-main), 1);
+    cursor: pointer;
+}
+.ufi-input-check:hover {
+    box-shadow: none;
+    border: 2px solid hsl(var(--white));
+}
+.ufi-input-check:focus {
+    box-shadow: none;
+    border: 2px solid hsl(var(--white));
+    outline: none;
+}
+.ufi-input-check:active {
+    box-shadow: none;
+    border: 2px solid hsl(var(--white));
+    outline: none;
+}
+.ufi-input-check::before {
+    content: "";
+    top: .4em; left: .4em;
+    width: .8em; height: .8em;
+    position: absolute;
+    background-color: hsl(var(--white));
+    transition: all .3s cubic-bezier(var(--transition-main), 1);
+}
+.ufi-input-check:checked::before {
+    left: calc(100% - .4em - .8em);
+    background: hsl(var(--primary));
+}
+.ufi-input-check:checked {
+    border-color: hsl(var(--primary));
+}
 .ufi-input {
     padding: 1.2em 3.25em;
     width: 100%;
@@ -659,6 +765,19 @@ select {
 }
 .ufi-input-inner .bad {
     color: hsl(var(--red));
+}
+/* Error Message */
+.error-msg {
+    margin: 0; padding: 1.2em;
+    width: 100%;
+    color: hsl(var(--white));
+    background-color: hsla(var(--red), .5);
+    border-left: .5em solid hsl(var(--red));
+    line-height: 1;
+    gap: 1em;
+}
+.error-msg span {
+    font-size: var(--paragraph);
 }
 /* Ufi button */
 .ufi-button {

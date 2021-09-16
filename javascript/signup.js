@@ -19,16 +19,15 @@ function checkButton(checks) {
 let timer
 let checks = {}
 checkButton(checks)
-$(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
+$(["username", "password", "confirmPassword", "cardID", "firstName", "lastName"]).each(function () {
     let type = this.toString()
     let icon = new CheckIcon()
     let input = $("#" + type)
     checks[type] = false
 
-    $(input).after(icon.content)
-    $(input).on("change keyup paste", function () {
+    function checkInput() {
         let val = $(input).val()
-        // Check if username fits proper parameters
+        // Checks if input is empty
         if (!val) {
             $(icon.content).attr("class", "none")
                 .html('')
@@ -36,6 +35,7 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
             checkButton(checks)
             return
         }
+        // Checks username
         if (type === "username") {
             if (typeof val !== "string") {
                 $(icon.content).attr("class", "bad")
@@ -54,6 +54,7 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
                 return
             }
         }
+        // Checks password and confirmPassword
         if (type === "password" || type === "confirmPassword") {
             let confirmPassword = $("#confirmPassword")
             if (typeof val !== "string") {
@@ -96,7 +97,8 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
                 return
             }
         }
-        if (type === "seatNumber") {
+        // Checks card ID
+        if (type === "cardID") {
             if (isNaN(+val)) {
                 $(icon.content).attr("class", "bad")
                     .html('<span class="material-icons">close</span>')
@@ -114,8 +116,35 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
                 return
             }
         }
-        // Check if username or seatNumber already exists
-        if (type === "username" || type === "seatNumber") {
+        // Checks first and last name
+        if (type === "firstName" || type === "lastName") {
+            if (typeof val !== "string") {
+                $(icon.content).attr("class", "bad")
+                    .html('<span class="material-icons">close</span>')
+                clearTimeout(timer)
+                checks[type] = false
+                checkButton(checks)
+                return
+            }
+            else if (val.length > 255) {
+                $(icon.content).attr("class", "bad")
+                    .html('<span class="material-icons">close</span>')
+                clearTimeout(timer)
+                checks[type] = false
+                checkButton(checks)
+                return
+            }
+            else {
+                $(icon.content).attr("class", "ok")
+                    .html('<span class="material-icons">done</span>')
+                clearTimeout(timer)
+                checks[type] = true
+                checkButton(checks)
+                return
+            }
+        }
+        // Check if username or cardID already exists
+        if (type === "username" || type === "cardID") {
             $(icon.content).attr("class", "wait")
             let payload = {}
             payload[type] = val
@@ -130,6 +159,7 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
                     if (data === "error") {
                         $(icon.content).attr("class", "bad")
                             .html('<span class="material-icons">error</span>')
+                        console.log("Error!")
                         checks[type] = false
                         checkButton(checks)
                     } else if (data) {
@@ -147,13 +177,17 @@ $(["username", "password", "confirmPassword", "seatNumber"]).each(function () {
                     .fail(function () {
                         $(icon.content).attr("class", "bad")
                             .html('<span class="material-icons">error</span>')
+                        console.log("Error!")
                         checks[type] = false
                         checkButton(checks)
                     })
-            }, 1000)
+            }, 500)
         }
-    })
+    }
+
+    $(input).after(icon.content)
+    $(input).on("change keyup paste", checkInput)
+    checkInput()
 })
 
 // Todo: Make better variable and class names
-// Todo: Make it work for every input, and with the correct checks

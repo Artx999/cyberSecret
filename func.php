@@ -47,10 +47,11 @@ class ErrorMsg {
 
 
 class User {
-    public $userId, $username;
-    function __construct($userId, $username) {
+    public $userId, $username, $cardID;
+    function __construct($userId, $username, $cardID) {
         $this->username = $username;
         $this->userId = $userId;
+        $this->cardID = $cardID;
     }
 
     public function sessionSet() {
@@ -64,8 +65,8 @@ class User {
     public static function auth($uname, $password) {
         $hashedPass = User::getHashedPass($uname);
         if (password_verify($password, $hashedPass)) {
-            $userInfo = dbQuery("SELECT user_id, username FROM cyber_secret.user WHERE username = '$uname' LIMIT 1")->fetch_assoc();
-            return new User($userInfo["user_id"], $userInfo["username"]);
+            $userInfo = dbQuery("SELECT user_id, username, card_ID FROM cyber_secret.user WHERE username = '$uname' LIMIT 1")->fetch_assoc();
+            return new User($userInfo["user_id"], $userInfo["username"], $userInfo["card_ID"]);
         } else return false;
     }
 
@@ -77,23 +78,31 @@ class User {
 
     public function getStats() {
         $i = dbQuery("SELECT * FROM cyber_secret.stats WHERE user_id='$this->userId'")->fetch_assoc();
-        if ($i)return $stats = new Stats($i["strength"], $i["dexterity"], $i["charisma"], $i["intelligence"]);
-        else return $stats = new Stats(0, 0, 0, 0);
+        if ($i)return new Stats($i["strength"], $i["dexterity"], $i["intelligence"], $i["wisdom"], $i["charisma"], $i["luck"]);
+        else return new Stats(5, 5, 5, 5, 5, 5);
+    }
+
+    public function getInventory() {
+        $i = dbQuery("SELECT * FROM cyber_secret.inventory WHERE user_id='$this->userId'");
+        if ($i) return $i;
+        else return false;
     }
 }
 
 class Stats {
-    public $strength, $dexterity, $charisma, $intelligence;
-    public function __construct($strength, $dexterity, $charisma, $intelligence) {
-        $this->strength = $strength;
-        $this->dexterity = $dexterity;
-        $this->charisma = $charisma;
-        $this->intelligence = $intelligence;
+    public $strength, $dexterity, $intelligence, $wisdom, $charisma, $luck;
+    public function __construct($strength, $dexterity, $intelligence, $wisdom, $charisma, $luck) {
+        $this->strength = ["Styrke", $strength];
+        $this->dexterity = ["Smidighet", $dexterity];
+        $this->intelligence = ["Intelligens", $intelligence];
+        $this->wisdom = ["Visdom", $wisdom];
+        $this->charisma = ["Karisma", $charisma];
+        $this->luck = ["Flaks", $luck];
     }
 }
 
 class Info {
-    public static function maxSeats() {
-        return 120; // ! Must ask someone important !
+    public static function maxID() {
+        return 172; // ! Must ask someone important !
     }
 }
