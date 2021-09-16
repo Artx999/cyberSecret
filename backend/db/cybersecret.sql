@@ -36,6 +36,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
+INSERT INTO `inventory` VALUES (1,'Sword'),(1,'Axe'),(1,'Gun'),(21,'Gunnar');
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,12 +81,14 @@ CREATE TABLE `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(25) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `seat_number` int(11) NOT NULL,
   `timestamp` datetime NOT NULL DEFAULT current_timestamp(),
+  `card_id` int(11) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_username_uindex` (`username`),
-  UNIQUE KEY `user_seat_number_uindex` (`seat_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY `user_seat_number_uindex` (`card_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +97,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Artx999','$2y$10$9pVEbwFmFzCjYt91kRghdOyNX1pkPabf2GyhLBUcffFPC2mexsuAG',9999,'2021-01-17 00:23:58'),(21,'lol','$2y$10$Z0rmkYzmGFQLY3WuVdcGsOo9MYFxhESb7TOs8DhanGLD7HLEp/rDa',9998,'2021-07-08 02:06:35'),(22,'Kåre Gunnar','$2y$10$wXRhQA0nMW/sck4FuBa.de67l6C48epOezv26R1t5cyOquOPDw7cC',9997,'2021-07-08 03:28:30'),(23,'Bonny','$2y$10$OCDiSFDl0khpfWV7hkh65.20hCqPfAndUAUyyJEXknxj77RTEyPY6',9996,'2021-07-13 23:59:55'),(24,'Kyle Ronny','$2y$10$KVR7mJbjH9JnOiJba3xBn.BfVun8jh16IzuD4OMbInzHlov633l0G',9995,'2021-07-14 00:24:19'),(25,'Bogga','$2y$10$3Q6MW66H3tSaVuyOp2qvDu.FRHD88PVOY/XmpICI0iq2dohdbn372',12,'2021-08-09 01:03:30'),(27,'123','$2y$10$XjhT07Oya/CFcJE7FMgjH.Lb4G0TZusfiTKWc8y0zzqXkUqkw2aES',32,'2021-08-09 02:48:03'),(28,'hae5tn','$2y$10$LTJt1l1MSukkC5YIaHA2F.A.0G1Jbu1F766ZHWeI9MPdrSH7JL2qG',43,'2021-08-09 04:01:52');
+INSERT INTO `user` VALUES (1,'Artx999','$2y$10$9pVEbwFmFzCjYt91kRghdOyNX1pkPabf2GyhLBUcffFPC2mexsuAG','2021-01-17 00:23:58',9999,'',''),(21,'lol','$2y$10$Z0rmkYzmGFQLY3WuVdcGsOo9MYFxhESb7TOs8DhanGLD7HLEp/rDa','2021-07-08 02:06:35',9998,'',''),(22,'Kåre Gunnar','$2y$10$wXRhQA0nMW/sck4FuBa.de67l6C48epOezv26R1t5cyOquOPDw7cC','2021-07-08 03:28:30',9997,'',''),(23,'Bonny','$2y$10$OCDiSFDl0khpfWV7hkh65.20hCqPfAndUAUyyJEXknxj77RTEyPY6','2021-07-13 23:59:55',9996,'',''),(24,'Kyle Ronny','$2y$10$KVR7mJbjH9JnOiJba3xBn.BfVun8jh16IzuD4OMbInzHlov633l0G','2021-07-14 00:24:19',9995,'',''),(25,'Bogga','$2y$10$3Q6MW66H3tSaVuyOp2qvDu.FRHD88PVOY/XmpICI0iq2dohdbn372','2021-08-09 01:03:30',12,'',''),(27,'123','$2y$10$XjhT07Oya/CFcJE7FMgjH.Lb4G0TZusfiTKWc8y0zzqXkUqkw2aES','2021-08-09 02:48:03',32,'',''),(28,'hae5tn','$2y$10$LTJt1l1MSukkC5YIaHA2F.A.0G1Jbu1F766ZHWeI9MPdrSH7JL2qG','2021-08-09 04:01:52',43,'',''),(36,'asd','$2y$10$FsXN39Rv4uf5BgwcuGItkO9.iUhb8VdmuQzUOOf.6DGs0BiSH1XBO','2021-09-01 00:17:38',2,'',''),(38,'1234','$2y$10$odLN9oaw/4iUs.OT2v0/7.UccRzvjSqbxphz2SHa.gIFy4st3h2pS','2021-09-06 00:44:00',22,'',''),(39,'hgear','$2y$10$ZXMuEsKoyn.cZHFSJlFCROnW2RqKzTtrTECQTphnNJUxiD.mSiwG.','2021-09-06 00:55:06',34,'123','123'),(40,'eqwgf','$2y$10$5B.gW9Gs5WUkeJWvLy7gF.O1PaETmj9iI1769ZjUTrlQnb2lxDfIe','2021-09-06 21:26:35',37,'123','s'),(41,'dfjgh','$2y$10$qW0wLJ1bCggQyhXwuawmiuAYSt8BcBePt35C6ceXhGqUaFeVqt4Mq','2021-09-06 21:29:22',78,'lol','lol'),(42,'5624','$2y$10$P6uYdjQuQ.YldKmr.cun7uZtt5C/rj12Bndx1fCpfgOV0vSMAXD56','2021-09-17 00:30:40',35,'ola','gul');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -107,4 +110,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-09  4:05:05
+-- Dump completed on 2021-09-17  0:31:50

@@ -7,7 +7,7 @@ if (isset($_POST["username"]) && $_POST["username"]) {
 }
 else if (isset($_POST["cardID"]) && $_POST["cardID"]) {
     $request = $_POST["cardID"];
-    $data = "card_ID";
+    $data = "card_id";
 }
 else {
     print "error";

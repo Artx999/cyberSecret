@@ -40,7 +40,7 @@ foreach ($keyExists as $row) {
 // Handles the errors
 if ($errors->content) {
     header("Location: ../signup.php?error=" . $errors->encode());
-} elseif ($sql = dbQuery("INSERT INTO `cyber_secret`.`user` (username, password, card_ID, first_name, last_name) VALUES ('$username', '$hashedPwd', '$cardID', '$firstName', '$lastName');")) {
+} elseif ($sql = dbQuery("INSERT INTO `cyber_secret`.`user` (username, password, card_id, first_name, last_name) VALUES ('$username', '$hashedPwd', '$cardID', '$firstName', '$lastName');")) {
     if ($sql === "duplicateKey") {
         $errors->add("duplicateKey");
         header("Location: ../signup.php?error=" . $errors->encode());
