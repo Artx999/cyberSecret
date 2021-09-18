@@ -65,7 +65,7 @@ class User {
     public static function auth($uname, $password) {
         $hashedPass = User::getHashedPass($uname);
         if (password_verify($password, $hashedPass)) {
-            $userInfo = dbQuery("SELECT user_id, username, card_ID FROM cyber_secret.user WHERE username = '$uname' LIMIT 1")->fetch_assoc();
+            $userInfo = dbQuery("SELECT user_id, username, card_id FROM cyber_secret.user WHERE username = '$uname' LIMIT 1")->fetch_assoc();
             return new User($userInfo["user_id"], $userInfo["username"], $userInfo["card_ID"]);
         } else return false;
     }

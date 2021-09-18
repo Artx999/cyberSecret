@@ -55,7 +55,7 @@ $rootPath = "";
                     <label for="cardID">ID-nummer* (Maks <?php print Info::maxID() ?>)</label>
                     <div class="ufi-input-inner flexbox">
                         <span class="material-icons">fact_check</span>
-                        <input id="cardID" type="number" class="ufi-input" placeholder="ID-nummer" name="cardID" min="1" max="<?php print Info::maxID()?>" aria-label="" <?php if (isset($_GET["id"])) print "value='{$_GET["id"]}' readonly" ?>required>
+                        <input id="cardID" type="number" class="ufi-input" placeholder="ID-nummer" name="cardID" min="1" max="<?php print Info::maxID()?>" aria-label="" <?php if (isset($_GET["cardID"]) && $_GET["cardID"]) print "value='{$_GET["cardID"]}' readonly" ?> required>
                     </div>
                 </div>
             </fieldset>
