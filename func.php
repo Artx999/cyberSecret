@@ -65,25 +65,25 @@ class User {
     public static function auth($uname, $password) {
         $hashedPass = User::getHashedPass($uname);
         if (password_verify($password, $hashedPass)) {
-            $userInfo = dbQuery("SELECT user_id, username, card_id FROM cyber_secret.user WHERE username = '$uname' LIMIT 1")->fetch_assoc();
+            $userInfo = dbQuery("SELECT user_id, username, card_id FROM lanmine_noneon.user WHERE username = '$uname' LIMIT 1")->fetch_assoc();
             return new User($userInfo["user_id"], $userInfo["username"], $userInfo["card_ID"]);
         } else return false;
     }
 
     private static function getHashedPass($uname) {
-        $result = dbQuery("SELECT username, password FROM cyber_secret.user WHERE username = '$uname' LIMIT 1;");
+        $result = dbQuery("SELECT username, password FROM lanmine_noneon.user WHERE username = '$uname' LIMIT 1;");
         if ($result = $result->fetch_assoc()) return $result["password"];
         else return false;
     }
 
     public function getStats() {
-        $i = dbQuery("SELECT * FROM cyber_secret.stats WHERE user_id='$this->userId'")->fetch_assoc();
+        $i = dbQuery("SELECT * FROM lanmine_noneon.stats WHERE user_id='$this->userId'")->fetch_assoc();
         if ($i)return new Stats($i["strength"], $i["dexterity"], $i["intelligence"], $i["wisdom"], $i["charisma"], $i["luck"]);
         else return new Stats(5, 5, 5, 5, 5, 5);
     }
 
     public function getInventory() {
-        $i = dbQuery("SELECT * FROM cyber_secret.inventory WHERE user_id='$this->userId'");
+        $i = dbQuery("SELECT * FROM lanmine_noneon.inventory WHERE user_id='$this->userId'");
         if ($i) return $i;
         else return false;
     }

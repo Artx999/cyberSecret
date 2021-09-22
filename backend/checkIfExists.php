@@ -14,6 +14,6 @@ else {
     exit();
 }
 
-$result = dbQuery("SELECT {$data} FROM cyber_secret.user WHERE {$data}='{$request}';");
+$result = dbQuery("SELECT {$data} FROM lanmine_noneon.user WHERE {$data}='{$request}';");
 if ($result->num_rows) print $request . ": " . $data;
 else print false;
