@@ -5,7 +5,7 @@ function trueOrFalse($i) {
     else return "false";
 }
 // TODO: Possibly make this a class that has functionality described in: https://stackoverflow.com/questions/533459/how-to-do-a-php-nested-class-or-nested-methods
-function dbQuery($sql, $database = "cyber_secret", $server = "localhost", $username="root", $password="") {
+function dbQuery($sql, $database = "lanmine_noneon", $server = "localhost", $username="root", $password="") {
     $connection = new mysqli($server, $username, $password, $database);
     if ($connection -> connect_error) return false;
     else {

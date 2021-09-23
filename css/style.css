@@ -295,6 +295,162 @@ select {
     3.3.1 Navbar
    ============== */
 
+#navbar {
+    top: 0;
+    padding: 2em;
+    width: 100%; height: 5em;
+    position: fixed;
+    background: hsla(var(--black), .1);
+    backdrop-filter: blur(.25rem);
+    z-index: 999;
+}
+.navbar-inner {
+    width: 100%; height: 100%;
+}
+.navbar-right {
+    height: 100%;
+    position: relative;
+}
+/* Profile Picture */
+.navbar-profilepicture-wrapper {
+    width: 3em; height: 3em;
+    position: relative;
+    cursor: pointer;
+}
+.navbar-profilepicturew-inner {
+    width: 100%; height: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 1001;
+}
+.navbar-profilepicture {
+    min-width: 100%; min-height: 100%;
+    max-width: 105%;
+    position: absolute;
+    object-fit: cover;
+}
+.navbar-profilepicture-glow {
+    top: .4em;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform: scale(.8, .8);
+    filter: blur(.5rem);
+    z-index: 1000;
+}
+/* Dropdown */
+.navbar-dropdown {
+    top: 3.5em; right: 0;
+    min-width: 100%;
+    position: absolute;
+    background-color: hsl(var(--black));
+    box-shadow: 0 24px 34px -28px hsla(var(--black), .5);
+    transition: all .3s cubic-bezier(var(--transition-main), 1);
+    pointer-events: none;
+    opacity: 0;
+    z-index: 999;
+}
+.navbar-dropdown::after {
+    content: "";
+    top: -.6em; right: calc(2.75em / 2 - 8px);
+    width: 0; height: 0;
+    position: absolute;
+    border-left: .6em solid transparent;
+    border-right: .6em solid transparent;
+    border-bottom: .6em solid hsla(var(--black), 1);
+    clear: both;
+    transition: all .3s cubic-bezier(var(--transition-main), 1);
+    z-index: 10;
+}
+.npw-menu-items {
+    width: 100%;
+}
+.npw-menu-item {
+    width: 100%;
+}
+.npw-menu-item:first-child {
+    border-bottom: 1px solid hsla(var(--grooble), .1);
+}
+.npw-menu-item-inner {
+    padding: 1em 3em 1em 1em;
+    width: 100%;
+    color: hsl(var(--white));
+    background-color: hsla(var(--black), 1);
+    text-decoration: none;
+    transition: all .2s cubic-bezier(var(--transition-main), 1);
+    user-select: none;
+    cursor: pointer;
+}
+.npw-menu-item-inner span {
+    margin: 0 .5em 0 .25em;
+}
+.npw-menu-item-inner:hover {
+    color: hsl(var(--quite-gray));
+    background-color: hsla(var(--black), .5);
+}
+.npw-menu-item-inner:visited {
+    color: hsl(var(--white));
+}
+.npw-menu-item-inner:visited:hover {
+    color: hsl(var(--quite-gray));
+}
+.npw-menu-profilepicture-wrapper {
+    margin: 0 .5em 0 0;
+    width: 3.5em; height: 3.5em;
+    position: relative;
+    cursor: pointer;
+}
+.npw-menu-picture {
+    width: calc(100% - 4px); height: calc(100% - 4px);
+    position: relative;
+    transition: all .35s cubic-bezier(var(--transition-main), 1);
+    user-select: none;
+    overflow: hidden;
+    z-index: 20;
+}
+.npw-menu-picture-inner {
+    min-width: 100%; max-width: 105%;
+    min-height: 100%;
+    position: absolute;
+    object-fit: cover;
+}
+.nwp-menu-profile-info-items {
+    display: grid;
+    grid-template-columns: 100%;
+    place-items: flex-start;
+}
+.npw-profile-link, .npw-editprofile-link {
+    transition: all .2s cubic-bezier(var(--transition-main), 1);
+    user-select: none;
+}
+.npw-profile-link {
+    color: hsl(var(--white));
+    font-weight: 700;
+    white-space: nowrap;
+}
+.npw-profile-link:hover {
+    color: hsl(var(--white), .5);
+}
+.npw-profile-link:visited {
+    color: hsl(var(--white));
+}
+.npw-profile-link:visited:hover {
+    color: hsl(var(--white), .5);
+}
+.npw-editprofile-link {
+    color: hsla(var(--primary), 1);
+    font-size: calc(var(--paragraph) - .4rem);
+}
+.npw-editprofile-link:hover {
+    color: hsla(var(--primary), .5);
+}
+.npw-editprofile-link:visited {
+    color: hsla(var(--primary), 1);
+}
+.npw-editprofile-link:visited:hover {
+    color: hsla(var(--primary), .5);
+}
+
 /* ==============
     3.3.2 Header
    ============== */
@@ -804,6 +960,10 @@ span.ripple {
 }
 
 /* Search */
+.search-wrapper {
+    margin: 2em 0 0 0;
+    width: 100%;
+}
 .search-input-wrapper {
     padding: .175em;
     width: 100%;
