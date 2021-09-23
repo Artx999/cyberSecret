@@ -803,6 +803,36 @@ span.ripple {
     z-index: 10;
 }
 
+/* Search */
+.search-input-wrapper {
+    padding: .175em;
+    width: 100%;
+    position: relative;
+    background: linear-gradient(90deg, hsl(var(--primary)) 0, hsl(var(--background)) 100%);
+}
+.search-label {
+    padding: 0 0 .5em 0;
+    display: block;
+    color: hsl(var(--quite-gray));
+}
+.search-input {
+    padding: 1.2em;
+    width: 100%;
+    color: hsl(var(--white));
+    background-color: hsl(var(--background));
+    border: 2px solid transparent;
+    border-radius: 0;
+}
+.search-input:hover, .search-input:focus {
+    box-shadow: none;
+    border: 2px solid transparent;
+}
+.search-button {
+    padding: 1.2em;
+    color: hsl(var(--white));
+    border: 1px solid transparent;
+}
+
 /* ==============
     3.3.4 Footer
    ============== */
