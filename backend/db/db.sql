@@ -1,6 +1,6 @@
 -- MariaDB dump 10.19  Distrib 10.4.19-MariaDB, for Win64 (AMD64)
 --
--- Host: localhost    Database: cyber_secret
+-- Host: localhost    Database: lanmine_noneon
 -- ------------------------------------------------------
 -- Server version	10.4.19-MariaDB
 
@@ -88,7 +88,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_username_uindex` (`username`),
   UNIQUE KEY `user_seat_number_uindex` (`card_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,4 +110,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-17  0:39:32
+-- Dump completed on 2021-09-24  0:16:03

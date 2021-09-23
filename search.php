@@ -1,4 +1,6 @@
 <?php
+require "func.php";
+session_start();
 $rootPath = "";
 ?>
 <!DOCTYPE html>
@@ -24,10 +26,10 @@ $rootPath = "";
 <!-- Main -->
 <main id="main" class="flexbox-col">
 
-    <form class="search-wrapper view-width flexbox-col-left-start" method="post" action="backend/searchSys.php">
-        <label class="search-label" for="search">Søk etter brukere</label>
+    <form class="search-wrapper view-width flexbox-col-left-start" method="get" action="">
+        <label class="search-label" for="username">Søk etter brukere</label>
         <div class="search-input-wrapper flexbox">
-            <input id="search" type="search" class="search-input" placeholder="Fyll inn brukernavn" name="search" aria-label="" required>
+            <input id="username" type="search" class="search-input" placeholder="Fyll inn brukernavn" name="username" aria-label="" required>
             <button class="search-button flexbox"><span class="material-icons">search</span></button>
         </div>
     </form>
@@ -35,23 +37,16 @@ $rootPath = "";
     <div class="search-output">
 
         <?php
+        if (isset($_GET["username"]) && $_GET["username"]) {
+            $username = stripslashes(htmlspecialchars($_GET["username"]));
+            $result = dbQuery("SELECT * FROM lanmine_noneon.user WHERE username='$username'");
 
-        $url = 'http://'. $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-        $parts = explode('=', $url);
-        $path = $parts[1];
+            while ($res = $result->fetch_assoc()) {
 
-        print '<p style="color: hsl(var(--white));">url = ' . $path . '</p>';
-
-        $result = dbQuery("SELECT * FROM lanmine_noneon.user WHERE username='$path'");
-
-        while ($res = $result->fetch_assoc()) {
-            $username = $res["username"];
-            $cardId = $res["cardId"];
-
-            print $username;
-            print $cardId;
+                print $res["username"] . "</br>";
+                print $res["card_id"];
+            }
         }
-
         ?>
 
     </div>
