@@ -22,7 +22,7 @@ $rootPath = "";
 </div>
 
 <!-- Main -->
-<main id="main" class="flexbox">
+<main id="main" class="flexbox-col">
 
     <form class="search-wrapper view-width flexbox-col-left-start" method="post" action="backend/searchSys.php">
         <label class="search-label" for="search">Søk etter brukere</label>
@@ -33,6 +33,7 @@ $rootPath = "";
     </form>
 
     <div class="search-output">
+
         <?php
 
         $url = 'http://'. $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
@@ -46,12 +47,13 @@ $rootPath = "";
         while ($res = $result->fetch_assoc()) {
             $username = $res["username"];
             $cardId = $res["cardId"];
+
+            print $username;
+            print $cardId;
         }
 
-        print $username;
-        print $cardId;
-
         ?>
+
     </div>
 
 </main>
