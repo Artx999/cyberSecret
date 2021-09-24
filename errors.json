@@ -11,5 +11,6 @@
   "usernameExists": "Username already exists",
   "cardIDExists": "Card ID already exists",
   "noFirstName": "You have not entered a first name",
-  "noLastName": "You have not entered a last name"
+  "noLastName": "You have not entered a last name",
+  "incorrectCardID": "Card ID does not exist"
 }

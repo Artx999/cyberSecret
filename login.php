@@ -1,6 +1,8 @@
 <?php
+require "func.php";
 session_start();
-if (isset($_SESSION["user"])) header("Location: index.php");
+// Temporarily removed because of issues with new user lookup
+// if (isset($_SESSION["user"])) header("Location: index.php");
 $rootPath = "";
 ?>
 <!DOCTYPE html>
@@ -33,7 +35,6 @@ $rootPath = "";
         </div>
         <?php
 
-        require "func.php";
         if (isset($_GET["error"])) {
             print '<p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMsg::decode($_GET["error"]) . '</p>'; // Prints error messages
         }

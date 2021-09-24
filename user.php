@@ -1,25 +1,46 @@
 <?php
 require "func.php";
 session_start();
+$errors = new ErrorMsg();
 $rootPath = "";
-$user = User::sessionGet();
-$stats = $user->getStats();
-$inventory = $user->getInventory();
+
+if (isset($_SESSION["user"])) {
+    $currentUser = User::sessionGet();
+}
 
 if (isset($_GET["cardID"]) && $_GET["cardID"]) {
     $cardID = stripslashes(htmlspecialchars($_GET["cardID"]));
-    $result = dbQuery("SELECT user_id, username, card_id FROM lanmine_noneon.user WHERE card_id = '$cardID' LIMIT 1")->fetch_assoc();
-    if ($result) {
-        print $result["username"];
-        if (isset($_GET["cardScan"]) && $_GET["cardScan"] === "true") {
-            header("Location: user.php?cardID=" . $cardID);
+    if (isset($currentUser) && $cardID === $currentUser->cardID) {
+        $displayUser = $currentUser;
+    } else {
+        $result = dbQuery("SELECT user_id, username, card_id FROM lanmine_noneon.user WHERE card_id = '{$cardID}' LIMIT 1")->fetch_assoc();
+        if ($result) {
+            if (isset($_GET["cardScan"]) && $_GET["cardScan"] === "true") {
+                header("Location: user.php?cardID={$cardID}");
+            } else {
+                $displayUser = new User($result["user_id"], $result["username"], $result["card_id"]);
+            }
+        }
+        elseif (isset($_GET["cardScan"]) && $_GET["cardScan"] === "true") {
+            header("Location: signup.php?cardID=" . $cardID);
+        }
+        else {
+            $errors->add("incorrectCardID");
+            header("Location: user.php?error={$errors->encode()}");
         }
     }
-    elseif (isset($_GET["cardScan"]) && $_GET["cardScan"] === "true") {
-        header("Location: signup.php?cardID=" . $cardID);
+} else {
+    if (isset($currentUser) && !isset($_GET["error"])) header("Location: user.php?cardID={$currentUser->cardID}");
+    else {
+        // What happens when the user is not logged in, and is not viewing any profile.
+        // print "No user specified";
     }
-    else print "Incorrect user";
-} else print "No user specified";
+}
+
+if (isset($displayUser) && $displayUser) {
+    $stats = $displayUser->getStats();
+    $inventory = $displayUser->getInventory();
+}
 
 ?>
 <!DOCTYPE html>
@@ -53,12 +74,17 @@ if (isset($_GET["cardID"]) && $_GET["cardID"]) {
             <!-- Search -->
             <form class="search-wrapper flexbox-col-left-start" method="get" action="">
                 <label class="search-label" for="search">Søk etter brukere</label>
+                <?php
+                if (isset($_GET["error"])) {
+                    print '<p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMsg::decode($_GET["error"]) . '</p>'; // Prints error messages
+                }
+                ?>
                 <div class="search-input-wrapper flexbox">
-                    <input id="search" type="search" class="search-input" placeholder="Fyll inn brukernavn" name="search" aria-label="" required>
+                    <input id="cardID" type="search" class="search-input" placeholder="Fyll inn kort-ID" name="cardID" aria-label="" required>
                     <button type="submit" class="search-button flexbox"><span class="material-icons">search</span></button>
                 </div>
             </form>
-
+            <?php if (isset($displayUser)) { ?>
             <!-- Profile Header -->
             <div class="profile-header">
 
@@ -70,8 +96,8 @@ if (isset($_GET["cardID"]) && $_GET["cardID"]) {
                         <img class="profile-picture-glow" src="images/profile-pic.jpg" alt="">
                     </div>
                     <div class="profile-username-wrapper flexbox-col-left">
-                        <h3 class="profile-username"><?php print $result["username"]?></h3>
-                        <p class="profile-at-username">@<?php print strtolower($result["username"]) ?></p>
+                        <h3 class="profile-username"><?php print $displayUser->username?></h3>
+                        <p class="profile-at-username">@<?php print strtolower($displayUser->username) ?></p>
                     </div>
                 </div>
 
@@ -145,6 +171,7 @@ if (isset($_GET["cardID"]) && $_GET["cardID"]) {
                 }
                 ?>
             </div>
+            <?php } ?>
         </div>
     </section>
 

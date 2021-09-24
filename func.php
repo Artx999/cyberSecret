@@ -49,8 +49,8 @@ class ErrorMsg {
 class User {
     public $userId, $username, $cardID;
     function __construct($userId, $username, $cardID) {
-        $this->username = $username;
         $this->userId = $userId;
+        $this->username = $username;
         $this->cardID = $cardID;
     }
 
@@ -66,7 +66,7 @@ class User {
         $hashedPass = User::getHashedPass($uname);
         if (password_verify($password, $hashedPass)) {
             $userInfo = dbQuery("SELECT user_id, username, card_id FROM lanmine_noneon.user WHERE username = '$uname' LIMIT 1")->fetch_assoc();
-            return new User($userInfo["user_id"], $userInfo["username"], $userInfo["card_ID"]);
+            return new User($userInfo["user_id"], $userInfo["username"], $userInfo["card_id"]);
         } else return false;
     }
 

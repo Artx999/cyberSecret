@@ -1,6 +1,7 @@
 <?php
 session_start();
-if (isset($_SESSION["user"])) header("Location: index.php");
+// Temporarily removed because of issues with new user lookup
+// if (isset($_SESSION["user"])) header("Location: index.php");
 $rootPath = "";
 ?>
 <!DOCTYPE html>
