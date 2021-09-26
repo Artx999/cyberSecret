@@ -12,5 +12,7 @@
   "cardIDExists": "Card ID already exists",
   "noFirstName": "You have not entered a first name",
   "noLastName": "You have not entered a last name",
-  "incorrectCardID": "Card ID does not exist"
+  "incorrectCardID": "Card ID does not exist",
+  "incorrectUsername": "Username does not exist",
+  "usernameAndCardID": "You can't use both username and card ID"
 }

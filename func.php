@@ -47,11 +47,12 @@ class ErrorMsg {
 
 
 class User {
-    public $userId, $username, $cardID;
-    function __construct($userId, $username, $cardID) {
+    public $userId, $username, $cardID, $profilePicture;
+    function __construct($userId, $username, $cardID, $profilePicture) {
         $this->userId = $userId;
         $this->username = $username;
         $this->cardID = $cardID;
+        $this->profilePicture = $profilePicture;
     }
 
     public function sessionSet() {
@@ -65,8 +66,8 @@ class User {
     public static function auth($uname, $password) {
         $hashedPass = User::getHashedPass($uname);
         if (password_verify($password, $hashedPass)) {
-            $userInfo = dbQuery("SELECT user_id, username, card_id FROM lanmine_noneon.user WHERE username = '$uname' LIMIT 1")->fetch_assoc();
-            return new User($userInfo["user_id"], $userInfo["username"], $userInfo["card_id"]);
+            $userInfo = dbQuery("SELECT user_id, username, card_id, profile_picture FROM lanmine_noneon.user WHERE username = '$uname' LIMIT 1")->fetch_assoc();
+            return new User($userInfo["user_id"], $userInfo["username"], $userInfo["card_id"], $userInfo["profile_picture"]);
         } else return false;
     }
 

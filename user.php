@@ -8,7 +8,33 @@ if (isset($_SESSION["user"])) {
     $currentUser = User::sessionGet();
 }
 
-if (isset($_GET["cardID"]) && $_GET["cardID"]) {
+if (isset($_GET["username"]) && isset($_GET["cardID"])) {
+    $errors->add("usernameAndCardID");
+    header("Location: user.php?error={$errors->encode()}");
+}
+
+if (isset($_GET["username"]) && $_GET["username"]) {
+    $username = stripslashes(htmlspecialchars($_GET["username"]));
+    if (isset($currentUser) && $username === $currentUser->username) {
+        $displayUser = $currentUser;
+    } else {
+        $result = dbQuery("SELECT user_id, username, card_id FROM lanmine_noneon.user WHERE username = '{$username}' LIMIT 1")->fetch_assoc();
+        if ($result) {
+            if (isset($_GET["cardScan"]) && $_GET["cardScan"] === "true") {
+                header("Location: user.php?username={$username}");
+            } else {
+                $displayUser = new User($result["user_id"], $result["username"], $result["card_id"], $result["profile_picture"]);
+            }
+        }
+        elseif (isset($_GET["cardScan"]) && $_GET["cardScan"] === "true") {
+            header("Location: signup.php?cardID=" . $cardID);
+        }
+        else {
+            $errors->add("incorrectCardID");
+            header("Location: user.php?error={$errors->encode()}");
+        }
+    }
+} else if (isset($_GET["cardID"]) && $_GET["cardID"]) {
     $cardID = stripslashes(htmlspecialchars($_GET["cardID"]));
     if (isset($currentUser) && $cardID === $currentUser->cardID) {
         $displayUser = $currentUser;
@@ -30,7 +56,7 @@ if (isset($_GET["cardID"]) && $_GET["cardID"]) {
         }
     }
 } else {
-    if (isset($currentUser) && !isset($_GET["error"])) header("Location: user.php?cardID={$currentUser->cardID}");
+    if (isset($currentUser) && !isset($_GET["error"])) header("Location: user.php?username={$currentUser->username}");
     else {
         // What happens when the user is not logged in, and is not viewing any profile.
         // print "No user specified";
@@ -53,7 +79,7 @@ if (isset($displayUser) && $displayUser) {
     <meta name="author" content="">
     <!-- ======= -->
     <!-- General -->
-    <title>Profile</title>
+    <title><?php print $displayUser->username?>'s Profil</title>
     <?php require "{$rootPath}structure/head/imports.php" ?>
 </head>
 <body>
@@ -80,7 +106,7 @@ if (isset($displayUser) && $displayUser) {
                 }
                 ?>
                 <div class="search-input-wrapper flexbox">
-                    <input id="cardID" type="search" class="search-input" placeholder="Fyll inn kort-ID" name="cardID" aria-label="" required>
+                    <input id="username" type="search" class="search-input" placeholder="Fyll inn brukernavn" name="username" aria-label="" required>
                     <button type="submit" class="search-button flexbox"><span class="material-icons">search</span></button>
                 </div>
             </form>
@@ -91,9 +117,9 @@ if (isset($displayUser) && $displayUser) {
                 <div class="profile-header-content flexbox-left">
                     <div class="profile-picture-wrapper flexbox">
                         <div class="profile-picture-inner flexbox">
-                            <img class="profile-picture" src="images/profile-pic.jpg" alt="">
+                            <?php print '<img class="profile-picture" src="data:media_type;base64,' . base64_encode($displayUser->profilePicture) . '" alt="">'; ?>
                         </div>
-                        <img class="profile-picture-glow" src="images/profile-pic.jpg" alt="">
+                        <?php print '<img class="profile-picture-glow" src="data:media_type;base64,' . base64_encode($displayUser->profilePicture) . '" alt="">'; ?>
                     </div>
                     <div class="profile-username-wrapper flexbox-col-left">
                         <h3 class="profile-username"><?php print $displayUser->username?></h3>
@@ -102,7 +128,14 @@ if (isset($displayUser) && $displayUser) {
                 </div>
 
                 <div class="profile-header-logout flexbox">
-                    <a href="backend/logout.php"><button class="logout-button">Logg ut</button></a>
+                    <?php
+                    if (isset($currentUser) && ((isset($cardID) && $cardID === $currentUser->cardID) || (isset($username) && $username === $currentUser->username))) {
+                        print '
+                        <a href="backend/logout.php"><button class="logout-button">Logg ut</button></a>
+                        ';
+                    } else {
+                        print '';
+                    } ?>
                 </div>
 
             </div>
@@ -148,7 +181,7 @@ if (isset($displayUser) && $displayUser) {
             </div>
             <!-- Inventory -->
             <div id="inventory" class="flexbox-col-left">
-                <h3>Inventory</h3>
+                <h3>Inventar</h3>
                 <?php
                 if ($inventory->fetch_assoc()) {
                     print "<div class='inventory-inner'>";

@@ -472,7 +472,7 @@ select {
    ===================== */
 
 #profile-section {
-    margin: 5em 0;
+    margin: 7em 0;
 }
 .profile-inner {
     width: 100%;
@@ -674,6 +674,11 @@ select {
 }
 .inventory-cell-title {
     color: hsl(var(--white));
+}
+
+/* Edit Profile */
+#pp-upload-wrapper {
+    cursor: pointer;
 }
 
 /* =====================
@@ -961,7 +966,6 @@ span.ripple {
 
 /* Search */
 .search-wrapper {
-    margin: 2em 0 0 0;
     width: 100%;
 }
 .search-input-wrapper {
