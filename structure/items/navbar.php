@@ -4,7 +4,7 @@
             <?php
             if (isset($currentUser)) { ?>
                 <div class="navbar-profilepicture-wrapper">
-                    <div class="navbar-profilepicturew-inner">
+                    <div class="navbar-profilepicturew-inner flexbox">
                         <?php print '<img class="navbar-profilepicture" src="data:media_type;base64,' . base64_encode($currentUser->profilePicture) . '" alt="">'; ?>
                     </div>
                     <?php print '<img class="navbar-profilepicture-glow" src="data:media_type;base64,' . base64_encode($currentUser->profilePicture) . '" alt="">'; ?>

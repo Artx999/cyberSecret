@@ -66,9 +66,9 @@ if (isset($_POST["upload-profile-picture"])) {
                     <input type="file" id="profile-picture" name="profile-picture" accept="image/*" style="display:none;" value="" aria-label="" required>
                     <div id="pp-upload-wrapper" class="profile-picture-wrapper flexbox">
                         <div class="profile-picture-inner flexbox">
-                            <?php print '<img class="profile-picture" src="data:media_type;base64,' . base64_encode($currentUser->profilePicture) . '" alt="">'; ?>
+                            <?php print '<img id="profile-picture-show" class="profile-picture" src="data:media_type;base64,' . base64_encode($currentUser->profilePicture) . '" alt="">'; ?>
                         </div>
-                        <?php print '<img class="profile-picture" src="data:media_type;base64,' . base64_encode($currentUser->profilePicture) . '" alt="">'; ?>
+                        <?php print '<img id="profile-picture-show2" class="profile-picture-glow" src="data:media_type;base64,' . base64_encode($currentUser->profilePicture) . '" alt="">'; ?>
                     </div>
                     <div class="profile-username-wrapper flexbox-col-left">
                         <h3 class="profile-username"><?php print $currentUser->username?></h3>
@@ -97,6 +97,17 @@ if (isset($_POST["upload-profile-picture"])) {
 
                         document.getElementById("profile-picture").click();
                     });
+
+                    document.getElementById("profile-picture").addEventListener("change", function(event) {
+                        event.preventDefault();
+
+                        let uploadedImageI = document.getElementById("profile-picture-show");
+                        let uploadedImageI2 = document.getElementById("profile-picture-show2");
+                        uploadedImageI.src = URL.createObjectURL(event.target.files[0]);
+                        uploadedImageI2.src = URL.createObjectURL(event.target.files[0]);
+                    });
+
+
 
                 </script>
 
