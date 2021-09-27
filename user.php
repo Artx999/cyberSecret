@@ -99,8 +99,29 @@ if (isset($displayUser) && $displayUser) {
 
     <section id="profile-section" class="view-width">
         <div class="profile-inner flexbox-col">
+
+            <script type="text/javascript">
+                function getStates(value) {
+                    $.post("backend/livesearchSys.php", {name:value},function(data){
+                            $("#results").html(data);
+                        }
+                    );
+                }
+
+                $(document).ready(function() {
+                    $("#username").on("change keyup paste", function() {
+                        if (!$("#username").val()) {
+                            $("#results").css("display", "none");
+                        } else {
+                            $("#results").css("display", "flex");
+                        }
+                    });
+                });
+
+            </script>
+
             <!-- Search -->
-            <form class="search-wrapper flexbox-col-left-start" method="get" action="">
+            <form class="search-wrapper flexbox-col-left-start" autocomplete="off" method="get" action="">
                 <label class="search-label" for="search">Søk etter brukere</label>
                 <?php
                 if (isset($_GET["error"])) {
@@ -108,10 +129,12 @@ if (isset($displayUser) && $displayUser) {
                 }
                 ?>
                 <div class="search-input-wrapper flexbox">
-                    <input id="username" type="search" class="search-input" placeholder="Fyll inn brukernavn" name="username" aria-label="" required>
+                    <input onkeyup="getStates(this.value)" id="username" type="search" class="search-input" placeholder="Fyll inn brukernavn" name="username" aria-label="" required>
+                    <div id="results" class="flexbox-col-left"></div>
                     <button type="submit" class="search-button flexbox"><span class="material-icons">search</span></button>
                 </div>
             </form>
+
             <?php if (isset($displayUser)) { ?>
             <!-- Profile Header -->
             <div class="profile-header">

@@ -720,6 +720,26 @@ select {
     justify-content: space-between;
     align-items: center;
 }
+#results {
+    top: 4.75em;
+    width: 100%;
+    position: absolute;
+    background-color: hsl(var(--background-dark));
+    box-shadow: -6px -4px 24px hsla(var(--background), .9);
+    z-index: 999;
+}
+#results a {
+    padding: .75em 1em;
+    color: hsl(var(--white));
+    gap: .75em;
+}
+#results span {
+    color: hsl(var(--quite-gray));
+    font-size: calc(var(--paragraph) - .1rem);
+}
+.search-nothing {
+    color: hsl(var(--quite-gray)) !important;
+}
 
 /* =====================
     3.3.3.3 Buttons.php
