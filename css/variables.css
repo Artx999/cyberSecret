@@ -21,11 +21,11 @@
     --pink: 322, 100%, 74%;
     /* Stats */
     --clr-styrke: 352, 100%, 53%;
-    --clr-intelligens: 22, 100%, 55%;
-    --clr-karisma: 52, 100%, 50%;
-    --clr-smidighet: 128, 100%, 50%;
-    --clr-visdom: 192, 100%, 50%;
-    --clr-flaks: 276, 100%, 50%;
+    --clr-intelligens: 52, 100%, 50%;
+    --clr-karisma: 22, 100%, 55%;
+    --clr-smidighet: 192, 100%, 50%;
+    --clr-visdom: 276, 100%, 50%;
+    --clr-flaks: 128, 100%, 50%;
     /* Gradients */
     --gradient: linear-gradient(90deg, hsla(var(--primary), 1) 0%, hsla(var(--secondary), 1) 50%, hsla(var(--tertiary), 1) 100%);
     /* Sizes */
