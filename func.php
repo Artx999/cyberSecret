@@ -52,7 +52,9 @@ class User {
         $this->userId = $userId;
         $this->username = $username;
         $this->cardID = $cardID;
-        $this->profilePicture = $profilePicture;
+        if ($profilePicture) {
+            $this->profilePicture = $profilePicture;
+        } else $this->profilePicture = file_get_contents("images/profile-pic.jpg");
     }
 
     public function sessionSet() {

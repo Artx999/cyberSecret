@@ -16,21 +16,22 @@ if (isset($_GET["username"]) && isset($_GET["cardID"])) {
 if (isset($_GET["username"]) && $_GET["username"]) {
     $username = stripslashes(htmlspecialchars($_GET["username"]));
     if (isset($currentUser) && $username === $currentUser->username) {
+        if (isset($_GET["cardScan"])) {
+            header("Location: user.php?username={$username}");
+        }
         $displayUser = $currentUser;
     } else {
-        $result = dbQuery("SELECT user_id, username, card_id FROM lanmine_noneon.user WHERE username = '{$username}' LIMIT 1")->fetch_assoc();
+        $result = dbQuery("SELECT user_id, username, card_id, profile_picture FROM lanmine_noneon.user WHERE username = '{$username}' LIMIT 1")->fetch_assoc();
         if ($result) {
-            if (isset($_GET["cardScan"]) && $_GET["cardScan"] === "true") {
+            if (isset($_GET["cardScan"])) {
                 header("Location: user.php?username={$username}");
             } else {
+                if (!isset($result["profile_picture"])) $result["profile_picture"] = false;
                 $displayUser = new User($result["user_id"], $result["username"], $result["card_id"], $result["profile_picture"]);
             }
         }
-        elseif (isset($_GET["cardScan"]) && $_GET["cardScan"] === "true") {
-            header("Location: signup.php?cardID=" . $cardID);
-        }
         else {
-            $errors->add("incorrectCardID");
+            $errors->add("incorrectUsername");
             header("Location: user.php?error={$errors->encode()}");
         }
     }
@@ -41,14 +42,15 @@ if (isset($_GET["username"]) && $_GET["username"]) {
     } else {
         $result = dbQuery("SELECT user_id, username, card_id FROM lanmine_noneon.user WHERE card_id = '{$cardID}' LIMIT 1")->fetch_assoc();
         if ($result) {
-            if (isset($_GET["cardScan"]) && $_GET["cardScan"] === "true") {
+            if (isset($_GET["cardScan"])) {
                 header("Location: user.php?cardID={$cardID}");
             } else {
-                $displayUser = new User($result["user_id"], $result["username"], $result["card_id"]);
+                if (!isset($result["profile_picture"])) $result["profile_picture"] = false;
+                $displayUser = new User($result["user_id"], $result["username"], $result["card_id"], $result["profile_picture"]);
             }
         }
         elseif (isset($_GET["cardScan"]) && $_GET["cardScan"] === "true") {
-            header("Location: signup.php?cardID=" . $cardID);
+            header("Location: signup.php?cardID={$cardID}");
         }
         else {
             $errors->add("incorrectCardID");
