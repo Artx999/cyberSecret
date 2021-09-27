@@ -53,7 +53,7 @@ if (isset($_POST["upload-profile-picture"])) {
 <!-- Main -->
 <main id="main" class="flexbox-col-start-center">
 
-    <section id="profile-section" class="view-width">
+    <form id="profile-section" class="view-width" method="post" action="" enctype="multipart/form-data">
         <?php
         if (isset($_GET["error"])) {
             print '<p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMsg::decode($_GET["error"]) . '</p>'; // Prints error messages
@@ -61,59 +61,49 @@ if (isset($_POST["upload-profile-picture"])) {
         ?>
         <div class="profile-inner flexbox-col">
             <!-- Profile Header -->
-            <div class="profile-header">
-                <form class="profile-header-content flexbox-left" method="post" action="" enctype="multipart/form-data">
+            <div class="upload-header flexbox-col-left-start">
+                <p class="upload-note">Trykk for å velge nytt profilbilde</p>
+                <div class="profile-header-content">
                     <input type="file" id="profile-picture" name="profile-picture" accept="image/*" style="display:none;" value="" aria-label="" required>
                     <div id="pp-upload-wrapper" class="profile-picture-wrapper flexbox">
                         <div class="profile-picture-inner flexbox">
+                            <div class="profile-picture-upload-overlay flexbox">
+                                <p><span class="material-icons">add_photo_alternate</span></p>
+                            </div>
                             <?php print '<img id="profile-picture-show" class="profile-picture" src="data:media_type;base64,' . base64_encode($currentUser->profilePicture) . '" alt="">'; ?>
                         </div>
                         <?php print '<img id="profile-picture-show2" class="profile-picture-glow" src="data:media_type;base64,' . base64_encode($currentUser->profilePicture) . '" alt="">'; ?>
                     </div>
-                    <div class="profile-username-wrapper flexbox-col-left">
-                        <h3 class="profile-username"><?php print $currentUser->username?></h3>
-                        <p class="profile-at-username">@<?php print strtolower($currentUser->username) ?></p>
-                    </div>
-
-                    <div id="profile-pic-uploader" class="flexbox">
-                        <div class="profile-pic-uploader-inner flexbox">
-                            <fieldset class="flexbox">
-                                <div class="flexbox-col">
-                                    <a class="profile-pic-small"><img id="profile-img-tag" src="" alt=""></a>
-                                    <input type="submit" name="upload-profile-picture" id="upload-profile-picture" value="Last opp bilde">
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="profile-pic-wrapper-overlay"></div>
-                    </div>
-                </form>
-
-                <script type="text/javascript">
-
-                    let ppUploadBtn = document.getElementById("pp-upload-wrapper");
-
-                    ppUploadBtn.addEventListener("click", function(event) {
-                        event.preventDefault();
-
-                        document.getElementById("profile-picture").click();
-                    });
-
-                    document.getElementById("profile-picture").addEventListener("change", function(event) {
-                        event.preventDefault();
-
-                        let uploadedImageI = document.getElementById("profile-picture-show");
-                        let uploadedImageI2 = document.getElementById("profile-picture-show2");
-                        uploadedImageI.src = URL.createObjectURL(event.target.files[0]);
-                        uploadedImageI2.src = URL.createObjectURL(event.target.files[0]);
-                    });
-
-
-
-                </script>
-
+                    <fieldset class="flexbox-right">
+                        <input type="submit" name="upload-profile-picture" id="upload-profile-picture" value="Lagre">
+                    </fieldset>
+                </div>
             </div>
+
+            <script type="text/javascript">
+
+                let ppUploadBtn = document.getElementById("pp-upload-wrapper");
+
+                ppUploadBtn.addEventListener("click", function(event) {
+                    event.preventDefault();
+
+                    document.getElementById("profile-picture").click();
+                });
+
+                document.getElementById("profile-picture").addEventListener("change", function(event) {
+                    event.preventDefault();
+
+                    let uploadedImageI = document.getElementById("profile-picture-show");
+                    let uploadedImageI2 = document.getElementById("profile-picture-show2");
+                    uploadedImageI.src = URL.createObjectURL(event.target.files[0]);
+                    uploadedImageI2.src = URL.createObjectURL(event.target.files[0]);
+                });
+
+
+
+            </script>
         </div>
-    </section>
+    </form>
 
 </main>
 

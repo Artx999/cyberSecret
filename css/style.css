@@ -511,12 +511,12 @@ select {
     object-fit: cover;
 }
 .profile-picture-glow {
-    top: 1.15em;
+    top: 1em;
     width: 100%; height: 100%;
     position: absolute;
     transform: scale(.8, .8);
     filter: blur(.75rem);
-    opacity: .75;
+    opacity: .5;
 }
 /* Username */
 .profile-username-wrapper {
@@ -677,8 +677,48 @@ select {
 }
 
 /* Edit Profile */
+.upload-header {
+    padding: 5em;
+    width: 100%;
+    background: linear-gradient(0deg, hsla(var(--primary), .1) 0%, hsla(var(--primary), 0) 100%);
+    border: 1px hsl(var(--primary)) solid;
+}
 #pp-upload-wrapper {
     cursor: pointer;
+}
+.upload-button-wrapper {
+    padding: 0 5em;
+    width: 100%;
+}
+#upload-profile-picture {
+    color: hsl(var(--black));
+    background-color: hsl(var(--white));
+    cursor: pointer;
+}
+.profile-picture-upload-overlay {
+    width: 100%; height: 100%;
+    position: absolute;
+    background-color: hsla(var(--black), .5);
+    transition: all .2s ease-in-out;
+    opacity: 0;
+    z-index: 7;
+}
+.profile-picture-upload-overlay p {
+    position: relative;
+    color: hsl(var(--white));
+    z-index: 8;
+}
+.profile-picture-inner:hover .profile-picture-upload-overlay {
+    opacity: 1;
+}
+.upload-note {
+    margin: 0 0 1em 0;
+    color: hsl(var(--quite-gray));
+}
+.upload-header > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* =====================
