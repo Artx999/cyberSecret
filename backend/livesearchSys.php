@@ -1,6 +1,7 @@
 <?php
 
 require "../func.php";
+session_start();
 
 $search = $_POST["name"];
 
@@ -9,7 +10,7 @@ $result = dbQuery("SELECT username FROM lanmine_noneon.user WHERE username LIKE 
 if ($result) {
     if ($result->num_rows) {
         while($user = $result->fetch_assoc()) {
-            print "<a class='flexbox' href='user.php?username={$user["username"]}'><span class='material-icons'>search</span> {$user["username"]}</a>";
+            print "<a class='flexbox' href='{$_SESSION['fileName']}.php?username={$user["username"]}'><span class='material-icons'>search</span> {$user["username"]}</a>";
         }
     } else {
         print "<a class='search-nothing'>Det finnes ingen bruker med dette brukernavnet</a>";

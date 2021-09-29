@@ -3,6 +3,7 @@ require "func.php";
 session_start();
 $errors = new ErrorMsg();
 $rootPath = "";
+$_SESSION['fileName'] = "user";
 
 if (isset($_SESSION["user"])) {
     $currentUser = User::sessionGet();
@@ -83,6 +84,7 @@ if (isset($displayUser) && $displayUser) {
     <!-- General -->
     <title><?php print $displayUser->username?>'s Profil</title>
     <?php require "{$rootPath}structure/head/imports.php" ?>
+    <script src="javascript/live-search.js" defer></script>
 </head>
 <body>
 
@@ -99,26 +101,6 @@ if (isset($displayUser) && $displayUser) {
 
     <section id="profile-section" class="view-width">
         <div class="profile-inner flexbox-col">
-
-            <script type="text/javascript">
-                function getStates(value) {
-                    $.post("backend/livesearchSys.php", {name:value},function(data){
-                            $("#results").html(data);
-                        }
-                    );
-                }
-
-                $(document).ready(function() {
-                    $("#username").on("change keyup paste", function() {
-                        if (!$("#username").val()) {
-                            $("#results").css("display", "none");
-                        } else {
-                            $("#results").css("display", "flex");
-                        }
-                    });
-                });
-
-            </script>
 
             <!-- Search -->
             <form class="search-wrapper flexbox-col-left-start" autocomplete="off" method="get" action="">

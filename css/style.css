@@ -563,6 +563,15 @@ select {
 .pro-swc-content {
     width: 2em;
 }
+#pro-swc-content-admin {
+    width: calc(2em + 4em);
+    gap: 1em;
+}
+#pro-swc-content-admin p {
+    color: hsl(var(--white));
+    user-select: none;
+    cursor: pointer;
+}
 .pro-swc-number {
     color: hsl(var(--white));
 }
