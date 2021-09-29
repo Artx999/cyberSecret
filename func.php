@@ -106,7 +106,7 @@ class User {
     // Function that returns users completed quests as array of objects
     public function getCompletedQuests() {
         $questList = [];
-        $result = dbQuery("SELECT quest.* FROM lanmine_noneon.quest INNER JOIN lanmine_noneon.completed_quests cq on quest.quest_id = cq.quest_id WHERE cq.user_id = $this->userId;");
+        $result = dbQuery("SELECT quest.* FROM lanmine_noneon.quest INNER JOIN lanmine_noneon.completed_quests cq on quest.quest_id = cq.quest_id WHERE cq.user_id = {$this->userId};");
         foreach ($result as $item) {
             $quest = new Quest(
                 $item["quest_id"],
@@ -195,6 +195,7 @@ class User {
         $questList = [];
         // Adds unlocked quests
         $unlockedQuests = $this->getUnlockedQuests();
+        $completedQuests = $this->getCompletedQuests();
         foreach ($unlockedQuests as $quest) {
             array_push($questList, $quest);
         }
@@ -202,7 +203,13 @@ class User {
         $currentVal = $this->getChildQuests($unlockedQuests);
         while ($currentVal) {
             foreach ($currentVal as $item) {
-                array_push($questList, $item);
+                $check = true;
+                foreach ($completedQuests as $quest) {
+                    if ($item->id === $quest->id) $check = false;
+                }
+                if ($check) {
+                    array_push($questList, $item);
+                }
             }
             $currentVal = $this->getChildQuests($currentVal);
         }
