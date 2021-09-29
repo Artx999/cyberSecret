@@ -69,6 +69,8 @@ if (isset($_GET["username"]) && $_GET["username"]) {
 if (isset($displayUser) && $displayUser) {
     $stats = $displayUser->getStats();
     $inventory = $displayUser->getInventory();
+    $completedQuests = $displayUser->getCompletedQuests();
+    $availableQuests = $displayUser->getAvailableQuests();
 }
 
 ?>
@@ -118,99 +120,121 @@ if (isset($displayUser) && $displayUser) {
             </form>
 
             <?php if (isset($displayUser)) { ?>
-            <!-- Profile Header -->
-            <div class="profile-header">
+                <!-- Profile Header -->
+                <div class="profile-header">
 
-                <div class="profile-header-content flexbox-left">
-                    <div class="profile-picture-wrapper flexbox">
-                        <div class="profile-picture-inner flexbox">
-                            <?php print '<img class="profile-picture" src="data:media_type;base64,' . base64_encode($displayUser->profilePicture) . '" alt="">'; ?>
+                    <div class="profile-header-content flexbox-left">
+                        <div class="profile-picture-wrapper flexbox">
+                            <div class="profile-picture-inner flexbox">
+                                <?php print '<img class="profile-picture" src="data:media_type;base64,' . base64_encode($displayUser->profilePicture) . '" alt="">'; ?>
+                            </div>
+                            <?php print '<img class="profile-picture-glow" src="data:media_type;base64,' . base64_encode($displayUser->profilePicture) . '" alt="">'; ?>
                         </div>
-                        <?php print '<img class="profile-picture-glow" src="data:media_type;base64,' . base64_encode($displayUser->profilePicture) . '" alt="">'; ?>
+                        <div class="profile-username-wrapper flexbox-col-left">
+                            <h3 class="profile-username"><?php print $displayUser->username?></h3>
+                            <p class="profile-at-username">@<?php print strtolower($displayUser->username) ?></p>
+                        </div>
                     </div>
-                    <div class="profile-username-wrapper flexbox-col-left">
-                        <h3 class="profile-username"><?php print $displayUser->username?></h3>
-                        <p class="profile-at-username">@<?php print strtolower($displayUser->username) ?></p>
-                    </div>
-                </div>
 
-                <div class="profile-header-logout flexbox">
-                    <?php
-                    if (isset($currentUser) && ((isset($cardID) && $cardID === $currentUser->cardID) || (isset($username) && $username === $currentUser->username))) {
-                        print '
-                        <a href="backend/logout.php"><button class="logout-button">Logg ut</button></a>
-                        ';
-                    } else {
-                        print '';
-                    } ?>
-                </div>
-
-            </div>
-            <!-- Profile Stats -->
-            <div class="profile-stats">
-                <div class="profile-stats-wrapper">
-                    <div class="pro-sw-titles">
+                    <div class="profile-header-logout flexbox">
                         <?php
-                        foreach ($stats as $key => $val) {
-                            print "
-                            <div class='pro-swt-column'>
-                                <h3 class='pro-swt-title'>{$val[0]}:</h3>
-                            </div>
-                            ";
-                        }
-                        ?>
+                        if (isset($currentUser) && ((isset($cardID) && $cardID === $currentUser->cardID) || (isset($username) && $username === $currentUser->username))) {
+                            print '
+                            <a href="backend/logout.php"><button class="logout-button">Logg ut</button></a>
+                            ';
+                        } else {
+                            print '';
+                        } ?>
                     </div>
 
-                    <div class="pro-sw-content">
-                        <?php
-                        foreach ($stats as $key => $val) {
-                            $percent = ($val[1] - 5) * 20;
-                            $cssVariable = strtolower("--clr-" . $val[0]);
-                            print "
-                            <div class='pro-swc-column'>
-                            <div class='pro-swc-content flexbox'>
-                                <h3 class='pro-swc-number'>{$val[1]}</h3>
-                            </div>
-                            <div class='pro-swc-bar-wrapper'>
-                                <div class='pro-swc-bar flexbox-left'>
-                                    <div class='pro-swc-bar-inner' style='width: {$percent}%; background-color: hsl(var({$cssVariable}));'>
-                                        <div class='pro-swc-bar-glow'></div>
+                </div>
+                <!-- Profile Stats -->
+                <div class="profile-stats">
+                    <div class="profile-stats-wrapper">
+                        <div class="pro-sw-titles">
+                            <?php
+                            foreach ($stats as $key => $val) {
+                                print "
+                                <div class='pro-swt-column'>
+                                    <h3 class='pro-swt-title'>{$val[0]}:</h3>
+                                </div>
+                                ";
+                            }
+                            ?>
+                        </div>
+
+                        <div class="pro-sw-content">
+                            <?php
+                            foreach ($stats as $key => $val) {
+                                $percent = ($val[1] - 5) * 20;
+                                $cssVariable = strtolower("--clr-" . $val[0]);
+                                print "
+                                <div class='pro-swc-column'>
+                                <div class='pro-swc-content flexbox'>
+                                    <h3 class='pro-swc-number'>{$val[1]}</h3>
+                                </div>
+                                <div class='pro-swc-bar-wrapper'>
+                                    <div class='pro-swc-bar flexbox-left'>
+                                        <div class='pro-swc-bar-inner' style='width: {$percent}%; background-color: hsl(var({$cssVariable}));'>
+                                            <div class='pro-swc-bar-glow'></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                                ";
+                            }
+                            ?>
                         </div>
+
+                    </div>
+                </div>
+                <!-- Quests -->
+                <div id="quests" class="flexbox-col-left">
+                    <h3>Quests</h3>
+                    <?php
+                    print "
+                        <h4 class='quest-title'>Available quests:</h4>
+                        <div class='quest'>
+                        ";
+                    foreach ($availableQuests as $item) {
+                        print "<p class='quest-name'>{$item->name}</p>";
+                    }
+                    print "
+                        </div>
+                        <h4 class='quest-title'>Completed quests:</h4>
+                        <div class='quest'>
+                        ";
+                    foreach ($completedQuests as $item) {
+                        print "<p class='quest-name-comp'>{$item->name}</p>";
+                    }
+                    print "</div>";
+                    ?>
+                </div>
+                <!-- Inventory -->
+                <div id="inventory" class="flexbox-col-left">
+                    <h3>Inventar</h3>
+                    <?php
+                    if ($inventory->fetch_assoc()) {
+                        print "<div class='inventory-inner'>";
+                        foreach ($inventory as $row) {
+                            print "
+                            <div class='inventory-cell flexbox'>
+                                <p class='inventory-cell-title'>{$row["item"]}</p>
+                            </div>
                             ";
                         }
-                        ?>
-                    </div>
-
-                </div>
-            </div>
-            <!-- Inventory -->
-            <div id="inventory" class="flexbox-col-left">
-                <h3>Inventar</h3>
-                <?php
-                if ($inventory->fetch_assoc()) {
-                    print "<div class='inventory-inner'>";
-                    foreach ($inventory as $row) {
+                        print "</div>";
+                    } else {
                         print "
-                        <div class='inventory-cell flexbox'>
-                            <p class='inventory-cell-title'>{$row["item"]}</p>
+                        <div class='inventory-inner-empty'>
+                            <div class='inv-empty'>
+                                <p>Inventaret ditt er tomt</p>
+                            </div>
                         </div>
                         ";
                     }
-                    print "</div>";
-                } else {
-                    print "
-                    <div class='inventory-inner-empty'>
-                        <div class='inv-empty'>
-                            <p>Inventaret ditt er tomt</p>
-                        </div>
-                    </div>
-                    ";
-                }
-                ?>
-            </div>
+                    ?>
+                </div>
             <?php } ?>
         </div>
     </section>

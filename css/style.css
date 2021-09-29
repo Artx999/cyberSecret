@@ -685,6 +685,27 @@ select {
     color: hsl(var(--white));
 }
 
+/* quests */
+#quests {
+    padding: 5em;
+    width: 100%;
+    background: linear-gradient(0deg, hsla(var(--primary), .1) 0%, hsla(var(--primary), 0) 100%);
+    border: 1px hsl(var(--primary)) solid;
+    gap: 2em;
+}
+#quests > h3 {
+    color: hsl(var(--white));
+}
+.quest-title {
+    color: hsl(var(--white));
+}
+.quest-name {
+    color: hsl(var(--white));
+}
+.quest-name-comp {
+    color: hsl(var(--quite-gray));
+}
+
 /* Edit Profile */
 .upload-header {
     padding: 5em;
