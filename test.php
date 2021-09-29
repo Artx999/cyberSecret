@@ -1,15 +1,17 @@
 <?php
 require "func.php";
 session_start();
+$errors = new ErrorMsg();
+$rootPath = "";
 
+$user = User::sessionGet();
+//$user = User::auth("gamerxxx", "123");
+$completedQuests = $user->getCompletedQuests();
+$availableQuests = $user->getAvailableQuests();
 
-$user = User::auth("Artx999", "test");
-$inventory = $user->getInventory();
-if ($inventory->fetch_assoc()) {
-    foreach ($inventory as $row) {
-        print_r($row["item"]);
-        print "</br>";
-    }
-} else {
-    print "NO!";
+$test = $user->getUnlockedQuests();
+
+foreach ($availableQuests as $item) {
+    print_r($item);
+    print "</br>";
 }

@@ -16,6 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `completed_quests`
+--
+
+DROP TABLE IF EXISTS `completed_quests`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `completed_quests` (
+  `user_id` int(11) NOT NULL,
+  `quest_id` varchar(255) NOT NULL,
+  KEY `completed_quests_quest_quest_id_fk` (`quest_id`),
+  KEY `completed_quests_user_user_id_fk` (`user_id`),
+  CONSTRAINT `completed_quests_quest_quest_id_fk` FOREIGN KEY (`quest_id`) REFERENCES `quest` (`quest_id`),
+  CONSTRAINT `completed_quests_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `completed_quests`
+--
+
+LOCK TABLES `completed_quests` WRITE;
+/*!40000 ALTER TABLE `completed_quests` DISABLE KEYS */;
+/*!40000 ALTER TABLE `completed_quests` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `inventory`
 --
 
@@ -66,7 +92,7 @@ CREATE TABLE `quest` (
 
 LOCK TABLES `quest` WRITE;
 /*!40000 ALTER TABLE `quest` DISABLE KEYS */;
-INSERT INTO `quest` VALUES ('dabfb30b-1f0d-11ec-b55b-f02f74187d82','Test','This is a test','[1,2]','[1,2,3]',0,'{\"items\": [\"car\", \"gun\"]}',0);
+INSERT INTO `quest` VALUES ('28f8702d-1fd2-11ec-83f3-f02f74187d82','Hack the server.','Its simple. Just hack the server','[\"2d9e6db9-1fd6-11ec-83f3-f02f74187d82\"]','[\"28f9957b-1fd2-11ec-83f3-f02f74187d82\", \"28fb2955-1fd2-11ec-83f3-f02f74187d82\"]',1,NULL,0),('28f9957b-1fd2-11ec-83f3-f02f74187d82','Username','Get the username for the server',NULL,'[\"e12fe79c-1fd2-11ec-83f3-f02f74187d82\"]',0,NULL,0),('28fb2955-1fd2-11ec-83f3-f02f74187d82','Password','Get the password for the server',NULL,'[\"cc6c6394-1fd3-11ec-83f3-f02f74187d82\", \"e1f75177-1fd3-11ec-83f3-f02f74187d82\"]',0,NULL,0),('297ccd78-1fd1-11ec-83f3-f02f74187d82','Hey, you. You\'re finally awake.','The introduction','[\"28f8702d-1fd2-11ec-83f3-f02f74187d82\"]',NULL,1,'{\"stats\": {\"any\": 3}}',0),('2d9e6db9-1fd6-11ec-83f3-f02f74187d82','Shoot your way out.','After hacking the server, you have to shoot your way out.',NULL,NULL,1,NULL,0),('cc6c6394-1fd3-11ec-83f3-f02f74187d82','USB','Steal or convince a guard to give you a USB-stick.',NULL,NULL,1,NULL,0),('e12fe79c-1fd2-11ec-83f3-f02f74187d82','Get UV-light','Complete challenges to get hold of a UV-torch.',NULL,NULL,1,NULL,0),('e1f75177-1fd3-11ec-83f3-f02f74187d82','Security cameras','Check the security footage to find out where the hooded figure went.',NULL,NULL,1,NULL,0);
 /*!40000 ALTER TABLE `quest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +122,7 @@ CREATE TABLE `stats` (
 
 LOCK TABLES `stats` WRITE;
 /*!40000 ALTER TABLE `stats` DISABLE KEYS */;
-INSERT INTO `stats` VALUES (1,7,5,9,10,5,8);
+INSERT INTO `stats` VALUES (1,7,6,9,10,6,8);
 /*!40000 ALTER TABLE `stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-27  2:32:39
+-- Dump completed on 2021-09-27 23:46:58
