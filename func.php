@@ -21,7 +21,7 @@ function dbQuery($sql, $database = "lanmine_noneon", $server = "localhost", $use
 // Class for storing and handling errors, as well as printing them
 class ErrorMsg {
     public $content;
-    public function __construct() {
+    function __construct() {
         $this->content = [];
     }
 
@@ -88,7 +88,7 @@ class User {
         else return false;
     }
 
-    // Function that returns user stats as stat object
+    // Function that returns users stats as stat object
     public function getStats() {
         $i = dbQuery("SELECT * FROM lanmine_noneon.stats WHERE user_id='$this->userId'")->fetch_assoc();
         if ($i)return new Stats($i["strength"], $i["dexterity"], $i["intelligence"], $i["wisdom"], $i["charisma"], $i["luck"]);
@@ -101,6 +101,115 @@ class User {
         if ($i) return $i;
         else return false;
     }
+
+    // ## Anything that has anything to do with quests ##
+    // Function that returns users completed quests as array of objects
+    public function getCompletedQuests() {
+        $questList = [];
+        $result = dbQuery("SELECT quest.* FROM lanmine_noneon.quest INNER JOIN lanmine_noneon.completed_quests cq on quest.quest_id = cq.quest_id WHERE cq.user_id = $this->userId;");
+        foreach ($result as $item) {
+            $quest = new Quest(
+                $item["quest_id"],
+                $item["name"],
+                $item["description"],
+                $item["unlocks"],
+                $item["children"],
+                $item["additional_requirements"],
+                $item["reward"],
+                $item["file"]
+            );
+            array_push($questList, $quest);
+        }
+        return $questList;
+    }
+
+    // Function that returns children of input array of quests
+    private function getChildQuests($questArray) {
+        $questList = [];
+        // Get one of each child
+        $children = [];
+        foreach ($questArray as $quest) {
+            if ($content = $quest->children) {
+                foreach (json_decode($content) as $item) {
+                    array_push($children, $item);
+                }
+            }
+        }
+        $data = "\"" . implode("\", \"", $children) . "\"";
+        $result = dbQuery("SELECT quest.* FROM lanmine_noneon.quest WHERE quest_id IN ($data)");
+        foreach ($result as $item) {
+            $quest = new Quest(
+                $item["quest_id"],
+                $item["name"],
+                $item["description"],
+                $item["unlocks"],
+                $item["children"],
+                $item["additional_requirements"],
+                $item["reward"],
+                $item["file"]
+            );
+            array_push($questList, $quest);
+        }
+        if (!$questList) return false;
+        else return $questList;
+    }
+
+    // Function that returns users unlocked quests that are not completed, without children
+    public function getUnlockedQuests() {
+        $questList = [];
+        $children = [];
+        $completedQuests = $this->getCompletedQuests();
+        foreach ($completedQuests as $quest) {
+            if ($quest->unlocks) {
+                foreach (json_decode($quest->unlocks) as $item) {
+                    array_push($children, $item);
+                }
+            }
+        }
+        $data = "\"" . implode("\", \"", $children) . "\"";
+        $result = dbQuery("SELECT quest.* FROM lanmine_noneon.quest WHERE quest_id IN ($data)");
+        foreach ($result as $item) {
+            $check = true;
+            foreach ($completedQuests as $quest) {
+                if ($item["quest_id"] === $quest->id) $check = false;
+            }
+            if ($check) {
+                $newQuest = new Quest(
+                    $item["quest_id"],
+                    $item["name"],
+                    $item["description"],
+                    $item["unlocks"],
+                    $item["children"],
+                    $item["additional_requirements"],
+                    $item["reward"],
+                    $item["file"]
+                );
+                array_push($questList, $newQuest);
+            }
+        }
+        return $questList;
+    }
+
+    // Function that returns users available quests as array of objects
+    public function getAvailableQuests() {
+        $questList = [];
+        // Adds unlocked quests
+        $unlockedQuests = $this->getUnlockedQuests();
+        foreach ($unlockedQuests as $quest) {
+            array_push($questList, $quest);
+        }
+        // Adds child quests
+        $currentVal = $this->getChildQuests($unlockedQuests);
+        while ($currentVal) {
+            foreach ($currentVal as $item) {
+                array_push($questList, $item);
+            }
+            $currentVal = $this->getChildQuests($currentVal);
+        }
+        return $questList;
+    }
+    // TODO: Add polymorphism instead of getting shit from other function, if possible.
+    // ## --- ###
 }
 
 
@@ -108,12 +217,29 @@ class User {
 class Stats {
     public $strength, $dexterity, $intelligence, $wisdom, $charisma, $luck;
     public function __construct($strength, $dexterity, $intelligence, $wisdom, $charisma, $luck) {
+        // Index 0 = norwegian translation, index 1 = value
         $this->strength = ["Styrke", $strength];
         $this->dexterity = ["Smidighet", $dexterity];
         $this->intelligence = ["Intelligens", $intelligence];
         $this->wisdom = ["Visdom", $wisdom];
         $this->charisma = ["Karisma", $charisma];
         $this->luck = ["Flaks", $luck];
+    }
+}
+
+
+// Class for quests
+class Quest {
+    public $id, $name, $description, $unlocks, $children, $req, $reward, $file;
+    function __construct($id, $name, $description, $unlocks, $children, $req, $reward, $file) {
+        $this->id = $id;
+        $this->name = $name;
+        $this->description = $description;
+        $this->unlocks = $unlocks;
+        $this->children = $children;
+        $this->req = $req;
+        $this->reward = $reward;
+        $this->file = $file;
     }
 }
 
