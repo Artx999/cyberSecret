@@ -38,6 +38,7 @@ CREATE TABLE `completed_quests` (
 
 LOCK TABLES `completed_quests` WRITE;
 /*!40000 ALTER TABLE `completed_quests` DISABLE KEYS */;
+INSERT INTO `completed_quests` VALUES (1,'297ccd78-1fd1-11ec-83f3-f02f74187d82'),(2,'297ccd78-1fd1-11ec-83f3-f02f74187d82'),(1,'28f8702d-1fd2-11ec-83f3-f02f74187d82'),(2,'cc6c6394-1fd3-11ec-83f3-f02f74187d82');
 /*!40000 ALTER TABLE `completed_quests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,4 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-27 23:46:58
+-- Dump completed on 2021-09-29 23:08:33
