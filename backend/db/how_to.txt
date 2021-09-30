@@ -1,4 +1,0 @@
-- Create schema called "cyber_secret", using root user with blank password on localhost.
-- To get/import database from repository, use sql-import.bat
-- To save/export database to repository, use sql-export.bat
-- Database will be saved as cybersecret.sql
