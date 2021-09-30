@@ -484,6 +484,10 @@ select {
     background: linear-gradient(0deg, hsla(var(--primary), .1) 0%, hsla(var(--primary), 0) 100%);
     border: 1px hsl(var(--primary)) solid;
 }
+.profile-stats-submit {
+    margin: 2em 0 0 0;
+    background-color: hsl(var(--white));
+}
 /* Profile Header */
 .profile-header {
     display: grid;
@@ -563,17 +567,31 @@ select {
 .pro-swc-content {
     width: 2em;
 }
-#pro-swc-content-admin {
+.pro-swc-content-admin {
     width: calc(2em + 4em);
-    gap: 1em;
+    user-select: none;
 }
-#pro-swc-content-admin p {
+.pro-swc-content-admin p {
+    padding: .75em;
     color: hsl(var(--white));
     user-select: none;
     cursor: pointer;
 }
 .pro-swc-number {
+    padding: 0;
+    width: calc(var(--stats) + var(--stats) - 1rem);
     color: hsl(var(--white));
+    font-size: var(--stats);
+    font-weight: 900;
+    text-align: center;
+    background-color: transparent;
+    pointer-events: none;
+    user-select: none;
+    border: none;
+}
+.pro-swc-number:hover {
+    border: none;
+    box-shadow: none;
 }
 /* Logout */
 .logout-button {
@@ -607,28 +625,26 @@ select {
     width: 50%; height: 100%;
     position: relative;
 }
+.pro-swc-bar-inner p {
+    margin: 0 0 0 .5em;
+    color: hsl(var(--white));
+}
 #styrke .pro-swc-bar-inner {
-    width: 95%;
     background-color: hsl(var(--clr-styrke));
 }
 #intelligens .pro-swc-bar-inner {
-    width: 30%;
     background-color: hsl(var(--clr-intelligens));
 }
 #karisma .pro-swc-bar-inner {
-    width: 10%;
     background-color: hsl(var(--clr-karisma));
 }
 #smidighet .pro-swc-bar-inner {
-    width: 66%;
     background-color: hsl(var(--clr-smidighet));
 }
 #visdom .pro-swc-bar-inner {
-    width: 34%;
     background-color: hsl(var(--clr-visdom));
 }
 #flaks .pro-swc-bar-inner {
-    width: 75%;
     background-color: hsl(var(--clr-flaks));
 }
 .pro-swc-bar-glow {
@@ -639,6 +655,29 @@ select {
     transform: scale(.85, .85);
     filter: blur(1.5rem);
     opacity: .4;
+}
+.pro-swc-bar-after {
+    right: 0;
+    width: 100%; height: 100%;
+    position: absolute;
+}
+#styrke .pro-swc-bar-after {
+    background-color: hsla(var(--clr-styrke), .5);
+}
+#intelligens .pro-swc-bar-after {
+    background-color: hsla(var(--clr-intelligens), .5);
+}
+#karisma .pro-swc-bar-after {
+    background-color: hsla(var(--clr-karisma), .5);
+}
+#smidighet .pro-swc-bar-after {
+    background-color: hsla(var(--clr-smidighet), .5);
+}
+#visdom .pro-swc-bar-after {
+    background-color: hsla(var(--clr-visdom), .5);
+}
+#flaks .pro-swc-bar-after {
+    background-color: hsla(var(--clr-flaks), .5);
 }
 
 /* Inventory */
