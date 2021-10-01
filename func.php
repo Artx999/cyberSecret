@@ -52,14 +52,14 @@ class ErrorMsg {
 
 // Class for users logged in
 class User {
-    public $userId, $username, $cardID, $profilePicture;
+    public $userId, $username, $cardID, $profilePicture, $stats, $inventory;
     function __construct($userId, $username, $cardID, $profilePicture) {
         $this->userId = $userId;
         $this->username = $username;
         $this->cardID = $cardID;
         if ($profilePicture) {
             $this->profilePicture = $profilePicture;
-        } else $this->profilePicture = file_get_contents("images/profile-pic.jpg");
+        } else $this->profilePicture = file_get_contents(__DIR__ . "/images/profile-pic.jpg");
     }
 
     // Function that adds user to session (should be used with user object)
@@ -91,15 +91,65 @@ class User {
     // Function that returns users stats as stat object
     public function getStats() {
         $i = dbQuery("SELECT * FROM lanmine_noneon.stats WHERE user_id='$this->userId'")->fetch_assoc();
-        if ($i)return new Stats($i["strength"], $i["dexterity"], $i["intelligence"], $i["wisdom"], $i["charisma"], $i["luck"]);
-        else return new Stats(5, 5, 5, 5, 5, 5);
+        if ($i) $stats = new Stats($i["strength"], $i["dexterity"], $i["intelligence"], $i["wisdom"], $i["charisma"], $i["luck"]);
+        else $stats = new Stats(5, 5, 5, 5, 5, 5);
+        $this->stats = $stats;
+        return $this->stats;
+    }
+
+    // Change stats
+    public function updateStats($strength, $dexterity, $intelligence, $wisdom, $charisma, $luck) {
+        // First, get original stats
+        $result = dbQuery("SELECT * FROM lanmine_noneon.stats WHERE user_id='$this->userId'")->fetch_assoc();
+        // Then, check if they exist
+        if ($result) {
+            $tmpStats = new Stats(
+                $result["strength"],
+                $result["dexterity"],
+                $result["intelligence"],
+                $result["wisdom"],
+                $result["charisma"],
+                $result["luck"]
+            );
+            $inputStats = new Stats(
+                $strength,
+                $dexterity,
+                $intelligence,
+                $wisdom,
+                $charisma,
+                $luck
+            );
+            if ($inputStats != $tmpStats) {
+                // Otherwise, add input to DB
+                dbQuery("UPDATE lanmine_noneon.stats SET strength = {$inputStats->strength[1]}, dexterity = {$inputStats->dexterity[1]}, intelligence = {$inputStats->intelligence[1]}, wisdom = {$inputStats->wisdom[1]}, charisma = {$inputStats->charisma[1]}, luck = {$inputStats->luck[1]} WHERE user_id = {$this->userId};");
+                print "Updated stats!";
+            }
+            else print "Stats were the same";
+        } else {
+            // If not, then add new entry to DB
+            dbQuery("INSERT INTO lanmine_noneon.stats (user_id, strength, dexterity, intelligence, wisdom, charisma, luck) VALUES ({$this->userId}, {$strength}, {$dexterity}, {$intelligence}, {$wisdom}, {$charisma}, {$luck})");
+            print "There were no previous stats for this user. New ones were generated!";
+        }
+        // Then, update object from DB
+        $result = dbQuery("SELECT * FROM lanmine_noneon.stats WHERE user_id='$this->userId'")->fetch_assoc();
+        $this->stats = new Stats(
+            $result["strength"],
+            $result["dexterity"],
+            $result["intelligence"],
+            $result["wisdom"],
+            $result["charisma"],
+            $result["luck"]
+        );
+        return $this->stats;
     }
 
     // Function that returns users inventory
     public function getInventory() {
         $i = dbQuery("SELECT * FROM lanmine_noneon.inventory WHERE user_id='$this->userId'");
-        if ($i) return $i;
-        else return false;
+        if ($i) $inventory = $i;
+        else $inventory = false;
+        $this->inventory = $inventory;
+        return $this->inventory;
     }
 
     // ## Anything that has anything to do with quests ##
@@ -231,15 +281,6 @@ class Stats {
         $this->wisdom = ["Visdom", $wisdom];
         $this->charisma = ["Karisma", $charisma];
         $this->luck = ["Flaks", $luck];
-    }
-
-    // Change stats
-    public function changeStats($strength, $dexterity, $intelligence, $wisdom, $charisma, $luck) {
-        // First, get original stats
-        // Then, check if they exist
-        // If not, then add new entry to DB
-        // Otherwise, add input to DB
-        // Then, update object from DB result
     }
 }
 

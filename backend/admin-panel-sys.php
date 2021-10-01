@@ -21,8 +21,13 @@ print "User ID: " . $displayUser->userId . "</br>";
 
 
 if (isset($_POST["stats"])) {
-    $stats->changeStats();
-}
-foreach ($stats as $key => $val) {
-
+    $displayUser->updateStats(
+        $_POST["strength"],
+        $_POST["dexterity"],
+        $_POST["intelligence"],
+        $_POST["wisdom"],
+        $_POST["charisma"],
+        $_POST["luck"]
+    );
+    print "</br>";
 }
