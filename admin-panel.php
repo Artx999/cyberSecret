@@ -141,7 +141,8 @@ if (isset($displayUser) && $displayUser) {
 
                 </div>
                 <!-- Profile Stats -->
-                <form class="profile-stats" action="">
+                <form class="profile-stats" method="post" action="backend/admin-panel-sys.php">
+                    <input type='hidden' name='userId' value='<?php print "$displayUser->userId";?>'/>
                     <div class="profile-stats-wrapper">
                         <div class="pro-sw-titles">
                             <?php
@@ -163,28 +164,28 @@ if (isset($displayUser) && $displayUser) {
                                 $percent = ($val[1] - 5) * 20;
                                 $cssVariable = strtolower("--clr-" . $val[0]);
                                 print "
-                            <div id='pro-swc{$i}' class='pro-swc-column'>
-                                <div class='pro-swc-content-admin pro-swc-content flexbox'>
-                                    <p class='pro-swc-c-minus'>-</p>
-                                    <input class='pro-swc-number' value='{$val[1]}'>
-                                    <p class='pro-swc-c-plus'>+</p>
-                                </div>
-                                <div class='pro-swc-bar-wrapper'>
-                                    <div class='pro-swc-bar flexbox-left'>
-                                        <div class='pro-swc-bar-inner flexbox-left' style='width: {$percent}%; background-color: hsl(var({$cssVariable}));'>
-                                            <p class='pro-swc-bar-number'>0</p>
-                                            <div class='pro-swc-bar-glow'></div>
+                                <div id='pro-swc{$i}' class='pro-swc-column'>
+                                    <div class='pro-swc-content-admin pro-swc-content flexbox'>
+                                        <p class='pro-swc-c-minus'>-</p>
+                                        <input name='$key' class='pro-swc-number' value='{$val[1]}'>
+                                        <p class='pro-swc-c-plus'>+</p>
+                                    </div>
+                                    <div class='pro-swc-bar-wrapper'>
+                                        <div class='pro-swc-bar flexbox-left'>
+                                            <div class='pro-swc-bar-inner flexbox-left' style='width: {$percent}%; background-color: hsl(var({$cssVariable}));'>
+                                                <p class='pro-swc-bar-number'>0</p>
+                                                <div class='pro-swc-bar-glow'></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            ";
+                                ";
                             }
                             ?>
                         </div>
 
                     </div>
-                    <button type="submit" class="profile-stats-submit">Send</button>
+                    <button type="submit" class="profile-stats-submit" name="stats">Send</button>
                 </form>
                 <!-- Inventory -->
                 <div id="inventory" class="flexbox-col-left">

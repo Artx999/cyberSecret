@@ -232,6 +232,15 @@ class Stats {
         $this->charisma = ["Karisma", $charisma];
         $this->luck = ["Flaks", $luck];
     }
+
+    // Change stats
+    public function changeStats($strength, $dexterity, $intelligence, $wisdom, $charisma, $luck) {
+        // First, get original stats
+        // Then, check if they exist
+        // If not, then add new entry to DB
+        // Otherwise, add input to DB
+        // Then, update object from DB result
+    }
 }
 
 
