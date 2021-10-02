@@ -1,6 +1,5 @@
 // Variables
 let proSwcCol = document.querySelectorAll(".pro-swc-column");
-let barNumber = 0;
 
 // Function for each item
 proSwcCol.forEach(function (item) {
