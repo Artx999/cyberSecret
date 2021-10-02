@@ -10,8 +10,7 @@ if (isset($_POST["userId"]) && $_POST["userId"]) {
     $displayUser = new User($data["user_id"], $data["username"], $data["card_id"], $data["profile_picture"]);
     $stats = $displayUser->getStats();
     $inventory = $displayUser->getInventory();
-
-
+    
     if (isset($_POST["stats"])) {
         $displayUser->updateStats(
             $_POST["strength"],
