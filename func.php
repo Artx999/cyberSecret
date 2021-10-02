@@ -27,7 +27,7 @@ class ErrorMsg {
 
     // Function for adding errors to the object
     public function add($message) {
-        array_push($this->content, $message);
+        if (!in_array($message, $this->content)) array_push($this->content, $message);
     }
 
     // Function that encodes the error object to base64

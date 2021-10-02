@@ -14,7 +14,6 @@ if (isset($userId) && $userId) {
     $inventory = $displayUser->getInventory();
 } else {
     $errors->add("somethingWrong");
-    header("Location: admin-panel.php?error={$errors->encode()}");
 }
 
 if (isset($_POST["stats"])) {
@@ -26,8 +25,11 @@ if (isset($_POST["stats"])) {
         $_POST["charisma"],
         $_POST["luck"]
     );
-
+} elseif (isset($_POST["quests"])) {
+    print "There is no way of handling quests here yet!";
+} elseif (isset($_POST["inventory"])) {
+    print "There is no way of handling inventory here yet!";
 } else {
     $errors->add("somethingWrong");
-    header("Location: admin-panel.php?error={$errors->encode()}");
 }
+if ($errors->content) header("Location: admin-panel.php?error={$errors->encode()}");
