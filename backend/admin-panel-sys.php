@@ -17,9 +17,6 @@ if (isset($userId) && $userId) {
     header("Location: admin-panel.php?error={$errors->encode()}");
 }
 
-print "User ID: " . $displayUser->userId . "</br>";
-
-
 if (isset($_POST["stats"])) {
     $displayUser->updateStats(
         $_POST["strength"],
@@ -29,5 +26,8 @@ if (isset($_POST["stats"])) {
         $_POST["charisma"],
         $_POST["luck"]
     );
-    print "</br>";
+
+} else {
+    $errors->add("somethingWrong");
+    header("Location: admin-panel.php?error={$errors->encode()}");
 }
