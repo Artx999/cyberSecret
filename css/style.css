@@ -1126,6 +1126,35 @@ span.ripple {
     border: 1px solid transparent;
 }
 
+#quest-title {
+    margin: 7em 0 2em 0;
+}
+#quest-title h3 {
+    color: hsl(var(--white));
+}
+#quest-title p {
+    color: hsl(var(--quite-gray));
+}
+#quest-description {
+    margin: 2em 0;
+    color: hsl(var(--white));
+}
+.quest-header {
+    padding: 5em;
+    width: 100%;
+    background: linear-gradient(0deg, hsla(var(--primary), .1) 0%, hsla(var(--primary), 0) 100%);
+    border: 1px hsl(var(--primary)) solid;
+}
+#quest-files {
+    margin: 2em 0;
+}
+.quest-button {
+    margin: 2em 0 0 0;
+}
+.quest-button button {
+    background-color: hsl(var(--primary));
+}
+
 /* ==============
     3.3.4 Footer
    ============== */
