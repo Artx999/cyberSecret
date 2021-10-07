@@ -145,6 +145,14 @@ if (isset($displayUser) && $displayUser) {
                         } else {
                             print '';
                         } ?>
+                        <?php
+                        if () {
+                            print '
+                            <a href="admin-panel.php?useranme=' . $displayUser->username . '"><button class="logout-button">Admin panel</button></a>
+                            ';
+                        } else {
+                            print '';
+                        } ?>
                     </div>
 
                 </div>
