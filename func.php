@@ -166,7 +166,8 @@ class User {
                 $item["children"],
                 $item["additional_requirements"],
                 $item["reward"],
-                $item["file"]
+                $item["file"],
+                $item["open"]
             );
             array_push($questList, $quest);
         }
@@ -196,7 +197,8 @@ class User {
                 $item["children"],
                 $item["additional_requirements"],
                 $item["reward"],
-                $item["file"]
+                $item["file"],
+                $item["open"]
             );
             array_push($questList, $quest);
         }
@@ -232,9 +234,11 @@ class User {
                     $item["children"],
                     $item["additional_requirements"],
                     $item["reward"],
-                    $item["file"]
+                    $item["file"],
+                    $item["open"]
                 );
-                array_push($questList, $newQuest);
+
+                if ($newQuest->open) array_push($questList, $newQuest);
             }
         }
         return $questList;
@@ -298,8 +302,8 @@ class Stats {
 
 // Class for quests
 class Quest {
-    public $id, $name, $description, $unlocks, $children, $req, $reward, $file;
-    function __construct($id, $name, $description, $unlocks, $children, $req, $reward, $file) {
+    public $id, $name, $description, $unlocks, $children, $req, $reward, $file, $open;
+    function __construct($id, $name, $description, $unlocks, $children, $req, $reward, $file, $open) {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
@@ -308,6 +312,7 @@ class Quest {
         $this->req = $req;
         $this->reward = $reward;
         $this->file = $file;
+        $this->open = $open;
     }
 }
 
