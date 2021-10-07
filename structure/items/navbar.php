@@ -29,7 +29,7 @@
                 </div>
             <?php } else { ?>
                     <!-- Will be changed -->
-                <a href="<?php print $rootPath ?>login.php"><button>Logg inn</button></a>
+                <a href="<?php print $rootPath ?>login.php"><button class="profile-stats-submit">Logg inn</button></a>
             <?php }
             ?>
         </div>
