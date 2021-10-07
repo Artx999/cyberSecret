@@ -189,7 +189,8 @@ if (isset($displayUser) && $displayUser) {
                     <button type="submit" class="profile-stats-submit" name="stats">Send</button>
                 </form>
                 <!-- Profile Stats -->
-                <form id="quests" class="flexbox-col-left" method="post" action="">
+                <form id="quests" class="flexbox-col-left" method="post" action="backend/admin-panel-sys.php">
+                    <input type='hidden' name='userId' value='<?php print "$displayUser->userId";?>'/>
                     <h3>Quests</h3>
                     <div id="search-wrapper" class="flexbox">
                         <input id="search" name="quest" autocomplete="off" placeholder="Legg til quest" aria-label="">

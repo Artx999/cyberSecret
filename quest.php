@@ -25,7 +25,8 @@ if (!isset($_GET["error"])) {
                 $result["children"],
                 $result["additional_requirements"],
                 $result["reward"],
-                $result["file"]
+                $result["file"],
+                $result["open"]
             );
 
             $questPermission = false;
