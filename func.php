@@ -217,7 +217,6 @@ class User {
         }
         $data = "\"" . implode("\", \"", $children) . "\"";
         $result = dbQuery("SELECT quest.* FROM lanmine_noneon.quest WHERE quest_id IN ($data)");
-        $firstQuest = false;
         foreach ($result as $item) {
             $check = true;
             foreach ($completedQuests as $quest) {
@@ -236,11 +235,11 @@ class User {
                     $item["open"]
                 );
 
-                if ($newQuest->id === "297ccd78-1fd1-11ec-83f3-f02f74187d82") $firstQuest = true;
                 if ($newQuest->open) array_push($questList, $newQuest);
             }
         }
-        if (!$firstQuest) {
+        $result = dbQuery("SELECT 1 FROM lanmine_noneon.completed_quests WHERE completed_quests.user_id = {$this->userId} AND completed_quests.quest_id = '297ccd78-1fd1-11ec-83f3-f02f74187d82' LIMIT 1")->fetch_assoc();
+        if (!$result) {
             $item = dbQuery("SELECT quest.* FROM lanmine_noneon.quest WHERE quest_id = '297ccd78-1fd1-11ec-83f3-f02f74187d82'")->fetch_assoc();
             $newQuest = new Quest(
                 $item["quest_id"],
