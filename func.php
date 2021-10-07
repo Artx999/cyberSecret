@@ -277,6 +277,7 @@ class User {
                 $check = true;
                 foreach ($completedQuests as $quest) {
                     if ($item->id === $quest->id) $check = false;
+                    if (!$item->open) $check = false;
                 }
                 if ($check) {
                     array_push($questList, $item);
