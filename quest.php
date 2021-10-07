@@ -76,19 +76,22 @@ if (!isset($_GET["error"])) {
 
 <!-- Main -->
 <main id="main" class="flexbox-col-start-center">
-    <section>
-        <?php
-        if (isset($_GET["error"])) {
-            print '<p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMsg::decode($_GET["error"]) . '</p>'; // Prints error messages
-            die();
-        }
-        ?>
-    </section>
+    <?php
+    if (isset($_GET["error"])) {
+        print '
+        <section id="quest-error" class="view-width">
+            <div class="quest-header flexbox-col-left-start">
+            <p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMsg::decode($_GET["error"]) . '</p>
+                die();
+            </div>
+        </section>';
+    }
+    ?>
     <section id="quest-title" class="view-width">
         <div class="quest-header flexbox-col-left-start">
             <?php
             if ($questCompleted) {
-                print "[Completed]";
+                print "<p class='completed-quest'>[Completed]</p>";
             }
             ?>
             <h3><?php print $currentQuest->name ?></h3>
@@ -114,7 +117,7 @@ if (!isset($_GET["error"])) {
         <div class='quest-header flexbox-col-left-start'>
             ";
         if (file_exists("questFiles/{$currentQuest->id}.php")) include "questFiles/{$currentQuest->id}.php";
-        else print "Error!";
+        else print "<p class='error-msg flexbox-left'><span class='material-icons'>warning</span>Error!</p>";
         print "
         </div>
     </section>

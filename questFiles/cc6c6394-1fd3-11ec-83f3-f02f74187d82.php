@@ -7,8 +7,8 @@ if (isset($_POST["answer"]) && $_POST["answer"]) {
     } else print "Wrong answer :(";
 }
 ?>
-<form action="" method="post">
+<form class="quest-form" action="" method="post">
     <label for="answer">Skriv inn svaret</label><br/>
-    <input type="text" name="answer" id="answer"><br/>
-    <button type="submit">Send inn</button>
+    <input type="text" class="inventory-item-add" placeholder="Svar" name="answer" id="answer"><br/>
+    <button type="submit" class="profile-stats-submit">Send inn</button>
 </form>
