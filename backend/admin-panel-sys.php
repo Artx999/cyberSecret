@@ -34,8 +34,11 @@ if (isset($_POST["userId"]) && $_POST["userId"]) {
         );
     } elseif (isset($_POST["quests"])) {
         $quest = $_POST["quest"];
-        $result = dbQuery("SELECT quest.quest_id FROM lanmine_noneon.quest WHERE name = '$quest'")->fetch_assoc();
-        if ($result) $displayUser->completeQuest($result["quest_id"]);
+        $result = dbQuery("SELECT quest.quest_id FROM lanmine_noneon.quest WHERE name = '$quest'");
+        if ($result) {
+            $i = $result->fetch_assoc();
+            $displayUser->completeQuest($i["quest_id"]);
+        }
     } elseif (isset($_POST["inventory"])) {
         print "There is no way of handling inventory here yet!";
         die();
