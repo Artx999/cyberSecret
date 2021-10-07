@@ -6,7 +6,15 @@ $rootPath = "";
 
 if (isset($_SESSION["user"])) {
     $currentUser = User::sessionGet();
+} else {
+    $errors->add("notLoggedIn");
+    header("Location: user.php?error={$errors->encode()}");
 }
+$result = dbQuery("SELECT user.admin FROM lanmine_noneon.user WHERE user_id = $currentUser->userId")->fetch_assoc();
+if ($result) {
+    if (!$result["admin"]) $errors->add("invalidPermission");
+} else $errors->add("somethingWrong");
+if ($errors->content) header("Location: user.php?error={$errors->encode()}");
 
 if (isset($_GET["username"]) && isset($_GET["cardID"])) {
     $errors->add("usernameAndCardID");
@@ -103,6 +111,7 @@ if (isset($displayUser) && $displayUser) {
 
     <section id="profile-section" class="view-width">
         <div class="profile-inner flexbox-col">
+            <h3>Admin panel</h3>
 
             <!-- Search -->
             <form class="search-wrapper flexbox-col-left-start" autocomplete="off" method="get" action="">
@@ -304,7 +313,7 @@ if (isset($displayUser) && $displayUser) {
                     <button type="submit" class="profile-stats-submit" name="quests">Send</button>
                 </form>
                 <!-- Inventory -->
-                <form id="inventory" class="flexbox-col-left" method="post" action="">
+                <form id="inventory" class="flexbox-col-left" method="post" action="backend/admin-panel-sys.php">
                     <h3>Inventar</h3>
                     <input class="inventory-item-add" name="item" autocomplete="off" placeholder="Legg til item" aria-label="">
                     <?php

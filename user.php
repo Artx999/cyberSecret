@@ -84,7 +84,7 @@ if (isset($displayUser) && $displayUser) {
     <meta name="author" content="">
     <!-- ======= -->
     <!-- General -->
-    <title><?php print $displayUser->username?>'s Profil</title>
+    <title><?php if (isset($displayUser)) print $displayUser->username . "'s Profil"; else print "Look up user"?></title>
     <?php require "{$rootPath}structure/head/imports.php" ?>
     <script src="javascript/live-search.js" defer></script>
 </head>

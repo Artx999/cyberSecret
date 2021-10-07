@@ -3,6 +3,18 @@ require "../func.php";
 session_start();
 $errors = new ErrorMsg();
 
+if (isset($_SESSION["user"])) {
+    $currentUser = User::sessionGet();
+} else {
+    $errors->add("notLoggedIn");
+    header("Location: user.php?error={$errors->encode()}");
+}
+$result = dbQuery("SELECT user.admin FROM lanmine_noneon.user WHERE user_id = $currentUser->userId")->fetch_assoc();
+if (!$result) {
+    $errors->add("invalidPermission");
+    header("Location: user.php?error={$errors->encode()}");
+}
+
 if (isset($_POST["userId"]) && $_POST["userId"]) {
     $userId = $_POST["userId"];
     $result = dbQuery("SELECT user_id, username, card_id, profile_picture FROM lanmine_noneon.user WHERE user_id = $userId");
