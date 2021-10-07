@@ -1486,6 +1486,31 @@ span.ripple {
         3.3.3 Main
        ============ */
 
+    .profile-header, .profile-stats {
+        padding: 3em;
+    }
+    #inventory {
+        padding: 3em;
+    }
+    #quests {
+        padding: 3em;
+    }
+    .upload-header {
+        padding: 3em;
+    }
+    .user-form {
+        padding: 3em;
+    }
+    .profile-header-logout {
+        display: none;
+    }
+    .pro-swt-column {
+        display: none;
+    }
+    .inventory-inner {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
     /* ===================
         3.3.3.1 Index.php
        =================== */
@@ -1550,6 +1575,25 @@ span.ripple {
         3.3.3.1 Index.php
        =================== */
 
+    .profile-header, .profile-stats {
+        padding: 1em;
+    }
+    #inventory {
+        padding: 1em;
+    }
+    #quests {
+        padding: 1em;
+    }
+    .upload-header {
+        padding: 1em;
+    }
+    .user-form {
+        padding: 1em;
+    }
+    .inventory-inner {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     /* =====================
         3.3.3.2 Profile.php
        ===================== */
@@ -1597,6 +1641,10 @@ span.ripple {
     /* ===================
         3.3.3.1 Index.php
        =================== */
+
+    .inventory-inner {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
     /* =====================
         3.3.3.2 Profile.php

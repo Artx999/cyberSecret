@@ -21,8 +21,9 @@ if (isset($_POST["userId"]) && $_POST["userId"]) {
             $_POST["luck"]
         );
     } elseif (isset($_POST["quests"])) {
-        print "There is no way of handling quests here yet!";
-        die();
+        $displayUser->completeQuest(
+            $_POST["qu"]
+        );
     } elseif (isset($_POST["inventory"])) {
         print "There is no way of handling inventory here yet!";
         die();

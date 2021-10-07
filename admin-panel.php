@@ -192,7 +192,7 @@ if (isset($displayUser) && $displayUser) {
                 <form id="quests" class="flexbox-col-left" method="post" action="">
                     <h3>Quests</h3>
                     <div id="search-wrapper" class="flexbox">
-                        <input id="search" name="quest" autocomplete="off" placeholder="Legg til quest" aria-label="">
+                        <input id="search" name="quest" autocomplete="off" placeholder="Legg til quest" value="" aria-label="">
                         <div id="chev" class="flexbox"></div>
                         <div id="search-results"></div>
                     </div>
