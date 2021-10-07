@@ -207,7 +207,7 @@ if (isset($displayUser) && $displayUser) {
                         <div class='quest'>
                         ";
                     foreach ($availableQuests as $item) {
-                        print "<a href='quest.php?questID={$item->id}'><p class='quest-name'>{$item->name}</p></a>";
+                        print "<a href='quest.php?questID={$item->id}'><p class='quest-name'>-> {$item->name}</p></a>";
                     }
                     print "
                         </div>
@@ -215,7 +215,7 @@ if (isset($displayUser) && $displayUser) {
                         <div class='quest'>
                         ";
                     foreach ($completedQuests as $item) {
-                        print "<a href='quest.php?questID={$item->id}'><p class='quest-name-comp'>{$item->name}</p></a>";
+                        print "<a href='quest.php?questID={$item->id}'><p class='quest-name-comp'>-> {$item->name}</p></a>";
                     }
                     print "</div>";
                     ?>

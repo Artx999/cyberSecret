@@ -312,6 +312,24 @@ if (isset($displayUser) && $displayUser) {
                         console.log(quest);
                     </script>
                     <button type="submit" class="profile-stats-submit" name="quests">Send</button>
+                    <?php
+                    print "
+                        <h4 class='quest-title'>Available quests:</h4>
+                        <div class='quest'>
+                        ";
+                    foreach ($availableQuests as $item) {
+                        print "<a href='quest.php?questID={$item->id}'><p class='quest-name'>-> {$item->name}</p></a>";
+                    }
+                    print "
+                        </div>
+                        <h4 class='quest-title'>Completed quests:</h4>
+                        <div class='quest'>
+                        ";
+                    foreach ($completedQuests as $item) {
+                        print "<a href='quest.php?questID={$item->id}'><p class='quest-name-comp'>-> {$item->name}</p></a>";
+                    }
+                    print "</div>";
+                    ?>
                 </form>
                 <!-- Inventory -->
                 <form id="inventory" class="flexbox-col-left" method="post" action="backend/admin-panel-sys.php">
