@@ -82,9 +82,9 @@ if (!isset($_GET["error"])) {
         <section id="quest-error" class="view-width">
             <div class="quest-header flexbox-col-left-start">
             <p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMsg::decode($_GET["error"]) . '</p>
-                die();
             </div>
         </section>';
+        die();
     }
     ?>
     <section id="quest-title" class="view-width">
@@ -117,7 +117,7 @@ if (!isset($_GET["error"])) {
         <div class='quest-header flexbox-col-left-start'>
             ";
         if (file_exists("questFiles/{$currentQuest->id}.php")) include "questFiles/{$currentQuest->id}.php";
-        else print "<p class='error-msg flexbox-left'><span class='material-icons'>warning</span>Error!</p>";
+        else print "<p class='error-msg flexbox-left'><span class='material-icons'>warning</span>Error: cannot find task!</p>";
         print "
         </div>
     </section>
