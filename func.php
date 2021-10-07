@@ -122,13 +122,10 @@ class User {
             if ($inputStats != $tmpStats) {
                 // Otherwise, add input to DB
                 dbQuery("UPDATE lanmine_noneon.stats SET strength = {$inputStats->strength[1]}, dexterity = {$inputStats->dexterity[1]}, intelligence = {$inputStats->intelligence[1]}, wisdom = {$inputStats->wisdom[1]}, charisma = {$inputStats->charisma[1]}, luck = {$inputStats->luck[1]} WHERE user_id = {$this->userId};");
-                print "Updated stats!";
             }
-            else print "Stats were the same";
         } else {
             // If not, then add new entry to DB
             dbQuery("INSERT INTO lanmine_noneon.stats (user_id, strength, dexterity, intelligence, wisdom, charisma, luck) VALUES ({$this->userId}, {$strength}, {$dexterity}, {$intelligence}, {$wisdom}, {$charisma}, {$luck})");
-            print "There were no previous stats for this user. New ones were generated!";
         }
         // Then, update object from DB
         $result = dbQuery("SELECT * FROM lanmine_noneon.stats WHERE user_id='$this->userId'")->fetch_assoc();
