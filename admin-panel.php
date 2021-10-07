@@ -3,7 +3,6 @@ require "func.php";
 session_start();
 $errors = new ErrorMsg();
 $rootPath = "";
-$_SESSION['fileName'] = "admin-panel";
 
 if (isset($_SESSION["user"])) {
     $currentUser = User::sessionGet();

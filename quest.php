@@ -3,10 +3,50 @@ require "func.php";
 session_start();
 $errors = new ErrorMsg();
 $rootPath = "";
-$_SESSION['fileName'] = "user";
 
 if (isset($_SESSION["user"])) {
     $currentUser = User::sessionGet();
+}
+if (isset($currentUser) && $currentUser) {
+    $completedQuests = $currentUser->getCompletedQuests();
+    $availableQuests = $currentUser->getAvailableQuests();
+}
+
+if (!isset($_GET["error"])) {
+    if (isset($_GET["questID"]) && $_GET["questID"]) {
+        $questID = $_GET["questID"];
+        $result = dbQuery("SELECT quest.* FROM lanmine_noneon.quest WHERE quest_id = '$questID' LIMIT 1;")->fetch_assoc();
+        if ($result) {
+            $currentQuest = new Quest(
+                $result["quest_id"],
+                $result["name"],
+                $result["description"],
+                $result["unlocks"],
+                $result["children"],
+                $result["additional_requirements"],
+                $result["reward"],
+                $result["file"]
+            );
+
+            $questPermission = false;
+            $questCompleted = false;
+            foreach ($completedQuests as $item) {
+                if ($item->id === $currentQuest->id) {
+                    $questPermission = true;
+                    $questCompleted = true;
+                }
+            }
+            foreach ($availableQuests as $item) {
+                if ($item->id === $currentQuest->id) $questPermission = true;
+            }
+            if (!$questPermission) $errors->add("questNotUnlocked");
+
+        } else $errors->add("somethingWrong");
+    } else $errors->add("somethingWrong");
+
+    if ($errors->content) {
+        header("Location: quest.php?error=" . $errors->encode());
+    }
 }
 
 ?>
@@ -36,28 +76,51 @@ if (isset($_SESSION["user"])) {
 
 <!-- Main -->
 <main id="main" class="flexbox-col-start-center">
-
+    <section>
+        <?php
+        if (isset($_GET["error"])) {
+            print '<p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMsg::decode($_GET["error"]) . '</p>'; // Prints error messages
+            die();
+        }
+        ?>
+    </section>
     <section id="quest-title" class="view-width">
         <div class="quest-header flexbox-col-left-start">
-            <h3>Quest Name</h3>
-            <p>Quest children</p>
+            <?php
+            if ($questCompleted) {
+                print "[Completed]";
+            }
+            ?>
+            <h3><?php print $currentQuest->name ?></h3>
+            <p><?php print $currentQuest->description ?></p>
+            <?php
+            $tmpArray = [$currentQuest];
+            if ($children = User::getChildQuests($tmpArray)) {
+                print "<p>*You need to complete these quests before completing this one: ";
+                foreach ($children as $item) {
+                    if ($item === $children[0]) print "\"" . $item->name . "\"";
+                    else print ", " . "\"" . $item->name . "\"";
+                }
+                print "</p>";
+            }
+            ?>
         </div>
     </section>
 
-    <section id="quest-description" class="view-width">
-        <div class="quest-header flexbox-col-left-start">
-            <p>Quest Description</p>
-            <div class="quest-button">
-                <button>Løs oppgave</button>
-            </div>
+    <?php
+    if ($currentQuest->file) {
+        print "
+    <section id='quest-files' class='view-width'>
+        <div class='quest-header flexbox-col-left-start'>
+            ";
+        if (file_exists("questFiles/{$currentQuest->id}.php")) include "questFiles/{$currentQuest->id}.php";
+        else print "Error!";
+        print "
         </div>
     </section>
-
-    <section id="quest-files" class="view-width">
-        <div class="quest-header flexbox-col-left-start">
-            <a href="">Quest file</a>
-        </div>
-    </section>
+    ";
+    }
+    ?>
 
 </main>
 

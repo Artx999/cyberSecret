@@ -15,5 +15,7 @@
   "incorrectCardID": "Card ID does not exist",
   "incorrectUsername": "Username does not exist",
   "usernameAndCardID": "You can't use both username and card ID",
-  "invalidImage": "Invalid image"
+  "invalidImage": "Invalid image",
+  "invalidPermission": "You do not have the permission to do this",
+  "questNotUnlocked": "You have not unlocked this quest yet."
 }

@@ -174,7 +174,7 @@ class User {
     }
 
     // Function that returns children of input array of quests
-    private function getChildQuests($questArray) {
+    public static function getChildQuests($questArray) {
         $questList = [];
         // Get one of each child
         $children = [];
@@ -250,7 +250,7 @@ class User {
             array_push($questList, $quest);
         }
         // Adds child quests
-        $currentVal = $this->getChildQuests($unlockedQuests);
+        $currentVal = User::getChildQuests($unlockedQuests);
         while ($currentVal) {
             foreach ($currentVal as $item) {
                 $check = true;
@@ -261,9 +261,20 @@ class User {
                     array_push($questList, $item);
                 }
             }
-            $currentVal = $this->getChildQuests($currentVal);
+            $currentVal = User::getChildQuests($currentVal);
         }
         return $questList;
+    }
+
+    // Function that completes quest
+    public function completeQuest($questID)
+    {
+        if ($sql = dbQuery("INSERT INTO lanmine_noneon.completed_quests (completed_quests.user_id, completed_quests.quest_id) VALUES ('$this->userId', '$questID');")) {
+            if ($sql === "duplicateKey") {
+                return "duplicateKey";
+            }
+        }
+        return true;
     }
     // TODO: Add polymorphism instead of getting shit from other function, if possible.
     // ## --- ###
