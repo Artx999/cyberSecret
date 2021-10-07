@@ -107,7 +107,7 @@ $(["username", "password", "confirmPassword", "cardID", "firstName", "lastName"]
                 checkButton(checks)
                 return
             }
-            else if (val < 1 || val > 172) {
+            else if (val < 1 || val > 200) {
                 $(icon.content).attr("class", "bad")
                     .html('<span class="material-icons">close</span>')
                 clearTimeout(timer)

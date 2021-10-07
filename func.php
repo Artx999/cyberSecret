@@ -220,6 +220,7 @@ class User {
         }
         $data = "\"" . implode("\", \"", $children) . "\"";
         $result = dbQuery("SELECT quest.* FROM lanmine_noneon.quest WHERE quest_id IN ($data)");
+        $firstQuest = false;
         foreach ($result as $item) {
             $check = true;
             foreach ($completedQuests as $quest) {
@@ -238,8 +239,24 @@ class User {
                     $item["open"]
                 );
 
+                if ($newQuest->id === "297ccd78-1fd1-11ec-83f3-f02f74187d82") $firstQuest = true;
                 if ($newQuest->open) array_push($questList, $newQuest);
             }
+        }
+        if (!$firstQuest) {
+            $item = dbQuery("SELECT quest.* FROM lanmine_noneon.quest WHERE quest_id = '297ccd78-1fd1-11ec-83f3-f02f74187d82'")->fetch_assoc();
+            $newQuest = new Quest(
+                $item["quest_id"],
+                $item["name"],
+                $item["description"],
+                $item["unlocks"],
+                $item["children"],
+                $item["additional_requirements"],
+                $item["reward"],
+                $item["file"],
+                $item["open"]
+            );
+            array_push($questList, $newQuest);
         }
         return $questList;
     }
@@ -320,6 +337,6 @@ class Quest {
 // Class for variable info for the LAN
 class Info {
     public static function maxID() {
-        return 172;
+        return 200;
     }
 }

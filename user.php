@@ -144,12 +144,14 @@ if (isset($displayUser) && $displayUser) {
                             ';
                         } else {
                             print '';
-                        } ?>
-                        <?php
-                        if () {
-                            print '
-                            <a href="admin-panel.php?useranme=' . $displayUser->username . '"><button class="logout-button">Admin panel</button></a>
-                            ';
+                        }
+                        $result = dbQuery("SELECT user.admin FROM lanmine_noneon.user WHERE user_id = $currentUser->userId")->fetch_assoc();
+                        if ($result) {
+                            if ($result["admin"]) {
+                                print '
+                                <a href="admin-panel.php?username=' . $displayUser->username . '"><button class="logout-button">Admin panel</button></a>
+                                ';
+                            }
                         } else {
                             print '';
                         } ?>
