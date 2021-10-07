@@ -624,6 +624,7 @@ select {
 .pro-swc-bar-inner {
     width: 50%; height: 100%;
     position: relative;
+    transition: all .35s cubic-bezier(var(--transition-main), 1.075);
 }
 .pro-swc-bar-inner p {
     margin: 0 0 0 .5em;
@@ -1126,6 +1127,9 @@ span.ripple {
     border: 1px solid transparent;
 }
 
+#quests {
+    position: relative;
+}
 #quest-title {
     margin: 7em 0 2em 0;
 }
@@ -1153,6 +1157,92 @@ span.ripple {
 }
 .quest-button button {
     background-color: hsl(var(--primary));
+}
+/* Search wrapper */
+#search-wrapper {
+    width: 100%;
+    height: 4em;
+    position: relative;
+}
+#search {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    padding: 1.2em;
+    font-size: 1.22rem;
+    color: hsl(var(--white));
+    background-color: hsl(var(--background-dark));
+    border: 2px solid hsl(var(--black));
+    transition: border .15s ease-in-out;
+}
+#search:hover {
+    border: 2px solid hsl(var(--primary));
+}
+#search:focus {
+    outline: none;
+    border: 2px solid hsl(var(--primary));
+}
+#chev {
+    top: 0;
+    left: calc(100% - 2.5em);
+    width: 2.5em;
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
+}
+#search-results {
+    top: calc(4em - 2px);
+    left: 0;
+    position: absolute;
+    width: 100%;
+    max-height: 170px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: hsl(var(--background-dark));
+    border-left: 2px solid hsl(var(--primary));
+    border-right: 2px solid hsl(var(--primary));
+    border-bottom: 2px solid hsl(var(--primary));
+    display: none;
+    z-index: 10;
+}
+#search-results::-webkit-scrollbar-track {
+    background-color: hsl(var(--background-dark));
+}
+#search-results::-webkit-scrollbar {
+    width: 8px;
+    background-color: hsl(var(--background-dark));
+}
+.item {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: hsl(var(--white));
+    padding-left: 10px;
+    font-size: 1.22rem;
+    cursor: pointer;
+    z-index: 10;
+}
+.item:hover {
+    opacity: .5;
+}
+.inventory-item-add {
+    padding: 1.2em;
+    width: 100%;
+    color: hsl(var(--white));
+    background-color: hsl(var(--background-dark));
+    border: 2px solid transparent;
+    border-radius: 0;
+}
+.inventory-item-add:hover, .inventory-item-add:focus {
+    box-shadow: none;
+    border: 2px solid transparent;
 }
 
 /* ==============

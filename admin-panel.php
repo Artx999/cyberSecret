@@ -68,6 +68,8 @@ if (isset($_GET["username"]) && $_GET["username"]) {
 if (isset($displayUser) && $displayUser) {
     $stats = $displayUser->getStats();
     $inventory = $displayUser->getInventory();
+    $completedQuests = $displayUser->getCompletedQuests();
+    $availableQuests = $displayUser->getAvailableQuests();
 }
 
 ?>
@@ -186,31 +188,147 @@ if (isset($displayUser) && $displayUser) {
                     </div>
                     <button type="submit" class="profile-stats-submit" name="stats">Send</button>
                 </form>
+                <!-- Profile Stats -->
+                <form id="quests" class="flexbox-col-left" method="post" action="">
+                    <h3>Quests</h3>
+                    <div id="search-wrapper" class="flexbox">
+                        <input id="search" name="quest" autocomplete="off" placeholder="Legg til quest" aria-label="">
+                        <div id="chev" class="flexbox"></div>
+                        <div id="search-results"></div>
+                    </div>
+                    <?php
+                    /*
+                    foreach ($availableQuests as $item) {
+                        print "<p class='quest-name'>{$item->name}</p>";
+                    }
+                    */
+                    ?>
+                    <script type="text/javascript">
+                        let quests = "<?php foreach ($availableQuests as $item) {
+                            print "$item->name" . ",";
+                        } ?>";
+                        let quest = quests.split(",");
+                        quest.pop();
+
+                        let exp = false;
+
+                        const search = document.getElementById("search");
+                        const sel = document.getElementById("search-results");
+                        const dd = document.getElementById("chev");
+
+                        search.addEventListener("keyup", (e) => {
+                            find(search.value);
+                        });
+
+                        search.addEventListener("click", (e) => {
+                            find(search.value);
+                        });
+
+                        dd.addEventListener("click", (e) => {
+                            if (exp) {
+                                hidelist();
+                            } else {
+                                /*if (search.value != "") {
+                                    find(search.value);
+                                } else {*/
+                                populate(quest);
+                                showlist();
+                                //}
+                            }
+                        });
+
+                        sel.addEventListener("click", (e) => {
+                            hidelist();
+                            search.value = e.target.innerHTML;
+                        });
+
+                        window.addEventListener("click", (e) => {
+                            if (!dd.contains(e.target) && !search.contains(e.target)) {
+                                if (e.target.className != "uil uil-angle-up") {
+                                    hidelist();
+                                }
+                            }
+                        });
+
+                        function showlist() {
+                            dd.innerHTML = '<i class="uil uil-angle-up"></i>';
+                            sel.style.display = "inline";
+                            exp = true;
+                        }
+
+                        function hidelist() {
+                            sel.style.display = "none";
+                            exp = false;
+                            dd.innerHTML = '<i class="uil uil-angle-down"></i>';
+                        }
+
+                        function find(str) {
+                            str = str.toLowerCase();
+                            let sres = [];
+                            for (i = 0; i < quest.length; i++) {
+                                let n = quest[i].indexOf(str);
+                                if (n > -1) {
+                                    sres.push(quest[i]);
+                                }
+                            }
+                            populate(sres);
+                            if (sres.length > 0) {
+                                showlist();
+                            } else {
+                                hidelist();
+                            }
+                        }
+
+                        function populate(items) {
+                            if (items.length > 0) {
+                                sel.innerHTML = "";
+                                let sorted_list = [];
+                                for (i = 0; i < items.length; i++) {
+                                    sorted_list.push(items[i]);
+                                }
+                                sorted_list.sort(function (a, b) {
+                                    return a.toLowerCase().localeCompare(b.toLowerCase());
+                                });
+                                for (i = 0; i < sorted_list.length; i++) {
+                                    let item = document.createElement("span");
+                                    item.setAttribute("class", "item");
+                                    item.innerHTML = sorted_list[i];
+                                    sel.appendChild(item);
+                                }
+                            }
+                        }
+
+                        console.log(quest);
+                    </script>
+                    <button type="submit" class="profile-stats-submit" name="quests">Send</button>
+                </form>
                 <!-- Inventory -->
-                <div id="inventory" class="flexbox-col-left">
+                <form id="inventory" class="flexbox-col-left" method="post" action="">
                     <h3>Inventar</h3>
+                    <input class="inventory-item-add" name="item" autocomplete="off" placeholder="Legg til item" aria-label="">
                     <?php
                     if ($inventory->fetch_assoc()) {
                         print "<div class='inventory-inner'>";
                         foreach ($inventory as $row) {
                             print "
-                        <div class='inventory-cell flexbox'>
-                            <p class='inventory-cell-title'>{$row["item"]}</p>
-                        </div>
-                        ";
+                            <div class='inventory-cell flexbox'>
+                                <p class='inventory-cell-title'>{$row["item"]}</p>
+                            </div>
+                            ";
                         }
                         print "</div>";
                     } else {
                         print "
-                    <div class='inventory-inner-empty'>
-                        <div class='inv-empty'>
-                            <p>Inventaret ditt er tomt</p>
+                        <div class='inventory-inner-empty'>
+                            <div class='inv-empty'>
+                                <p>Inventaret ditt er tomt</p>
+                            </div>
                         </div>
-                    </div>
-                    ";
+                        ";
                     }
                     ?>
-                </div>
+                    <button type="submit" class="profile-stats-submit" name="inventory">Send</button>
+                </form>
             <?php } ?>
         </div>
     </section>
