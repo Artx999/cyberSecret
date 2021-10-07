@@ -1140,6 +1140,9 @@ span.ripple {
 .quest-form button {
     margin: 2em 0 0 0;
 }
+.login-button {
+    background-color: hsl(var(--primary));
+}
 #quests {
     position: relative;
 }
