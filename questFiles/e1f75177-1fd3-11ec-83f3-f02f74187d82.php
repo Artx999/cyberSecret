@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST["answer"]) && $_POST["answer"]) {
-    $solution = "sceneshow!";
+    $solution = "panda";
     if ($_POST["answer"] === $solution) {
         $currentUser->completeQuest($currentQuest->id);
         print "You did it!";
