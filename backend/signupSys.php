@@ -1,7 +1,7 @@
 <?php
 require "../func.php";
 
-$errors = new ErrorMsg();
+$errors = new ErrorMessage();
 // Username
 if (isset($_POST["username"]) && $_POST["username"]) {
     $username = stripslashes(htmlspecialchars($_POST["username"]));

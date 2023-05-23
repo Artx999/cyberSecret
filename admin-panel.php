@@ -1,7 +1,7 @@
 <?php
 require "func.php";
 session_start();
-$errors = new ErrorMsg();
+$errors = new ErrorMessage();
 $rootPath = "";
 $_SESSION['fileName'] = "admin-panel";
 
@@ -119,7 +119,7 @@ if (isset($displayUser) && $displayUser) {
                 <label class="search-label" for="search">Søk etter brukere</label>
                 <?php
                 if (isset($_GET["error"])) {
-                    print '<p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMsg::decode($_GET["error"]) . '</p>'; // Prints error messages
+                    print '<p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMessage::decode($_GET["error"]) . '</p>'; // Prints error messages
                 }
                 ?>
                 <div class="search-input-wrapper flexbox">

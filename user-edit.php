@@ -1,7 +1,7 @@
 <?php
 require "func.php";
 session_start();
-$errors = new ErrorMsg();
+$errors = new ErrorMessage();
 $rootPath = "";
 
 if (isset($_SESSION["user"])) {
@@ -56,7 +56,7 @@ if (isset($_POST["upload-profile-picture"])) {
     <form id="profile-section" class="view-width" method="post" action="" enctype="multipart/form-data">
         <?php
         if (isset($_GET["error"])) {
-            print '<p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMsg::decode($_GET["error"]) . '</p>'; // Prints error messages
+            print '<p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMessage::decode($_GET["error"]) . '</p>'; // Prints error messages
         }
         ?>
         <div class="profile-inner flexbox-col">

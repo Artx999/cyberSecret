@@ -38,7 +38,7 @@ $rootPath = "";
 
         require "func.php";
         if (isset($_GET["error"])) {
-            print '<p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMsg::decode($_GET["error"]) . '</p>'; // Prints error messages
+            print '<p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMessage::decode($_GET["error"]) . '</p>'; // Prints error messages
         }
 
         ?>

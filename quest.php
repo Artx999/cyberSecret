@@ -1,7 +1,7 @@
 <?php
 require "func.php";
 session_start();
-$errors = new ErrorMsg();
+$errors = new ErrorMessage();
 $rootPath = "";
 
 if (isset($_SESSION["user"])) {
@@ -82,7 +82,7 @@ if (!isset($_GET["error"])) {
         print '
         <section id="quest-error" class="view-width">
             <div class="quest-header flexbox-col-left-start">
-            <p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMsg::decode($_GET["error"]) . '</p>
+            <p class="error-msg flexbox-left"><span class="material-icons">warning</span>' . ErrorMessage::decode($_GET["error"]) . '</p>
             </div>
         </section>';
         die();
